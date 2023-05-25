@@ -1,4 +1,4 @@
-package backend.src.main.java.tn.camps.tuncamps.persistence.entity.forum;
+package tn.camps.tuncamps.persistence.entity.forum;
 
 import backend.src.main.java.tn.camps.tuncamps.persistence.entity.enumeration.CommunityCategory;
 
