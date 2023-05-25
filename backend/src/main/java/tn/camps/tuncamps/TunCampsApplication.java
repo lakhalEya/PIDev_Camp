@@ -8,6 +8,7 @@ public class TunCampsApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TunCampsApplication.class, args);
+        System.out.println("Hello Hello ");
     }
 
 }
