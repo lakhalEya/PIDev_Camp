@@ -2,8 +2,10 @@ package tn.camps.tuncamps.persistence.entity.parc;
 
 import lombok.*;
 import tn.camps.tuncamps.persistence.entity.commun.Location;
+import tn.camps.tuncamps.persistence.entity.commun.Tariff;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -11,18 +13,24 @@ import javax.persistence.*;
 @AllArgsConstructor
 @ToString
 @Entity
-public class Parc {
+
+public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idParc;
+    private int id;
 
     private String name;
 
-    private String description;
-
-    @Enumerated(EnumType.STRING)
-    private ParcCategory category;
-
     @OneToOne
     private Location location;
+
+    private Date startDate;
+
+    private Date endDate;
+
+    private String organizer;
+
+    @OneToOne
+    private Tariff tariff;
+
 }

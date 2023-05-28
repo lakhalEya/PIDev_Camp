@@ -10,7 +10,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @ToString
 @Entity
-@Embeddable
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
