@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.camps.tuncamps.persistence.entity.commun.Location;
 import tn.camps.tuncamps.persistence.repository.commun.LocationRepository;
-import tn.camps.tuncamps.service.LocationService;
+import tn.camps.tuncamps.service.commun.LocationService;
 
 import java.util.List;
 import java.util.Optional;

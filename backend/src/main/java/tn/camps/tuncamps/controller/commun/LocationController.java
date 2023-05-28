@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.camps.tuncamps.persistence.entity.commun.Location;
-import tn.camps.tuncamps.service.LocationService;
+import tn.camps.tuncamps.service.commun.LocationService;
 
 import java.util.List;
 import java.util.Optional;

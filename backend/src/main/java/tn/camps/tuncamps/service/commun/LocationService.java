@@ -1,4 +1,4 @@
-package tn.camps.tuncamps.service;
+package tn.camps.tuncamps.service.commun;
 import tn.camps.tuncamps.persistence.entity.commun.Location;
 
 import java.util.List;
