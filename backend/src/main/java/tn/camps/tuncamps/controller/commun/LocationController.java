@@ -1,4 +1,4 @@
-package tn.camps.tuncamps.controler.commun;
+package tn.camps.tuncamps.controller.commun;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

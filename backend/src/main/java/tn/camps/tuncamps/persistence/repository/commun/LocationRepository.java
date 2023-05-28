@@ -1,4 +1,4 @@
-package tn.camps.tuncamps.persistence.repository;
+package tn.camps.tuncamps.persistence.repository.commun;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

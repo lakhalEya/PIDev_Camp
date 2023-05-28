@@ -12,7 +12,6 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-
 @Entity
 public class Location {
     @Id
