@@ -2,10 +2,7 @@ package tn.camps.tuncamps.persistence.entity.commun;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Currency;
 
 @Getter
@@ -22,5 +19,6 @@ public class Tariff {
     private String name;
     private String description;
     private int duration;
+    @Embedded
     private Currency currency;
 }
