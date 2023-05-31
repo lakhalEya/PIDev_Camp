@@ -2,11 +2,10 @@ package tn.camps.tuncamps.persistence.entity.forum;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import tn.camps.tuncamps.persistence.entity.enumeration.CommunityCategory;
+import tn.camps.tuncamps.persistence.entity.enumeration.Visibility;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
-
+import java.util.Date;
 @Entity
 @Setter
 @Getter
@@ -14,17 +13,16 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CommunitySpace implements Serializable
-{
+public class Post implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idForum;
+    private int idPost;
     private String title;
-    private String description;
+    private String content;
+    @Temporal(TemporalType.DATE)
+    private Date datePublication;
     @Enumerated(EnumType.STRING)
-    private CommunityCategory category;
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Post> Posts;
-//    @OneToMany(cascade = CascadeType.ALL)
-//    private Set<User> Users;
+    private Visibility visibility;
+//    @ManyToOne
+//    private User user;
 }
