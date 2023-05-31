@@ -1,2 +1,6 @@
-package tn.camps.tuncamps.persistence.entity.enumeration;public enum Reaction {
+package tn.camps.tuncamps.persistence.entity.enumeration;
+
+public enum Reaction {
+    Like,
+    Dislike
 }
