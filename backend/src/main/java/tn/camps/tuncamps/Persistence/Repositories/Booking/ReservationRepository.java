@@ -1,4 +1,8 @@
-package main.java.tn.camps.tuncamps.Persistence.Repositories.Booking;
+package tn.camps.tuncamps.Persistence.Repositories.Booking;
 
-public interface ReservationRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import tn.camps.tuncamps.Persistence.Entities.Booking.Reservation;
+
+
+public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 }

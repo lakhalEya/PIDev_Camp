@@ -1,10 +1,8 @@
 package tn.camps.tuncamps.Persistence.Entities.Booking;
 
-import javax.persistence.*;
 import lombok.*;
-import tn.camps.tuncamps.Persistence.Entities.Commun.Tariff;
 
-
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -14,16 +12,15 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Entity
-public class Reservation {
+public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String title;
+    private String description;
     private Date startDate;
-    private Date endDate;
-    @OneToOne
-    private Tariff tarif;
-    @ManyToMany(mappedBy = "reservations")
-    private List<Sale> sales;
-
-
+    private Date expirationDate;
+    private double amount;
+    @ManyToMany
+    private List<Reservation> reservations;
 }
