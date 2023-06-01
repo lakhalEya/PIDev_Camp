@@ -5,6 +5,7 @@ import lombok.*;
 import tn.camps.tuncamps.Persistence.Entities.Commun.Tariff;
 
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Entity
-public class Reservation {
+public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
