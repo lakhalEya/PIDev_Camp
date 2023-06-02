@@ -16,10 +16,11 @@ import java.util.List;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class TariffControllerTest {
+public class TariffTestController {
     @Mock
     private TariffService tariffService;
 
