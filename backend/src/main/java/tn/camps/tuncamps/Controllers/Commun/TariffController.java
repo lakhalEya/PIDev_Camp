@@ -18,7 +18,7 @@ public class TariffController {
 
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/getOne/{id}")
     public ResponseEntity<Tariff> getTariffById(@PathVariable int id) {
         try {
             Tariff tariff = tariffService.findById(id);
@@ -28,19 +28,19 @@ public class TariffController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Tariff>> getAllTariffs() {
         List<Tariff> tariffs = tariffService.findAll();
         return ResponseEntity.ok(tariffs);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Tariff> createTariff(@RequestBody Tariff tariff) {
         Tariff createdTariff = tariffService.createTariff(tariff);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTariff);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Tariff> updateTariff(@PathVariable int id, @RequestBody Tariff tariff) {
         tariff.setId(id);
         try {
@@ -51,7 +51,7 @@ public class TariffController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteTariff(@PathVariable int id) {
         try {
             tariffService.deleteTariff(id);
