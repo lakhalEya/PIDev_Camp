@@ -1,11 +1,11 @@
 package tn.camps.tuncamps.Persistence.Entities.Commun;
 
-
 import lombok.*;
 
-import javax.persistence.*;
-import java.io.Serializable;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Getter
 @Setter
@@ -13,14 +13,11 @@ import java.io.Serializable;
 @AllArgsConstructor
 @ToString
 @Entity
-public class Tariff implements Serializable {
+public class Currency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private double price;
+    private String code;
     private String name;
-    private String description;
-    private int duration;
-    @OneToOne
-    private Currency currency;
+    private String symbol;
 }
