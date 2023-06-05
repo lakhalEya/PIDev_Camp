@@ -1,1 +1,98 @@
-<p>admin-layout works!</p>
+<div class="sidebar">
+    <div class="logo-details">
+        <i class='bx bxl-c-plus-plus icon'></i>
+        <div class="logo_name">CodingLab</div>
+        <i class='bx bx-menu' id="btn"></i>
+    </div>
+    <ul class="nav-list">
+
+        <li>
+            <a href="#forum" routerLink="/admin/forum">
+                <i class='bx bx-grid-alt'></i>
+                <span class="links_name">Forum</span>
+            </a>
+            <span class="tooltip">Forum</span>
+        </li>
+        <li>
+            <a href="#user" routerLink="/admin/users">
+                <i class='bx bx-user'></i>
+                <span class="links_name">User</span>
+            </a>
+            <span class="tooltip">User</span>
+        </li>
+
+        <li>
+            <a href="#maps" routerLink="/admin/parcs">
+                <i class='bx bx-map'></i>
+                <span class="links_name">Parcs</span>
+            </a>
+            <span class="tooltip">Parcs</span>
+        </li>
+        <li>
+            <a href="#events" routerLink="/admin/events">
+                <i class='bx bx-calendar-star'></i>
+                <span class="links_name">Event</span>
+            </a>
+            <span class="tooltip">Event</span>
+        </li>
+        <li>
+            <a href="#shop" routerLink="/admin/store">
+                <i class='bx bx-cart-alt'></i>
+                <span class="links_name">shop</span>
+            </a>
+            <span class="tooltip">shop</span>
+        </li>
+
+
+    </ul>
+</div>
+
+
+
+
+<!--<section class="home-section">
+        <div class="text">Dashboard</div>
+      </section>
+    -->
+
+<script>
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+    let searchBtn = document.querySelector(".bx-search");
+    console.log("Helloooo woooooorld");
+
+    console.log(document.querySelector(".sidebar"));
+    console.log(document.querySelector("#btn"));
+    console.log(document.querySelector(".bx-search"));
+    console.log("Helloooo woooooorld");
+
+    console.log(document.getElementById("sidebarId"));
+
+    closeBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        menuBtnChange(); //calling the function(optional)
+    });
+
+    console.log(searchBtn);
+
+    searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+        sidebar.classList.toggle("open");
+        menuBtnChange(); //calling the function(optional)
+    });
+
+
+    // following are the code to change sidebar button(optional)
+    function menuBtnChange() {
+        if (sidebar.classList.contains("open")) {
+            closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
+        } else {
+            closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
+        }
+    }
+</script>
+
+
+
+<div>
+    <router-outlet></router-outlet>
+</div>
