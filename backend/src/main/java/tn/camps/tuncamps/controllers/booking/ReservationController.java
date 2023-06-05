@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import tn.camps.tuncamps.persistence.entities.booking.Reservation;
+import tn.camps.tuncamps.persistence.entities.booking.Sale;
+import tn.camps.tuncamps.persistence.repositories.booking.SaleRepository;
 import tn.camps.tuncamps.services.interfaces.booking.ReservationService;
 
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.List;
 public class ReservationController {
     @Autowired
     private ReservationService reservationService;
+    @Autowired
+    private SaleRepository saleRepository;
 
 
 
@@ -37,6 +41,9 @@ public class ReservationController {
 
     @PostMapping("/add")
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
+
+        Sale sale = saleRepository.findById(reservation.getSale().getId()).orElse(null);
+        reservation.setSale(sale);
         Reservation createdReservation = reservationService.createReservation(reservation);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdReservation);
     }

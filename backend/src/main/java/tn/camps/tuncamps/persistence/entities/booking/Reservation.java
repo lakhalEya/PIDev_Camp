@@ -1,7 +1,11 @@
 package tn.camps.tuncamps.persistence.entities.booking;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 import tn.camps.tuncamps.persistence.entities.commun.Tariff;
 
 
@@ -26,8 +30,12 @@ public class Reservation implements Serializable {
     @OneToOne
     @JoinColumn(name = "tarif_id")
     private Tariff tarif;
-    @ManyToMany(mappedBy = "reservations")
-    private List<Sale> sales;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sale_id")
+    //@JsonManagedReference
+    private Sale sale;
 
 
 }

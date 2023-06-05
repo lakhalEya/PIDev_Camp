@@ -1,6 +1,10 @@
 package tn.camps.tuncamps.persistence.entities.booking;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Entity
+@JsonIgnoreProperties("reservations")
 public class Sale implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +27,8 @@ public class Sale implements Serializable {
     private Date startDate;
     private Date expirationDate;
     private double amount;
-    @ManyToMany
+
+    @OneToMany(mappedBy = "sale")
+    //@JsonBackReference
     private List<Reservation> reservations;
 }
