@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import tn.camps.tuncamps.persistence.entities.booking.Reservation;
 import tn.camps.tuncamps.persistence.entities.booking.Sale;
+import tn.camps.tuncamps.persistence.repositories.booking.ReservationRepository;
 import tn.camps.tuncamps.persistence.repositories.booking.SaleRepository;
 import tn.camps.tuncamps.services.interfaces.booking.ReservationService;
 
@@ -20,6 +21,8 @@ public class ReservationController {
     private ReservationService reservationService;
     @Autowired
     private SaleRepository saleRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
 
 
 
@@ -51,6 +54,18 @@ public class ReservationController {
     @PutMapping("/update/{id}")
     public ResponseEntity<Reservation> updateReservation(@PathVariable int id, @RequestBody Reservation reservation) {
         reservation.setId(id);
+        try {
+            Reservation updatedReservation = reservationService.updateReservation(reservation);
+            return ResponseEntity.ok(updatedReservation);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+    @PutMapping("/affectSale/{idR}/{idS}")
+    public ResponseEntity<Reservation> affectSaleToReservation(@PathVariable int idR,@PathVariable int idS) {
+        Reservation reservation = reservationRepository.findById(idR).orElse(null);
+        Sale sale = saleRepository.findById(idS).orElse(null);
+        reservation.setSale(sale);
         try {
             Reservation updatedReservation = reservationService.updateReservation(reservation);
             return ResponseEntity.ok(updatedReservation);
