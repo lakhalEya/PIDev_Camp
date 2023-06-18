@@ -1,11 +1,21 @@
 {
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "cli": {
+        "analytics": false
+    },
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
         "frontend": {
             "projectType": "application",
-            "schematics": {},
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                },
+                "@schematics/angular:application": {
+                    "strict": true
+                }
+            },
             "root": "",
             "sourceRoot": "src",
             "prefix": "app",
@@ -20,27 +30,26 @@
                             "zone.js"
                         ],
                         "tsConfig": "tsconfig.app.json",
+                        "inlineStyleLanguage": "scss",
+                        "preserveSymlinks": true,
                         "assets": [
                             "src/favicon.ico",
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.css",
-                            "@angular/material/prebuilt-themes/purple-green.css",
-                            "node_modules/bootstrap/dist/css/bootstrap.min.css"
+                            "src/scss/styles.scss"
                         ],
-                        "scripts": [
-                            "node_modules/bootstrap/dist/js/bootstrap.min.js",
-                            "node_modules/jquery/dist/jquery.min.js"
-
+                        "scripts": [],
+                        "allowedCommonJsDependencies": [
+                            "chart.js"
                         ]
                     },
                     "configurations": {
                         "production": {
                             "budgets": [{
                                     "type": "initial",
-                                    "maximumWarning": "500kb",
-                                    "maximumError": "1mb"
+                                    "maximumWarning": "1500kb",
+                                    "maximumError": "6mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
@@ -87,19 +96,16 @@
                             "zone.js/testing"
                         ],
                         "tsConfig": "tsconfig.spec.json",
+                        "karmaConfig": "karma.conf.js",
+                        "inlineStyleLanguage": "scss",
                         "assets": [
                             "src/favicon.ico",
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.css",
-                            "@angular/material/prebuilt-themes/purple-green.css",
-                            "node_modules/bootstrap/dist/css/bootstrap.min.css"
+                            "src/scss/styles.scss"
                         ],
-                        "scripts": [
-                            "node_modules/jquery/dist/jquery.min.js",
-                            "node_modules/bootstrap/dist/js/bootstrap.min.js"
-                        ]
+                        "scripts": []
                     }
                 }
             }

@@ -1,0 +1,60 @@
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center bg-gradiant">
+    <c-container>
+        <c-row class="justify-content-center ">
+            <c-col md="8">
+                <c-card-group class="shadow-lg rounded border-light ">
+                    <c-card [ngStyle]="{'width.%': 44}" class="p-4 text-white bg-light bg-opacity-25 py-5 border-1">
+                        <c-card-body>
+                            <div>
+                                <form cForm>
+
+                                    <h1>Login</h1>
+                                    <p class="text-light">Sign In to your account</p>
+                                    <c-input-group class="mb-3">
+                                        <input autoComplete="username" cFormControl placeholder="Username" />
+                                    </c-input-group>
+                                    <c-input-group class="mb-4">
+                                        <input autoComplete="current-password" cFormControl placeholder="Password" type="password" />
+                                    </c-input-group>
+                                    <c-row>
+
+                                        <div class="d-grid gap-2">
+                                            <button cButton color="transparent" class="btn-outline-light" type="button">Login</button>
+                                        </div>
+
+                                        <c-col class="text-right" xs="6">
+                                            <button cButton class="px-0" color="link">
+                      Forgot password?
+                    </button>
+                                        </c-col>
+                                    </c-row>
+                                </form>
+                            </div>
+                        </c-card-body>
+                    </c-card>
+                    <c-card [ngStyle]="{'width.%': 44}" class="text-white bg-transparent py-5 border-1">
+                        <c-card-body class="text-center">
+                            <div>
+                                <h2>Sign up</h2>
+                                <p>
+                                    Welcome to TuniCamp! Sign in to your account to access all the features and resources we offer. Whether you're planning your next camping trip, exploring park listings, or connecting with fellow campers, TuniCamp has everything you need for an unforgettable
+                                    outdoor experience.
+                                </p>
+                                <p>
+                                    If you don't have an account yet, click on the 'Sign Up' button to create one and join our camping community.
+                                </p>
+                                <p>
+                                    Happy camping!
+                                </p>
+                                <div class="d-grid gap-2">
+                                    <button [active]="true" cButton color="transparent" class="bg bg-transparent btn-outline-light text-light" type="button" routerLink="/register"> Register Now!</button>
+                                </div>
+
+                            </div>
+                        </c-card-body>
+                    </c-card>
+                </c-card-group>
+            </c-col>
+        </c-row>
+    </c-container>
+</div>
