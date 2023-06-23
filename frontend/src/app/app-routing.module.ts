@@ -6,6 +6,8 @@ import {Page404Component} from './views/pages/page404/page404.component';
 import {Page500Component} from './views/pages/page500/page500.component';
 import {LoginComponent} from './views/pages/login/login.component';
 import {RegisterComponent} from './views/pages/register/register.component';
+import {HomePageComponent} from './views/pages/home-page/home-page.component';
+
 
 const routes: Routes = [
   {
@@ -24,6 +26,31 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+      },
+      {
+        path: 'users',
+        loadChildren: () =>
+          import('./views/users/users.module').then((m) => m.UsersModule)
+      },
+      {
+        path: 'parc',
+        loadChildren: () =>
+          import('./views/parc/parc.module').then((m) => m.ParcModule)
+      },
+      {
+        path: 'social',
+        loadChildren: () =>
+          import('./views/social/social.module').then((m) => m.SocialModule)
+      },
+      {
+        path: 'e-commerce',
+        loadChildren: () =>
+          import('./views/e-commerce/e-commerce.module').then((m) => m.ECommerceModule)
+      },
+      {
+        path: 'reservation',
+        loadChildren: () =>
+          import('./views/reservation/reservation.module').then((m) => m.ReservationModule)
       },
       {
         path: 'theme',
@@ -71,6 +98,13 @@ const routes: Routes = [
           import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
     ]
+  },
+  {
+    path: 'user',
+    component: HomePageComponent,
+    data: {
+      title: 'HomePage'
+    }
   },
   {
     path: '404',

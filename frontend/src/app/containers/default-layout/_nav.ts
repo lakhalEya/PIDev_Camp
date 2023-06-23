@@ -13,12 +13,12 @@ export const navItems: INavData[] = [
 
   {
     name: 'User Management',
-    url: '/user-management',
+    url: '/users', // /user-management
     iconComponent: { name: 'cil-user' },
   },
   {
     name: 'Reclamations',
-    url: '/reclamations',
+    url: '/users', // /reclamations
     iconComponent: { name: 'cil-mood-bad' },
   },
 
@@ -28,7 +28,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Park Listing',
-    url: '/park-listing',
+    url: '/parc', // /park-listing
     iconComponent: { name: 'cil-location-pin' },
   },
   {
@@ -37,7 +37,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Forum',
-    url: '/forum',
+    url: '/social', ///forum
     iconComponent: { name: 'cil-chat-bubble' },
   },
   {
@@ -46,17 +46,17 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Products',
-    url: '/e-commerce/products',
+    url: '/e-commerce', // /products
     iconComponent: { name: 'cil-list' },
   },
   {
     name: 'Shopping Cart',
-    url: '/e-commerce/cart',
+    url: '/e-commerce', // /cart
     iconComponent: { name: 'cil-basket' },
   },
   {
     name: 'Orders',
-    url: '/e-commerce/orders',
+    url: '/e-commerce', ///orders
     iconComponent: { name: 'cil-cart' },
   },
   {
@@ -65,7 +65,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Pricing and Promotion',
-    url: '/pricing-promotion',
+    url: '/reservation', // /pricing-promotion
     iconComponent: { name: 'cil-dollar' },
   },
   {
