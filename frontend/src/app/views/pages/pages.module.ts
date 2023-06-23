@@ -8,7 +8,6 @@ import { Page404Component } from './page404/page404.component';
 import { Page500Component } from './page500/page500.component';
 import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
-import { HomePageComponent } from './home-page/home-page.component';
 
 
 @NgModule({
@@ -16,8 +15,7 @@ import { HomePageComponent } from './home-page/home-page.component';
     LoginComponent,
     RegisterComponent,
     Page404Component,
-    Page500Component,
-    HomePageComponent
+    Page500Component
   ],
   imports: [
     CommonModule,

@@ -37,6 +37,7 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
+import { UserLayoutComponent } from './containers/user-layout/user-layout.component';
 
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
@@ -44,7 +45,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS],
+  declarations: [AppComponent, ...APP_CONTAINERS, UserLayoutComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -2,11 +2,12 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {DefaultLayoutComponent} from './containers';
+import {UserLayoutComponent} from './containers/user-layout';
+
 import {Page404Component} from './views/pages/page404/page404.component';
 import {Page500Component} from './views/pages/page500/page500.component';
 import {LoginComponent} from './views/pages/login/login.component';
 import {RegisterComponent} from './views/pages/register/register.component';
-import {HomePageComponent} from './views/pages/home-page/home-page.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
     path: '',
     component: DefaultLayoutComponent,
     data: {
-      title: 'Home'
+      title: 'Dashboard'
     },
     children: [
       {
@@ -33,7 +34,7 @@ const routes: Routes = [
           import('./views/users/users.module').then((m) => m.UsersModule)
       },
       {
-        path: 'parc',
+        path: 'parcs',
         loadChildren: () =>
           import('./views/parc/parc.module').then((m) => m.ParcModule)
       },
@@ -48,7 +49,7 @@ const routes: Routes = [
           import('./views/e-commerce/e-commerce.module').then((m) => m.ECommerceModule)
       },
       {
-        path: 'reservation',
+        path: 'reservations',
         loadChildren: () =>
           import('./views/reservation/reservation.module').then((m) => m.ReservationModule)
       },
@@ -100,10 +101,10 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'user',
-    component: HomePageComponent,
+    path: 'home',
+    component: UserLayoutComponent,
     data: {
-      title: 'HomePage'
+      title: 'Home'
     }
   },
   {

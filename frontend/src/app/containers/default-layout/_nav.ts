@@ -13,22 +13,32 @@ export const navItems: INavData[] = [
 
   {
     name: 'User Management',
-    url: '/users', // /user-management
+    url: '/users/user-management', //
     iconComponent: { name: 'cil-user' },
   },
   {
-    name: 'Reclamations',
-    url: '/users', // /reclamations
+    name: 'Reclamation',
+    url: '/users/reclamations', //
     iconComponent: { name: 'cil-mood-bad' },
   },
 
   {
     title: true,
-    name: 'parc'
+    name: 'parcs'
   },
   {
-    name: 'Park Listing',
-    url: '/parc', // /park-listing
+    name: 'Parc',
+    url: '/parcs/parc', //
+    iconComponent: { name: 'cil-location-pin' },
+  },
+  {
+    name: 'Equipment',
+    url: '/parcs/equipment', //
+    iconComponent: { name: 'cil-location-pin' },
+  },
+  {
+    name: 'Activity',
+    url: '/parcs/activity', //
     iconComponent: { name: 'cil-location-pin' },
   },
   {
@@ -37,7 +47,17 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Forum',
-    url: '/social', ///forum
+    url: '/social/forums', //
+    iconComponent: { name: 'cil-chat-bubble' },
+  },
+  {
+    name: 'Post',
+    url: '/social/posts', //
+    iconComponent: { name: 'cil-chat-bubble' },
+  },
+  {
+    name: 'Reaction',
+    url: '/social/reactions', //
     iconComponent: { name: 'cil-chat-bubble' },
   },
   {
@@ -45,18 +65,18 @@ export const navItems: INavData[] = [
     name: 'E-commerce'
   },
   {
-    name: 'Products',
-    url: '/e-commerce', // /products
+    name: 'Product',
+    url: '/e-commerce/products', //
     iconComponent: { name: 'cil-list' },
   },
   {
     name: 'Shopping Cart',
-    url: '/e-commerce', // /cart
+    url: '/e-commerce/carts', //
     iconComponent: { name: 'cil-basket' },
   },
   {
-    name: 'Orders',
-    url: '/e-commerce', ///orders
+    name: 'Order',
+    url: '/e-commerce/orders', ///orders
     iconComponent: { name: 'cil-cart' },
   },
   {
@@ -65,12 +85,12 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Pricing and Promotion',
-    url: '/reservation', // /pricing-promotion
+    url: '/reservations/pricing-promotion', // /pricing-promotion
     iconComponent: { name: 'cil-dollar' },
   },
   {
     name: 'Reservation',
-    url: '/reservation',
+    url: '/reservations/reservation',
     iconComponent: { name: 'cil-calendar' },
   },
   {
