@@ -23,24 +23,41 @@ import java.util.List;
         }
     @Override
     public List<CommunitySpace> retrieveAllCommunitySpace() {
-        List<CommunitySpace> listForum =  (List<CommunitySpace>) communitySpaceRepository.findAll();
-        return listForum;
+       return (List<CommunitySpace>) communitySpaceRepository.findAll();
+
     }
-    @Override
-        public CommunitySpace updateCommunitySpace(int id, CommunitySpace communitySpace) {
-            CommunitySpace existingCommunitySpace = communitySpaceRepository.findById(id).orElse(null);
-            if (existingCommunitySpace != null) {
-                existingCommunitySpace.setTitle(communitySpace.getTitle());
-                existingCommunitySpace.setDescription(communitySpace.getDescription());
-                existingCommunitySpace.setCategory(communitySpace.getCategory());
-                existingCommunitySpace.setPosts(communitySpace.getPosts());
-                return communitySpaceRepository.save(existingCommunitySpace);
-            }
-            return null;
+
+        @Override
+        public CommunitySpace updateCommunitySpace(CommunitySpace communitySpace) {
+
+            return communitySpaceRepository.save(communitySpace);
         }
+
+        /* @Override
+             public CommunitySpace updateCommunitySpace(int id, CommunitySpace communitySpace) {
+                 CommunitySpace existingCommunitySpace = communitySpaceRepository.findById(id).orElse(null);
+                 if (existingCommunitySpace != null) {
+                     existingCommunitySpace.setTitle(communitySpace.getTitle());
+                     existingCommunitySpace.setDescription(communitySpace.getDescription());
+                     existingCommunitySpace.setCategory(communitySpace.getCategory());
+                     existingCommunitySpace.setPosts(communitySpace.getPosts());
+                     return communitySpaceRepository.save(existingCommunitySpace);
+                 }
+                 return null;
+             }*/
     @Override
         public void deleteCommunitySpace(int id) {
             communitySpaceRepository.deleteById(id);
         }
     }
 
+/*
+public void deleteDocument(Integer idDocument) {
+        Document document = documentRepository.findById(idDocument).orElseThrow();
+        DocumentArchive archive = new DocumentArchive(document);
+        archive.setTitre(document.getTitre());
+        archive.setLieuEnregidArchivage(document.getSource());
+        archive.setDateArchive(document.getDateCreation());
+        archiveRepository.save(archive);
+        documentRepository.delete(document);
+        */

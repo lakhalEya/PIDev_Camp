@@ -33,7 +33,7 @@ public class MessageServiceImpl implements IMessageService{
         if(messageRepository.existsById(message.getIdMessage())) {
             Message m = messageRepository.findById(message.getIdMessage()).get();
             m.setContent(message.getContent());
-            m.setReact(message.getReact());
+            m.setReacts(message.getReacts());
             messageRepository.save(message);
         }
         return message;
