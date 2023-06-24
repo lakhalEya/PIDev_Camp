@@ -1,4 +1,4 @@
-package tn.camps.tuncamps.persistance.entity;
+package tn.camps.tuncamps.user.repository;
 
 public enum UserState {
     NEW,
