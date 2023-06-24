@@ -4,22 +4,21 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class React {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idReact;
     private String title;
     private String description;
-//    @ManyToOne
-//    private User user;
-    @OneToOne(mappedBy="react")
-    private Message message;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Comment> comments;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Message> messages;
 }

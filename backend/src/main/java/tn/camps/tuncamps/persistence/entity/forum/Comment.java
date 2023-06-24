@@ -19,8 +19,6 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -33,9 +31,10 @@ public class Comment implements Serializable {
     private String content;
     @Temporal(TemporalType.DATE)
     private Date datePublication;
-    @ManyToOne
-    private Post post;
-//    @ManyToOne
-//    private User user;
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "comments")
+    private Set<Post> post;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "comments")
+    private Set<React> reacts;
+
 
 }
