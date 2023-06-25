@@ -1,6 +1,7 @@
 package tn.camps.tuncamps.persistence.entities.booking;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -8,6 +9,7 @@ import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -24,8 +26,10 @@ public class Sale implements Serializable {
     private int id;
     private String title;
     private String description;
-    private Date startDate;
-    private Date expirationDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate startDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate expirationDate;
     private double amount;
 
     @OneToMany(mappedBy = "sale")

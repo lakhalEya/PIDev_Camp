@@ -1,0 +1,30 @@
+<input type="text" name="search"  placeholder="search Reservation" >
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Status</th>
+    <th>Number Interessés ❤</th>
+    <th>action</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let reservation of reservations">
+  <tr>
+
+    <td>{{reservation.id}}</td>
+    <td>{{reservation.startDate}}</td>
+    <td>{{reservation.endDate}}</td>
+    <td>{{reservation.status}}</td>
+    <td>{{reservation.personnbr}}</td>
+    <button class="btn btn-success" >Interessted</button>
+    <td>
+      <button class="btn btn-danger"  >
+        delete
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>

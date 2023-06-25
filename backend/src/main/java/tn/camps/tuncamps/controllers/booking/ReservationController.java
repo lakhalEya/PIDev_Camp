@@ -1,19 +1,30 @@
 package tn.camps.tuncamps.controllers.booking;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import tn.camps.tuncamps.persistence.components.EmailSender;
 import tn.camps.tuncamps.persistence.entities.booking.Reservation;
 import tn.camps.tuncamps.persistence.entities.booking.Sale;
+import tn.camps.tuncamps.persistence.entities.parc.Parc;
+import tn.camps.tuncamps.persistence.entities.user.User;
 import tn.camps.tuncamps.persistence.repositories.booking.ReservationRepository;
 import tn.camps.tuncamps.persistence.repositories.booking.SaleRepository;
+import tn.camps.tuncamps.persistence.repositories.parc.ParcRepository;
+import tn.camps.tuncamps.persistence.repositories.user.UserRepository;
 import tn.camps.tuncamps.services.interfaces.booking.ReservationService;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/reservations")
 public class ReservationController {
@@ -22,8 +33,16 @@ public class ReservationController {
     @Autowired
     private SaleRepository saleRepository;
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private ParcRepository parcRepository;
+    @Autowired
     private ReservationRepository reservationRepository;
+    private final EmailSender emailSender;
 
+    public ReservationController(EmailSender emailSender) {
+        this.emailSender = emailSender;
+    }
 
 
     @GetMapping("/getOne/{id}")
@@ -42,14 +61,29 @@ public class ReservationController {
         return ResponseEntity.ok(reservations);
     }
 
+    @GetMapping("/resBySaleDate")
+    public ResponseEntity<List<Reservation>> getReservationsBySaleDate(@RequestBody  LocalDate date) {
+        List<Reservation> reservations = reservationService.findResSaleDate(date);
+        return ResponseEntity.ok(reservations);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
 
         Sale sale = saleRepository.findById(reservation.getSale().getId()).orElse(null);
+        User user = userRepository.findById(reservation.getUser().getId()).orElse(null);
+        Parc parc = parcRepository.findById(reservation.getParc().getIdParc()).orElse(null);
         reservation.setSale(sale);
+        //à modifier Connected user
+        reservation.setUser(user);
+        reservation.setParc(parc);
         Reservation createdReservation = reservationService.createReservation(reservation);
+        //emailSender.sendConfirmationEmail("nefzimaysa27@gmail.com");
+        //emailSender.sendConfirmationEmail("");
         return ResponseEntity.status(HttpStatus.CREATED).body(createdReservation);
+
     }
+
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Reservation> updateReservation(@PathVariable int id, @RequestBody Reservation reservation) {

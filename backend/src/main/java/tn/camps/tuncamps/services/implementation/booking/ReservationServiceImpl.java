@@ -1,13 +1,18 @@
 package tn.camps.tuncamps.services.implementation.booking;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.camps.tuncamps.persistence.entities.booking.Reservation;
+import tn.camps.tuncamps.persistence.entities.parc.Parc;
+import tn.camps.tuncamps.persistence.entities.user.User;
 import tn.camps.tuncamps.persistence.repositories.booking.ReservationRepository;
 import tn.camps.tuncamps.services.interfaces.booking.ReservationService;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
-
+@Slf4j
 @Service
 public class ReservationServiceImpl implements ReservationService {
     @Autowired
@@ -25,8 +30,9 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Reservation createReservation(Reservation Reservation) {
-        return reservationRepository.save(Reservation);
+    public Reservation createReservation(Reservation reservation) {
+       System.out.println(reservation.getUser().getId());
+        return reservationRepository.save(reservation);
     }
 
     @Override
@@ -44,4 +50,26 @@ public class ReservationServiceImpl implements ReservationService {
         }
         reservationRepository.deleteById(id);
     }
+
+    @Override
+    public List<Reservation> findResStatus(String status) {
+        return reservationRepository.findByStatus(status);
+    }
+
+    @Override
+    public List<Reservation> findResUser(User user) {
+        return reservationRepository.findByUser(user);
+    }
+
+    @Override
+    public List<Reservation> findResParc(Parc parc) {
+        return reservationRepository.findByParc(parc);
+    }
+
+    @Override
+    public List<Reservation> findResSaleDate(LocalDate dateI) {
+        return reservationRepository.findBySaleDate(dateI);
+    }
+
+
 }
