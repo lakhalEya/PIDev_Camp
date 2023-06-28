@@ -9,6 +9,7 @@ import { EcommerceComponent } from './ecommerce/ecommerce.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { HomeComponent } from './home/home.component';
 
+import { CarouselModule } from '@coreui/angular';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     CommonModule,
+    CarouselModule,
     UIcomponentRoutingModule
   ]
 })
