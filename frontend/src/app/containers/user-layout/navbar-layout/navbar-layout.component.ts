@@ -1,11 +1,11 @@
 import { Component , HostListener } from '@angular/core';
 
 @Component({
-  selector: 'app-user-layout',
-  templateUrl: './user-layout.component.html',
-  styleUrls: ['./user-layout.component.scss']
+  selector: 'app-navbar-layout',
+  templateUrl: './navbar-layout.component.html',
+  styleUrls: ['./navbar-layout.component.scss']
 })
-export class UserLayoutComponent {
+export class NavbarLayoutComponent {
   isNavbarOpen = false;
   isNavbarScrolled = false;
 

@@ -11,7 +11,7 @@ import { CartComponent } from './cart/cart.component';
   declarations: [
     ProductsComponent,
     OrdersComponent,
-    CartComponent
+    CartComponent,
   ],
   imports: [
     CommonModule,

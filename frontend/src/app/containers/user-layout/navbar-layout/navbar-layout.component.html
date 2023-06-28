@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" [ngClass]="{'navbar-scrolled': isNavbarScrolled}">
+    <div class="container">
+        <a class="navbar-brand" href="#">Your Logo</a>
+        <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+        <div class="collapse navbar-collapse" [ngClass]="{'show': isNavbarOpen}">
+            <ul class="navbar-nav ml-2">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="parcs">Parc</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="ecommerce">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="reservation">Promotions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="social">Camper Space</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="users">User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="dashboard">dashboard</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

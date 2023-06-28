@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 
 // Import containers
 import {  DefaultHeaderComponent, DefaultLayoutComponent } from './containers';
+import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {
   AvatarModule,
@@ -38,6 +39,8 @@ import {
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { UserLayoutComponent } from './containers/user-layout/user-layout.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavbarLayoutComponent } from './containers/user-layout/navbar-layout/navbar-layout.component';
 
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
@@ -45,7 +48,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, UserLayoutComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, UserLayoutComponent, NavbarLayoutComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -72,7 +75,9 @@ const APP_CONTAINERS = [
     BadgeModule,
     ListGroupModule,
     CardModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    NgbModule,
+    NgbCollapseModule
   ],
   providers: [
     {

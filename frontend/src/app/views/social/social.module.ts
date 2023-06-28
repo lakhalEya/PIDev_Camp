@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ForumComponent } from './forum/forum.component';
 import { SocialRoutingModule } from './social-routing.module';
 import { PostComponent } from './post/post.component';
-import { ReactionComponent } from './reaction/reaction.component'
+import { ReactionComponent } from './reaction/reaction.component';
 
 
 
@@ -11,7 +11,7 @@ import { ReactionComponent } from './reaction/reaction.component'
   declarations: [
     ForumComponent,
     PostComponent,
-    ReactionComponent
+    ReactionComponent,
   ],
   imports: [
     CommonModule,
