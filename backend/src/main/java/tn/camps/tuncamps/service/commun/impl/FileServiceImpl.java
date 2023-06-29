@@ -1,11 +1,9 @@
 package tn.camps.tuncamps.service.commun.impl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import tn.camps.tuncamps.service.commun.FileService;
 
 import java.io.File;
@@ -16,13 +14,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
+import java.lang.String;
+import org.springframework.web.multipart.MultipartFile;
+
 
 @Service
 public class FileServiceImpl implements FileService {
     private static final String UPLOAD_FOLDER = "/path/to/upload/folder/";
 
 
-    @Autowired
+    /*@Autowired
     public String uploadFile(MultipartFile multipartFile, String path) {
         // Generate a unique file id
         String fileId = UUID.randomUUID().toString();
@@ -95,6 +96,6 @@ public class FileServiceImpl implements FileService {
         Path destination = Paths.get(destinationPath);
 
         Files.copy(sourcePath, destination, StandardCopyOption.REPLACE_EXISTING);
-    }
+    }*/
 }
 

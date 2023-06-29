@@ -16,10 +16,13 @@ import java.io.IOException;
 @RequestMapping("/files")
 public class FileController {
 
+/*
+    private final FileService fileService;
+
     @Autowired
-    private FileService fileService;
-
-
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
+    }
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile multipartFile, @PathVariable String path) {
@@ -44,5 +47,5 @@ public class FileController {
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-    }
+    }*/
 }

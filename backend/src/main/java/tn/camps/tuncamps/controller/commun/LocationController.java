@@ -31,17 +31,23 @@ public class LocationController {
     }
 
     @PostMapping
-    public ResponseEntity<Location> createLocation(@RequestBody Location location) {
-        Location createdLocation = locationService.saveLocation(location);
-        return new ResponseEntity<>(createdLocation, HttpStatus.CREATED);
+    public ResponseEntity<?> createLocation(@RequestBody Location location) {
+        try {
+            Location createdLocation = locationService.createLocation(location);
+            return new ResponseEntity<>(createdLocation, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            String errorMessage = "A location with the same latitude and longitude already exists.";
+            return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+        }
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Location> updateLocation(@PathVariable int id, @RequestBody Location location) {
         Optional<Location> existingLocation = locationService.getLocationById(id);
         if (existingLocation.isPresent()) {
             location.setId(id);
-            Location updatedLocation = locationService.saveLocation(location);
+            Location updatedLocation = locationService.createLocation(location);
             return new ResponseEntity<>(updatedLocation, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
