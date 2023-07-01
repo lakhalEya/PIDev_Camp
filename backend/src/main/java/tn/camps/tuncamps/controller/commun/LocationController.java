@@ -23,11 +23,42 @@ public class LocationController {
         return new ResponseEntity<>(locations, HttpStatus.OK);
     }
 
+    @GetMapping("/{longitude}/{latitude}")
+    public ResponseEntity<?> findLocationWithLongitudeAndLatitude(@PathVariable double longitude, @PathVariable double latitude) {
+        Optional<Location> location = locationService.getLocationByCoordinates(longitude, latitude);
+        if (location.isPresent())
+            return new ResponseEntity<>(location, HttpStatus.OK);
+        else
+            return new ResponseEntity<>("No Location with longitude: " + longitude + " and latitude " + latitude, HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Location> getLocationById(@PathVariable int id) {
+    public ResponseEntity<?> findLocationById(@PathVariable int id) {
         Optional<Location> location = locationService.getLocationById(id);
-        return location.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if (location.isPresent())
+            return new ResponseEntity<>(location, HttpStatus.OK);
+        else
+            return new ResponseEntity<>("No Location with id " + id, HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/enable/{id}")
+    public ResponseEntity<?> enableLocation(@PathVariable int id) {
+        try {
+            Location location = locationService.enableLocation(id);
+            return new ResponseEntity<>(location, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/disable/{id}")
+    public ResponseEntity<?> disableLocation(@PathVariable int id) {
+        try {
+            Location location = locationService.disableLocation(id);
+            return new ResponseEntity<>(location, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping
@@ -36,33 +67,45 @@ public class LocationController {
             Location createdLocation = locationService.createLocation(location);
             return new ResponseEntity<>(createdLocation, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
-            String errorMessage = "A location with the same latitude and longitude already exists.";
+            String errorMessage = e.getMessage();
             return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
         }
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Location> updateLocation(@PathVariable int id, @RequestBody Location location) {
-        Optional<Location> existingLocation = locationService.getLocationById(id);
-        if (existingLocation.isPresent()) {
-            location.setId(id);
-            Location updatedLocation = locationService.createLocation(location);
+    @PostMapping("update/{id}")
+    public ResponseEntity<?> updateLocation(@PathVariable int id, @RequestBody Location location) {
+        try {
+            Location updatedLocation = locationService.updateLocation(id, location);
             return new ResponseEntity<>(updatedLocation, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/{longitude}/{latitude}")
+    public ResponseEntity<?> deleteLocationWithLongitudeAndLatitude(@PathVariable double longitude, @PathVariable double latitude) {
+        try {
+            locationService.deleteLocationByCoordinates(longitude, latitude);
+            return new ResponseEntity<>("Location with longitude: " + longitude + " and latitude " + latitude + " is Deleted successfully", HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("Location with longitude: " + longitude + " and latitude " + latitude + "  is not found ", HttpStatus.NOT_FOUND);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>("Failed to delete location: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteLocation(@PathVariable int id) {
-        Optional<Location> existingLocation = locationService.getLocationById(id);
-        if (existingLocation.isPresent()) {
+    public ResponseEntity<?> deleteLocation(@PathVariable int id) {
+        try {
             locationService.deleteLocation(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Location " + id + " Deleted successfully", HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("Location " + id + " is not found ", HttpStatus.NOT_FOUND);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>("Failed to delete location: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
 }

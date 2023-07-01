@@ -11,5 +11,6 @@ import java.util.Optional;
 public interface LocationRepository extends JpaRepository<Location, Integer>, JpaSpecificationExecutor<Location> {
 
     Optional<Location> findByLatitudeAndLongitude(double latitude, double longitude);
+    Boolean existsLocationByLatitudeAndLongitudeAndIdIsNot(double latitude, double longitude, int id);
 
 }

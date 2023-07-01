@@ -26,4 +26,14 @@ public interface LocationService {
     Location createLocation(Location location);
 
     void deleteLocation(int id);
+
+    void deleteLocationByCoordinates(double longitude, double latitude);
+
+    Optional<Location> getLocationByCoordinates(double longitude, double latitude);
+
+     Location updateLocation(int id ,Location location) ;
+
+    Location enableLocation(int id);
+    Location disableLocation(int id);
+
 }

@@ -1,0 +1,75 @@
+United States,New York,10001
+United States,Los Angeles,90001
+United States,Chicago,60601
+United States, New York, 10001
+United States, Los Angeles, 90001
+United States, Chicago, 60601
+United States, Houston, 77001
+United States, Phoenix, 85001
+United Kingdom, London, SW1A 1AA
+United Kingdom, Manchester, M1 1AG
+United Kingdom, Birmingham, B1 1BB
+United Kingdom, Glasgow, G1 1XX
+United Kingdom, Edinburgh, EH1 1XX
+Canada, Toronto, M5V 1J2
+Canada, Vancouver, V6C 1G8
+Canada, Montreal, H2Y 1P5
+Canada, Calgary, T2P 0R4
+Canada, Ottawa, K1A 0A1
+France, Paris, 75000
+France, Marseille, 13000
+France, Lyon, 69000
+France, Toulouse, 31000
+France, Nice, 06000
+Germany, Berlin, 10115
+Germany, Hamburg, 20095
+Germany, Munich, 80331
+Germany, Cologne, 50667
+Germany, Frankfurt, 60311
+Australia, Sydney, 2000
+Australia, Melbourne, 3000
+Australia, Brisbane, 4000
+Australia, Perth, 6000
+Australia, Adelaide, 5000
+United Kingdom, London, SW1A 1AA
+United Kingdom, Manchester, M1 1AF
+United Kingdom, Birmingham, B1 1BB
+United Kingdom, Glasgow, G1 1CC
+United Kingdom, Edinburgh, EH1 1DD
+Canada, Toronto, M5V 2C3
+Canada, Vancouver, V6B 1V2
+Canada, Montreal, H2X 1Y9
+Canada, Calgary, T2P 0V1
+Canada, Ottawa, K1P 1J1
+Spain, Madrid, 28001
+Spain, Barcelona, 08002
+Spain, Valencia, 46001
+Spain, Seville, 41001
+Spain, Málaga, 29001
+Tunisia, Ariana,	2000
+Tunisia, Beja,	9000
+Tunisia, Ben Arous,	2000
+Tunisia, Ben Arous,	 1100
+Tunisia, Bizerte,	7000
+Tunisia, Gabes,	6000
+Tunisia, Gafsa,	2100
+Tunisia, Jendouba,	8100
+Tunisia, Kairouan,	3100
+Tunisia, Kasserine,	1200
+Tunisia, Kebili,	4200
+Tunisia,Manouba,	2000
+Tunisia,Manouba,	1100
+Tunisia,  Kef,	7100
+Tunisia, Mahdia, 5100
+Tunisia, Medenine, 4100
+Tunisia, Monastir, 5000
+Tunisia, Nabeul, 8000
+Tunisia, Sfax, 3000
+Tunisia, Sidi Bouzid, 9100
+Tunisia, Siliana, 6100
+Tunisia, Sousse, 4000
+Tunisia, Tataouine, 3200
+Tunisia, Tozeur, 2200
+Tunisia, Tunis, 	2000
+Tunisia, Tunis,  1000
+Tunisia, Zaghouan, 	1100
