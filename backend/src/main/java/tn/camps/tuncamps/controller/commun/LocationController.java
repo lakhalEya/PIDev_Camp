@@ -41,6 +41,12 @@ public class LocationController {
             return new ResponseEntity<>("No Location with id " + id, HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/availabe/{status}")
+    public ResponseEntity<?> findLocationByDisponibility(@PathVariable boolean status) {
+        List<Location> locations = locationService.getLocationByDisponibility(status);
+        return new ResponseEntity<>(locations, HttpStatus.OK);
+       }
+
     @PutMapping("/enable/{id}")
     public ResponseEntity<?> enableLocation(@PathVariable int id) {
         try {

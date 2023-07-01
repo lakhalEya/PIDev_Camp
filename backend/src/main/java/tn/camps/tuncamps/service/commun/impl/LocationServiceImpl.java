@@ -71,6 +71,10 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
+    public List<Location> getLocationByDisponibility(boolean status) {
+        return locationRepository.findByDisponibilite(status);
+    }
+    @Override
     public Optional<Location> getLocationByCoordinates(double longitude, double latitude) {
         return locationRepository.findByLatitudeAndLongitude(latitude, longitude);
     }

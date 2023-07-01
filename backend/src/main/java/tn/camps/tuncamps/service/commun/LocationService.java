@@ -23,6 +23,8 @@ public interface LocationService {
 
     Optional<Location> getLocationById(int id);
 
+    List<Location> getLocationByDisponibility(boolean status);
+
     Location createLocation(Location location);
 
     void deleteLocation(int id);
