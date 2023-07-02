@@ -5,8 +5,7 @@ import lombok.experimental.FieldDefaults;
 import tn.camps.tuncamps.persistence.entity.enumeration.CommunityCategory;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -22,7 +21,15 @@ public class CommunitySpace implements Serializable
     private String description;
     @Enumerated(EnumType.STRING)
     private CommunityCategory category;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy ="communitySpace", fetch = FetchType.EAGER)
-    private List<Post> Posts = new ArrayList<>();
+    @OneToMany(mappedBy = "communitySpace", cascade = CascadeType.ALL)
+    private Set<Post> posts;
 
+
+    @Lob
+    private byte[] fileData;
+    private String fileName;
+    private String fileType;
+
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private Set<User> Users;
 }

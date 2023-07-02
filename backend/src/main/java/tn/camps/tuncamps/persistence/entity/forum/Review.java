@@ -11,6 +11,8 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Review implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +22,6 @@ public class Review implements Serializable {
     private int rating;
     @Temporal(TemporalType.DATE)
     private Date reviewDate;
-    @ManyToOne
-    Post posts;
-
+//    @ManyToOne
+//    private User user;
 }

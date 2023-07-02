@@ -1,6 +1,6 @@
 package tn.camps.tuncamps.controller.forum;
 
-import javafx.geometry.Pos;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.camps.tuncamps.persistence.entity.forum.Post;
@@ -22,5 +22,9 @@ public class PostController {
     @GetMapping("/show")
     public List<Post> listPost(){
         return  iPostService.retrieveAllPost();
+    }
+    @GetMapping("/show/{id}")
+    public  Post postById(int id){
+        return  iPostService.retrievePost(id);
     }
 }

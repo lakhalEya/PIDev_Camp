@@ -13,7 +13,6 @@ public class PostServiceImpl implements IPostService{
 
     @Override
     public Post createPost(Post post) {
-
         return postRepository.save(post);
     }
 
