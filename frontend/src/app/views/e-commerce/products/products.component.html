@@ -1,0 +1,319 @@
+<div id="layoutSidenav">
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+
+                <div class="card mb-4 d-inline-block">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col col-lg-10">
+                                <i class="fas fa-table me-1"></i>
+                                Liste des Products
+                            </div>
+                            <div class="col col-lg-2">
+                                <button class="btn btn-primary btn-sm float-right" (click)="showAddForm()">
+                                    <i class="fas fa-plus"></i>
+                                    Add
+
+                                </button>
+                            </div>
+
+
+                            <div class="row" *ngIf="addFormVisible">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+
+                                    </div>
+                                    <div class="card-body">
+
+                                        <form (ngSubmit)="createproduct();" method="POST">
+                                            <div class="card card-default">
+
+                                                <div class="card-body">
+
+                                                    <div class="row">
+                                                        <div class="form-group col-lg-6">
+                                                            <label>barcode</label>
+                                                            <input type="text" name="barcode" [(ngModel)]="prod.barcode"
+                                                                class="form-control" />
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Name</label>
+                                                            <input type="text" name="name" [(ngModel)]="prod.name"
+                                                                class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Price</label>
+                                                            <input type="number" min="0" name="price"
+                                                                [(ngModel)]="prod.price" class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>QTS</label>
+                                                            <input type="number" min="0" name="stockQuantity"
+                                                                [(ngModel)]="prod.stockQuantity" class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Category</label>
+                                                            <input type="text" name="category"
+                                                                [(ngModel)]="prod.category" class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Description</label>
+                                                            <input type="text" name="description"
+                                                                [(ngModel)]="prod.description" class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Owner</label>
+                                                            <input type="text" name="owner" [(ngModel)]="prod.owner"
+                                                                class="form-control">
+
+
+                                                        </div>
+                                                        <div style="margin-top: 4%;" class="form-group col-lg-6">
+                                                            <label>TypeProprietaire</label>
+
+                                                            <select name="typeProprietaire"
+                                                                [(ngModel)]="prod.typeProprietaire">
+                                                                <option value="PP">PP</option>
+                                                                <option value="PM">PM</option>
+
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Image</label> <br>
+                                                            <input id="file-input" type="file" name="image"
+                                                                accept="image/*" [(ngModel)]="prod.image">
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Reorder</label>
+                                                            <label class="toggle-switch">
+                                                                <input type="checkbox" name="reorder"
+                                                                    [(ngModel)]="prod.reorder">
+                                                                <span class="slider"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="row float-right">
+                                                        <div class="col">
+                                                            <button type="reset" class="btn btn-primary  btn-sm m-3"
+                                                                data-dismiss="modal"
+                                                                (click)="hideAddForm()">Annuler</button>
+                                                            <button type="submit" class="btn btn-success btn-sm"
+                                                                data-dismiss="modal">Enregistrer</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="editFormVisible">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+
+                                        <form (ngSubmit)="updateproduct(prod)" method="POST">
+                                            <div class="card card-default">
+
+                                                <div class="card-body">
+
+                                                    <div class="row">
+                                                        <div class="form-group col-lg-6">
+                                                            <label>barcode</label>
+                                                            <input type="text" name="barcode" [(ngModel)]="prod.barcode"
+                                                                class="form-control" />
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Name</label>
+                                                            <input type="text" name="name" [(ngModel)]="prod.name"
+                                                                class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Price</label>
+                                                            <input type="number" min="0" name="price"
+                                                                [(ngModel)]="prod.price" class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>QTS</label>
+                                                            <input type="number" min="0" name="stockQuantity"
+                                                                [(ngModel)]="prod.stockQuantity" class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Category</label>
+                                                            <input type="text" name="category"
+                                                                [(ngModel)]="prod.category" class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Description</label>
+                                                            <input type="text" name="description"
+                                                                [(ngModel)]="prod.description" class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Owner</label>
+                                                            <input type="text" name="owner" [(ngModel)]="prod.owner"
+                                                                class="form-control">
+
+
+                                                        </div>
+                                                        <div style="margin-top: 4%;" class="form-group col-lg-6">
+                                                            <label>TypeProprietaire</label>
+
+                                                            <select name="typeProprietaire"
+                                                                [(ngModel)]="prod.typeProprietaire">
+                                                                <option value="PP">PP</option>
+                                                                <option value="PM">PM</option>
+
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Image</label> <br>
+                                                            <input id="file-input" type="file" name="image"
+                                                                accept="image/*" [(ngModel)]="prod.image">
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Reorder</label>
+                                                            <label class="toggle-switch">
+                                                                <input type="checkbox" name="reorder"
+                                                                    [(ngModel)]="prod.reorder">
+                                                                <span class="slider"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="row float-right">
+                                                        <div class="col">
+                                                            <button type="reset" class="btn btn-primary  btn-sm m-3"
+                                                                data-dismiss="modal"
+                                                                (click)="hideEditForm()">Annuler</button>
+                                                            <button type="submit" class="btn btn-success btn-sm"
+                                                                data-dismiss="modal">Enregistrer</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                        <div class="search-wrapper">
+                            <input [(ngModel)]="term" type="text" id="searchInput" placeholder="Search...">
+                            <i class="fa fa-search"></i>
+                          </div>
+                          
+                    </div>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Barcode</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>QTS</th>
+                                <th>Owner</th>
+                                <th>Reorder</th>
+                                <th>Image</th>
+                                <th>TypeProprietaire</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let prod of prods| filter: term : 'name' | slice:(currentPage - 1) * itemsPerPage : currentPage * itemsPerPage ">
+                                <td>
+                                    <p>{{prod.barcode}}</p>
+                                </td>
+                                <td>
+                                    <p>{{prod.name}}</p>
+                                </td>
+                                <td>
+                                    <p>{{prod.category }}</p>
+                                </td>
+                                <td>
+                                    <p>{{prod.price }}</p>
+                                </td>
+                                <td>
+                                    <p>{{prod.stockQuantity }}</p>
+                                </td>
+                                <td>
+                                    <p>{{prod.owner }}</p>
+                                </td>
+                                <td>
+                                    <p> {{ prod.reorder}}</p>
+                                </td>
+                                <td>
+                                    <img class="product-image" src="{{ prod.image }}" alt="Product Image" />
+                                </td>
+                                <td>
+                                    <p> {{ prod.typeProprietaire}}</p>
+                                </td>
+                                <td><button class="btn btn-sm btn-warning m-2" (click)="editproduct(prod)">
+                                        <i class="fas fa-pen text-white"></i>
+
+                                    </button>
+
+                                    <button class="btn btn-sm btn-danger m-2" (click)="deleteproduct(prod)">
+                                        <i class="fas fa-trash text-white"></i>
+
+                                    </button>
+                                </td>
+
+                        </tbody>
+                    </table>
+                    <div><button *ngIf="currentPage>1" class="previous-button"
+                            (click)="currentPage = currentPage - 1">Précédent</button>
+                        <button *ngIf="currentPage<total" class="next-button"
+                            (click)="currentPage = currentPage + 1">Suivant</button>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+    </div>
+</div>

@@ -1,0 +1,231 @@
+<div id="layoutSidenav">
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+
+                <div class="card mb-4 ">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col col-lg-10">
+                                <i class="fas fa-table me-1"></i>
+                                Liste des allocations
+                            </div>
+                            <div class="col col-lg-2">
+                                <button class="btn btn-primary btn-sm float-right" (click)="showAddForm()">
+                                    <i class="fas fa-plus"></i>
+                                    Add
+
+                                </button>
+                            </div>
+
+
+                            <div class="row" *ngIf="addFormVisible">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+
+                                    </div>
+                                    <div class="card-body">
+
+                                        <form (ngSubmit)="createallocation();" method="POST">
+                                            <div class="card card-default">
+
+                                                <div class="card-body">
+
+                                                    <div class="row">
+                                                        <div class="form-group col-lg-6">
+                                                            <label>dateDebut</label>
+                                                            <input type="date" name="dateDebut"
+                                                                [(ngModel)]="allocation.dateDebut" class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>dateFin</label>
+                                                            <input type="date" name="dateFin"
+                                                                [(ngModel)]="allocation.dateFin" class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Quantity</label>
+                                                            <input type="nymber" name="Quantity"
+                                                                [(ngModel)]="allocation.Quantity" class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6" style="margin-top: 2%;">
+                                                            <label>Product</label>
+                                                            <select (change)="state($event)">
+                                                                <option *ngFor="let option of prods"
+                                                                    [value]="option.idProduct">{{ option.name }}
+                                                                </option>
+                                                            </select>
+
+
+
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="row float-right">
+                                                        <div class="col">
+                                                            <button type="reset" class="btn btn-primary  btn-sm m-3"
+                                                                data-dismiss="modal"
+                                                                (click)="hideAddForm()">Annuler</button>
+                                                            <button type="submit" class="btn btn-success btn-sm"
+                                                                data-dismiss="modal">Enregistrer</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="editFormVisible">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+
+                                        <form (ngSubmit)="updateallocation(allocation)" method="POST">
+                                            <div class="card card-default">
+
+                                                <div class="card-body">
+
+                                                    <div class="row">
+                                                        <div class="form-group col-lg-6">
+                                                            <label>dateDebut</label>
+                                                            <input type="date" name="dateDebut"
+                                                                [(ngModel)]="allocation.dateDebut" class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>dateFin</label>
+                                                            <input type="date" name="dateFin"
+                                                                [(ngModel)]="allocation.dateFin" class="form-control">
+
+
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Quantity</label>
+                                                            <input type="nymber" name="Quantity"
+                                                                [(ngModel)]="allocation.Quantity" class="form-control">
+
+
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="row float-right">
+                                                        <div class="col">
+                                                            <button type="reset" class="btn btn-primary  btn-sm m-3"
+                                                                data-dismiss="modal"
+                                                                (click)="hideEditForm()">Annuler</button>
+                                                            <button type="submit" class="btn btn-success btn-sm"
+                                                                data-dismiss="modal">Enregistrer</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Product name</th>
+                                <th>barcode</th>
+                                <th>category</th>
+                                <th>Iamge</th>
+                                <th>description</th>
+                                <th>product price</th>
+                                <th>dateDebut</th>
+                                <th>dateFin</th>
+                                <th>Quantity</th>
+                                <th>resevation price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let allocation of allocations | slice:(currentPage - 1) * itemsPerPage : currentPage * itemsPerPage ">
+                                <td>
+                                    <p>{{allocation.product.name}}</p>
+                                </td>
+                                <td>
+                                    <p>{{allocation.product.barcode}}</p>
+                                </td>
+                                <td>
+                                    <p>{{allocation.product.category}}</p>
+                                </td>
+
+                                <td>
+                                    <img class="product-image" src="{{ allocation.product.image}}"
+                                        alt="Product Image" />
+                                </td>
+                                <td>
+                                    <p>{{allocation.product.description}}</p>
+                                </td>
+                                <td>
+                                    <p>{{allocation.product.price}}</p>
+                                </td>
+                                <td>
+                                    <p>{{allocation.dateDebut  | date: 'dd/MM/yyyy HH:mm'}}</p>
+                                </td>
+                                <td>
+                                    <p>{{allocation.dateFin | date: 'dd/MM/yyyy HH:mm'}}
+                                </td>
+                                <td>
+                                    <p>{{allocation.Quantity}}
+                                </td>
+                                <td>
+                                    <p>{{allocation.price}}
+                                </td>
+                                <td><button class="btn btn-sm btn-warning m-2" (click)="editallocation(allocation)">
+                                        <i class="fas fa-pen text-white"></i>
+
+                                    </button>
+
+                                    <button class="btn btn-sm btn-danger m-2" (click)="deleteallocation(allocation)">
+                                        <i class="fas fa-trash text-white"></i>
+
+                                    </button>
+                                </td>
+
+                        </tbody>
+                    </table>
+                    <div><button *ngIf="currentPage>1" class="previous-button"
+                            (click)="currentPage = currentPage - 1">Précédent</button>
+                        <button *ngIf="currentPage<total" class="next-button"
+                            (click)="currentPage = currentPage + 1">Suivant</button>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+    </div>
+</div>
