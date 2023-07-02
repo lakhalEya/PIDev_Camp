@@ -3,6 +3,7 @@ package tn.camps.tuncamps.persistence.entity.commun;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Currency;
 
 @Getter
@@ -11,7 +12,7 @@ import java.util.Currency;
 @AllArgsConstructor
 @ToString
 @Entity
-public class Tariff {
+public class Tariff  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,6 +20,7 @@ public class Tariff {
     private String name;
     private String description;
     private int duration;
-    @Embedded
-    private Currency currency;
+    //@Embedded
+    //private Currency currency;
+
 }

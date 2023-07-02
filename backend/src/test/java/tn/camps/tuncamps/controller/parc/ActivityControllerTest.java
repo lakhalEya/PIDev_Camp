@@ -49,8 +49,8 @@ public class ActivityControllerTest {
     public void getAllActivities_ShouldReturnListOfActivities() throws Exception {
         Currency currency = Currency.getInstance("USD");
 
-        Activity activity = new Activity(1, "Activity 1", new Location(1, "Location 1", "Description 1", true, 1.0, 1.0), new Date(), new Date(), "Organizer 1", new Tariff(1, 10.0, "Tariff 1", "Tariff Description", 60, currency));
-        Activity activity2 = new Activity(2, "Activity 2", new Location(2, "Location 2", "Description 2", true, 2.0, 2.0), new Date(), new Date(), "Organizer 2", new Tariff(2, 20.0, "Tariff 2", "Tariff Description", 120, currency));
+        Activity activity = new Activity(1, "Activity 1", new Location(1, "Location 1", "Description 1", true, 1.0, 1.0), new Date(), new Date(), "Organizer 1", new Tariff(1, 10.0, "Tariff 1", "Tariff Description", 60/*, currency*/));
+        Activity activity2 = new Activity(2, "Activity 2", new Location(2, "Location 2", "Description 2", true, 2.0, 2.0), new Date(), new Date(), "Organizer 2", new Tariff(2, 20.0, "Tariff 2", "Tariff Description", 120/*, currency*/));
         List<Activity> activities = Arrays.asList(activity, activity2);
 
         when(activityService.getAllActivities()).thenReturn(activities);
@@ -71,7 +71,7 @@ public class ActivityControllerTest {
     public void getActivityById_ExistingId_ShouldReturnActivity() throws Exception {
         Currency currency = Currency.getInstance("USD");
 
-        Activity activity = new Activity(1, "Activity 1", new Location(1, "Location 1", "Description 1", true, 1.0, 1.0), new Date(), new Date(), "Organizer 1", new Tariff(1, 10.0, "Tariff 1", "Tariff Description", 60, currency));
+        Activity activity = new Activity(1, "Activity 1", new Location(1, "Location 1", "Description 1", true, 1.0, 1.0), new Date(), new Date(), "Organizer 1", new Tariff(1, 10.0, "Tariff 1", "Tariff Description", 60/*, currency*/));
 
         when(activityService.getActivityById(1)).thenReturn(Optional.of(activity));
 
@@ -100,8 +100,8 @@ public class ActivityControllerTest {
     @Test
     public void createActivity_ValidActivity_ShouldReturnCreatedActivity() throws Exception {
         Currency currency = Currency.getInstance("USD");
-        Activity activity = new Activity(1, "Activity 1", new Location(1, "Location 1", "Description 1", true, 1.0, 1.0), new Date(), new Date(), "Organizer 1", new Tariff(1, 10.0, "Tariff 1", "Tariff Description", 60, currency));
-        Activity createdActivity = new Activity(1, "Activity 1", new Location(2, "Location 2", "Description 2", true, 2.0, 2.0), new Date(), new Date(), "Organizer 2", new Tariff(2, 20.0, "Tariff 2", "Tariff Description", 120, currency));
+        Activity activity = new Activity(1, "Activity 1", new Location(1, "Location 1", "Description 1", true, 1.0, 1.0), new Date(), new Date(), "Organizer 1", new Tariff(1, 10.0, "Tariff 1", "Tariff Description", 60/*, currency*/));
+        Activity createdActivity = new Activity(1, "Activity 1", new Location(2, "Location 2", "Description 2", true, 2.0, 2.0), new Date(), new Date(), "Organizer 2", new Tariff(2, 20.0, "Tariff 2", "Tariff Description", 120/*, currency*/));
 
         when(activityService.createActivity(any(Activity.class))).thenReturn(createdActivity);
 
@@ -146,7 +146,7 @@ public class ActivityControllerTest {
     @Test
     public void updateActivity_NonExistingId_ShouldReturnNotFound() throws Exception {
         // Create test data
-        Activity activity = new Activity(1, "Activity 1", new Location(1, "Location 1", "Description 1", true, 1.0, 1.0), new Date(), new Date(), "Organizer 1", new Tariff(1, 10.0, "Tariff 1", "Tariff Description", 60, Currency.getInstance("USD")));
+        Activity activity = new Activity(1, "Activity 1", new Location(1, "Location 1", "Description 1", true, 1.0, 1.0), new Date(), new Date(), "Organizer 1", new Tariff(1, 10.0, "Tariff 1", "Tariff Description", 60/*, Currency.getInstance("USD")*/));
 
         // Mock activity service
         when(activityService.getActivityById(1)).thenReturn(Optional.empty());

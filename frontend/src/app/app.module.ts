@@ -1,14 +1,12 @@
-<<<<<<< HEAD
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+
 import { HttpClientModule } from '@angular/common/http';
-=======
+
 import { NgModule , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
->>>>>>> origin/main
+
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
@@ -54,21 +52,11 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-<<<<<<< HEAD
-  declarations: [
-    AppComponent,
-    ListReservationComponent
-
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-=======
   declarations: [AppComponent, ...APP_CONTAINERS, UserLayoutComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
     AvatarModule,
     BreadcrumbModule,
@@ -105,7 +93,6 @@ const APP_CONTAINERS = [
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
->>>>>>> origin/main
   ],
 })
 export class AppModule {

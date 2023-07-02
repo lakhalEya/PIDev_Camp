@@ -1,12 +1,12 @@
-package tn.camps.tuncamps.persistence.entity.parc;
+package tn.camps.tuncamps.persistence.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import tn.camps.tuncamps.persistence.entity.booking.Reservation;
-import tn.camps.tuncamps.persistence.entity.commun.Location;
 
 import javax.persistence.*;
 import java.util.List;
+
 
 @Getter
 @Setter
@@ -15,20 +15,13 @@ import java.util.List;
 @ToString
 @Entity
 @JsonIgnoreProperties("reservations")
-public class Parc {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idParc;
+    private int id;
+    private String email;
 
-    private String name;
-
-    private String description;
-
-    @Enumerated(EnumType.STRING)
-    private ParcCategory category;
-
-    @OneToOne
-    private Location location;
-    @OneToMany(mappedBy = "parc")
+    @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
+
 }

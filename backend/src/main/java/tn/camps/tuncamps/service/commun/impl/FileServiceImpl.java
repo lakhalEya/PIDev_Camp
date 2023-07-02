@@ -18,11 +18,11 @@ import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
 @Service
-public class FileServiceImpl implements FileService {
-    private static final String UPLOAD_FOLDER = "/path/to/upload/folder/";
+public class FileServiceImpl /*implements FileService */{
+    //private static final String UPLOAD_FOLDER = "/path/to/upload/folder/";
 
 
-    @Autowired
+    /*@Autowired
     public String uploadFile(MultipartFile multipartFile, String path) {
         // Generate a unique file id
         String fileId = UUID.randomUUID().toString();
@@ -95,6 +95,6 @@ public class FileServiceImpl implements FileService {
         Path destination = Paths.get(destinationPath);
 
         Files.copy(sourcePath, destination, StandardCopyOption.REPLACE_EXISTING);
-    }
+    }*/
 }
 

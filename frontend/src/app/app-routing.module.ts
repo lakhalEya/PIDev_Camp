@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { ListReservationComponent } from './components/booking/list-reservation/list-reservation.component';
-import { AppComponent } from './app.component';
-
-const routes: Routes = [
-  {path:"reservation",component: ListReservationComponent},
-  {path:"acceuil",component: AppComponent},
-=======
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
@@ -146,7 +136,6 @@ const routes: Routes = [
     }
   },
   {path: '**', redirectTo: 'dashboard'}
->>>>>>> origin/main
 ];
 
 @NgModule({

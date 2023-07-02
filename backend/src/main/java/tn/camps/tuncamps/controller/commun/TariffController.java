@@ -29,7 +29,8 @@ public class TariffController {
         }
     }
 
-    @GetMapping
+
+    @GetMapping("/all")
     public ResponseEntity<List<Tariff>> getAllTariffs() {
         List<Tariff> tariffs = tariffService.findAll();
         return ResponseEntity.ok(tariffs);

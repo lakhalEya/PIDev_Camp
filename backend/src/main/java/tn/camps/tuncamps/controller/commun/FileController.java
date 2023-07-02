@@ -16,7 +16,7 @@ import java.io.IOException;
 @RequestMapping("/files")
 public class FileController {
 
-    @Autowired
+    /*@Autowired
     private FileService fileService;
 
 
@@ -44,5 +44,5 @@ public class FileController {
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-    }
+    }*/
 }
