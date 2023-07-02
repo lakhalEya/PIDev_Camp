@@ -13,6 +13,9 @@ public interface LocationRepository extends JpaRepository<Location, Integer>, Jp
 
     Optional<Location> findByLatitudeAndLongitude(double latitude, double longitude);
     List<Location> findByDisponibilite(boolean status);
+
+    List<Location> findByCityCountry(String country);
+
     Boolean existsLocationByLatitudeAndLongitudeAndIdIsNot(double latitude, double longitude, int id);
 
 }

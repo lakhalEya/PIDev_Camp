@@ -41,6 +41,28 @@ public class LocationController {
             return new ResponseEntity<>("No Location with id " + id, HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/filterBy/{filterBy}/{filterValue}")
+    public ResponseEntity<?> getAllLocationsFiltredBy(@PathVariable String filterBy, @PathVariable String filterValue) {
+        List<Location> locationList = locationService.getAllLocationsFiltered(filterBy, filterValue);
+        return new ResponseEntity<>(locationList, HttpStatus.OK);
+
+    }
+
+
+    @GetMapping("/sortBy/{sortBy}")
+    public ResponseEntity<?> getAllLocationsFiltredBy(@PathVariable String sortBy) {
+        List<Location> locationList = locationService.getAllLocationsSorted(sortBy);
+        return new ResponseEntity<>(locationList, HttpStatus.OK);
+
+    }
+
+    @GetMapping("/country/{country}")
+    public ResponseEntity<?> getLocationsByCountry(@PathVariable String country) {
+        List<Location> locationList = locationService.getLocationByCountry(country);
+        return new ResponseEntity<>(locationList, HttpStatus.OK);
+
+    }
+
     @GetMapping("/availabe/{status}")
     public ResponseEntity<?> findLocationByDisponibility(@PathVariable boolean status) {
         List<Location> locations = locationService.getLocationByDisponibility(status);

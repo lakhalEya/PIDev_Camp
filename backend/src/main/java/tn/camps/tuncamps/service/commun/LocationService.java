@@ -31,6 +31,9 @@ public interface LocationService {
 
     void deleteLocationByCoordinates(double longitude, double latitude);
 
+
+    List<Location> getLocationByCountry(String country);
+
     Optional<Location> getLocationByCoordinates(double longitude, double latitude);
 
      Location updateLocation(int id ,Location location) ;
