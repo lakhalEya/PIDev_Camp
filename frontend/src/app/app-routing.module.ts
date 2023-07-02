@@ -13,11 +13,11 @@ import {RegisterComponent} from './views/pages/register/register.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
-    path: '',
+    path: 'dashboard',
     component: DefaultLayoutComponent,
     data: {
       title: 'Dashboard'
@@ -105,7 +105,18 @@ const routes: Routes = [
     component: UserLayoutComponent,
     data: {
       title: 'Home'
-    }
+
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./views/uicomponent/uicomponent.module').then((m) => m.UIcomponentModule)
+      },
+
+
+
+    ],
   },
   {
     path: '404',
