@@ -27,11 +27,17 @@ public class ParcController {
         }
     }
 
-    @PutMapping("/{parcId}")
-    public ResponseEntity<Parc> updateParc(@PathVariable int parcId, @RequestBody Parc parc) {
-        parc.setIdParc(parcId);
-        Parc updatedParc = parcService.updateParc(parc);
-        return new ResponseEntity<>(updatedParc, HttpStatus.OK);
+    @PostMapping("/{parcId}")
+    public ResponseEntity<?> updateParc(@PathVariable int parcId, @RequestBody Parc parc) {
+        try {
+            parc.setIdParc(parcId);
+            Parc updatedParc = parcService.updateParc(parcId,parc);
+            return new ResponseEntity<>(updatedParc, HttpStatus.OK);
+
+        }catch (IllegalArgumentException e)
+        {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/{parcId}")

@@ -33,14 +33,13 @@ public class ParcServiceImpl implements ParcService {
 
     @Override
     @Transactional
-
     public Parc createParc(Parc parc) {
         if (parc.getLocation() != null) {
 
             Optional<Location> location = locationRepository.findByLatitudeAndLongitude(parc.getLocation().getLatitude(), parc.getLocation().getLongitude());
 
             if (location.isPresent()) {
-                if (parcRepository.existsByLocationLatitudeAndLocationLongitude(location.get().getLatitude(),location.get().getLongitude())) {
+                if (parcRepository.existsByLocationLatitudeAndLocationLongitude(location.get().getLatitude(), location.get().getLongitude())) {
                     throw new IllegalArgumentException("Another parc with the same location already exists.");
                 }
                 parc.setLocation(location.get());
@@ -53,7 +52,7 @@ public class ParcServiceImpl implements ParcService {
 
         }
         if (parc.getMaxCapacity() < 10) {
-            throw new IllegalArgumentException("maxCapacity should be greater than 10.");
+            throw new IllegalArgumentException("the Max Capacity should be greater than 10.");
         }
 
         Date currentDate = new Date();
@@ -62,12 +61,47 @@ public class ParcServiceImpl implements ParcService {
 
         parc.setStatus(Parc.ParcStatus.ENABLED);
 
-        return parcRepository.save(parc);
+        return parcRepository.saveAndFlush(parc);
     }
 
     @Override
-    public Parc updateParc(Parc parc) {
-        return parcRepository.save(parc);
+    @Transactional
+    public Parc updateParc(int id, Parc parc) {
+        Optional<Parc> existingParc = parcRepository.findById(id);
+        if (!existingParc.isPresent())
+            throw new IllegalArgumentException("the parc with the id " + id + " doesn't exists.");
+
+        if (parc.getCreationDate() != null && existingParc.get().getCreationDate().compareTo(parc.getCreationDate()) != 0)
+            throw new IllegalArgumentException("You can't modify the creation date");
+
+        parc.setCreationDate(existingParc.get().getCreationDate());
+
+        if (existingParc.get().getLocation() != null && (existingParc.get().getLocation().getLongitude() != parc.getLocation().getLongitude() ||
+                existingParc.get().getLocation().getLatitude() != parc.getLocation().getLatitude())) {
+
+            Optional<Location> location = locationRepository.findByLatitudeAndLongitude(parc.getLocation().getLatitude(), parc.getLocation().getLongitude());
+
+            if (location.isPresent()) {
+                if (parcRepository.existsByLocationLatitudeAndLocationLongitude(location.get().getLatitude(), location.get().getLongitude())) {
+                    throw new IllegalArgumentException("Another parc with the same location already exists.");
+                }
+                parc.setLocation(location.get());
+            } else {
+                Location newLocation = locationService.createLocation(parc.getLocation());
+                parc.setLocation(newLocation);
+            }
+        } else {
+            parc.setLocation(existingParc.get().getLocation());
+
+        }
+
+        if (parc.getMaxCapacity() < 10) {
+            throw new IllegalArgumentException("the Max Capacity should be greater than 10.");
+        }
+        Date currentDate = new Date();
+        parc.setLastUpdateDate(currentDate);
+
+        return parcRepository.saveAndFlush(parc);
     }
 
     @Override

@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface ParcService {
     Parc createParc(Parc parc);
-    Parc updateParc(Parc parc);
+
+    Parc updateParc(int id, Parc parc);
+
     void deleteParc(int parcId);
     Parc getParcById(int parcId);
     List<Parc> getAllParcs();
