@@ -3,17 +3,16 @@ import { CommonModule } from '@angular/common';
 import { ReservationRoutingModule } from './reservation-routing.module';
 import { PromotionComponent } from './promotion/promotion.component';
 import { ReservationComponent } from './reservation/reservation.component';
-import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     PromotionComponent,
-    ReservationComponent
+    ReservationComponent,
   ],
   imports: [
-    CommonModule, FormsModule,
+    CommonModule,
     ReservationRoutingModule
   ]
 })
