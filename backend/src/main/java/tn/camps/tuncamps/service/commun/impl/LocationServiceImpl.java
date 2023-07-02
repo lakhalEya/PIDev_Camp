@@ -81,6 +81,7 @@ public class LocationServiceImpl implements LocationService {
 
 
     @Override
+    @Transactional
     public Location createLocation(Location location) {
         Optional<City> existingCity = cityRepository.findByPostalCodeAndCountryAndCity(
                 location.getCity().getPostalCode(),
@@ -103,8 +104,8 @@ public class LocationServiceImpl implements LocationService {
         if (existingLocation.isPresent()) {
             throw new IllegalArgumentException("A location with the same latitude and longitude already exists.");
         }
+        return locationRepository.saveAndFlush(location);
 
-        return locationRepository.save(location);
     }
 
 

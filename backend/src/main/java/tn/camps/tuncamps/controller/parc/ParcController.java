@@ -17,9 +17,14 @@ public class ParcController {
     private ParcService parcService;
 
     @PostMapping
-    public ResponseEntity<Parc> createParc(@RequestBody Parc parc) {
-        Parc createdParc = parcService.createParc(parc);
-        return new ResponseEntity<>(createdParc, HttpStatus.CREATED);
+    public ResponseEntity<?> createParc(@RequestBody Parc parc) {
+        try {
+            Parc createdParc = parcService.createParc(parc);
+            return new ResponseEntity<>(createdParc, HttpStatus.CREATED);
+        }catch (IllegalArgumentException e)
+        {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("/{parcId}")

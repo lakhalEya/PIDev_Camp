@@ -8,5 +8,7 @@ import tn.camps.tuncamps.persistence.entity.parc.Parc;
 @Repository
 public interface ParcRepository extends JpaRepository<Parc, Integer> {
     boolean existsByLocation(Location location);
+    boolean existsByLocationLatitudeAndLocationLongitude(Double latitude, Double longitude);
+
 
 }

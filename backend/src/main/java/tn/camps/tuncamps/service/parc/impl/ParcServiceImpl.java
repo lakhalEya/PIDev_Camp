@@ -16,6 +16,8 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
+@Transactional
+
 public class ParcServiceImpl implements ParcService {
 
     private final ParcRepository parcRepository;
@@ -29,19 +31,28 @@ public class ParcServiceImpl implements ParcService {
         this.locationService = locationService;
     }
 
+    @Override
     @Transactional
-    public Parc createParc(Parc parc)  {
-        if (parc.getLocation() != null && parcRepository.existsByLocation(parc.getLocation())) {
-            throw new IllegalArgumentException("Another parc with the same location already exists.");
-        }
-        Optional<Location> location = locationRepository.findByLatitudeAndLongitude(parc.getLocation().getLatitude(), parc.getLocation().getLongitude());
-        parc.setLocation(location.get());
 
-        if (!location.isPresent()) {
-            Location parcLocation = locationService.createLocation(parc.getLocation());
-            parc.setLocation(parcLocation);
+    public Parc createParc(Parc parc) {
+        if (parc.getLocation() != null) {
+
+            Optional<Location> location = locationRepository.findByLatitudeAndLongitude(parc.getLocation().getLatitude(), parc.getLocation().getLongitude());
+
+            if (location.isPresent()) {
+                if (parcRepository.existsByLocationLatitudeAndLocationLongitude(location.get().getLatitude(),location.get().getLongitude())) {
+                    throw new IllegalArgumentException("Another parc with the same location already exists.");
+                }
+                parc.setLocation(location.get());
+            } else {
+                Location newLocation = locationService.createLocation(parc.getLocation());
+                parc.setLocation(newLocation);
+            }
+        } else {
+            throw new IllegalArgumentException("The location is mandatory for the parc");
+
         }
-        if (parc.getMaxCapacity() <= 10) {
+        if (parc.getMaxCapacity() < 10) {
             throw new IllegalArgumentException("maxCapacity should be greater than 10.");
         }
 
