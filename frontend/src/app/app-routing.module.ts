@@ -8,18 +8,16 @@ import {Page404Component} from './views/pages/page404/page404.component';
 import {Page500Component} from './views/pages/page500/page500.component';
 import {LoginComponent} from './views/pages/login/login.component';
 import {RegisterComponent} from './views/pages/register/register.component';
-import { HomeComponent } from './home/home.component';
-import { PanierComponent } from './panier/panier.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
-    path: '',
+    path: 'dashboard',
     component: DefaultLayoutComponent,
     data: {
       title: 'Dashboard'
@@ -107,14 +105,18 @@ const routes: Routes = [
     component: UserLayoutComponent,
     data: {
       title: 'Home'
-    }
-  },
-  {
-    path: 'panier',
-    component: PanierComponent,
-    data: {
-      title: 'panier'
-    }
+
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./views/uicomponent/uicomponent.module').then((m) => m.UIcomponentModule)
+      },
+
+
+
+    ],
   },
   {
     path: '404',
@@ -142,13 +144,6 @@ const routes: Routes = [
     component: RegisterComponent,
     data: {
       title: 'Register Page'
-    }
-  },
-  {
-    path: 'homeshop',
-    component: HomeComponent,
-    data: {
-      title: 'homeshop'
     }
   },
   {path: '**', redirectTo: 'dashboard'}
