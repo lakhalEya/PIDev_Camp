@@ -1,0 +1,94 @@
+.previous-button {
+    background-color: #86abf0; /* couleur de fond */
+    border: none; /* pas de bordure */
+    color: white; /* couleur de texte */
+    padding: 10px 20px; /* espacement autour du texte */
+    text-align: center; /* centré horizontalement */
+    text-decoration: none; /* pas de soulignement */
+    display: inline-block; /* affichage en ligne */
+    font-size: 16px; /* taille de police */
+    margin: 10px; /* espacement autour du bouton */
+    border-radius: 5px; /* bordure arrondie */
+    cursor: pointer; /* curseur de souris */
+  
+    &:hover {
+      color: rgb(166, 199, 241);
+      background-color: #3213df;
+      cursor: pointer;
+    }
+  }
+  
+  .next-button {
+    background-color: #316291; /* couleur de fond */
+    border: none; /* pas de bordure */
+    color: white; /* couleur de texte */
+    padding: 10px 20px; /* espacement autour du texte */
+    text-align: center; /* centré horizontalement */
+    text-decoration: none; /* pas de soulignement */
+    display: inline-block; /* affichage en ligne */
+    font-size: 16px; /* taille de police */
+    margin: 10px; /* espacement autour du bouton */
+    border-radius: 5px; /* bordure arrondie */
+    cursor: pointer; /* curseur de souris */
+    float: right; /* flotter à droite */
+  
+    &:hover {
+      color: rgb(166, 199, 241);
+      background-color: #3213df;
+      cursor: pointer;
+    }
+  }
+
+  .toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-top: 5%;
+  
+    input {
+      display: none;
+    }
+  
+    .slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      border-radius: 34px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+      }
+    }
+  
+    input:checked + .slider {
+      background-color: #2196F3;
+  
+      &:before {
+        transform: translateX(26px);
+      }
+    }
+  }
+  .table-primary {
+    width: 100%;
+    border-collapse: collapse;
+  
+    th, td {
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+  }
+ 

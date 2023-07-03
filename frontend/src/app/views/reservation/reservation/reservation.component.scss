@@ -1,0 +1,104 @@
+.previous-button {
+    background-color: #86abf0; /* couleur de fond */
+    border: none; /* pas de bordure */
+    color: white; /* couleur de texte */
+    padding: 10px 20px; /* espacement autour du texte */
+    text-align: center; /* centré horizontalement */
+    text-decoration: none; /* pas de soulignement */
+    display: inline-block; /* affichage en ligne */
+    font-size: 16px; /* taille de police */
+    margin: 10px; /* espacement autour du bouton */
+    border-radius: 5px; /* bordure arrondie */
+    cursor: pointer; /* curseur de souris */
+  
+    &:hover {
+      color: rgb(166, 199, 241);
+      background-color: #3213df;
+      cursor: pointer;
+    }
+  }
+  
+  .next-button {
+    background-color: #316291; /* couleur de fond */
+    border: none; /* pas de bordure */
+    color: white; /* couleur de texte */
+    padding: 10px 20px; /* espacement autour du texte */
+    text-align: center; /* centré horizontalement */
+    text-decoration: none; /* pas de soulignement */
+    display: inline-block; /* affichage en ligne */
+    font-size: 16px; /* taille de police */
+    margin: 10px; /* espacement autour du bouton */
+    border-radius: 5px; /* bordure arrondie */
+    cursor: pointer; /* curseur de souris */
+    float: right; /* flotter à droite */
+  
+    &:hover {
+      color: rgb(166, 199, 241);
+      background-color: #3213df;
+      cursor: pointer;
+    }
+  }
+
+  .toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-top: 5%;
+  
+    input {
+      display: none;
+    }
+  
+    .slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      border-radius: 34px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+      }
+    }
+  
+    input:checked + .slider {
+      background-color: #2196F3;
+  
+      &:before {
+        transform: translateX(26px);
+      }
+    }
+  }
+  
+  .custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f2f2f2;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: #e6e6e6;
+    }
+  }
+  .product-image {
+    width: 100px; /* Set the desired width of the image */
+    height: 100px; /* Set the desired height of the image */
+    object-fit: cover; /* Adjust how the image fits within the container */
+    border-radius: 50%; /* Apply a circular border radius to the image */
+}

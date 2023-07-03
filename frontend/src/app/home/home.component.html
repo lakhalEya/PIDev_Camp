@@ -1,0 +1,83 @@
+
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#!"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                   
+                    <form class="d-flex">
+                        <button class="btn btn-outline-dark" type="submit" (click)="navigate()">
+                            <i class="bi-cart-fill me-1"></i>
+                            Cart
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">{{totitem}}</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div class="search-wrapper">
+            <input [(ngModel)]="term" type="text" id="searchInput" placeholder="Search...">
+            <i class="fa fa-search"></i>
+          </div>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Shop </h1>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <div class="row" *ngFor="let product of prods | filter: term : 'name'  | slice:(currentPage - 1) * itemsPerPage : currentPage * itemsPerPage ">
+                        <div class="col mb-5" >
+                          <div class="card h-100">
+                            <!-- Product image-->
+                              <!--<img class="card-img-top" src="./../../assets/{{ product.image }}" alt="..." />-->
+                            <img class="card-img-top" src="./../../assets/test.jpeg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                              <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">{{ product.name }}</h5>
+                                <!-- Product price-->
+                                {{ product.price | currency }}
+                              </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                  <div class="btn-group">
+                                    <button class="btn btn-outline-dark mt-auto" (click)="tocart(product)">
+                                        <i class="fas fa-cart-plus"></i> <!-- Font Awesome cart-plus icon -->
+
+                                    </button>
+                                    <button class="btn btn-outline-dark mt-auto" (click)="command(product)">
+                                        <i class="fas fa-clipboard-list"></i> <!-- Font Awesome eye icon -->
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                          </div>
+                        </div>
+                      </div>
+                      
+                    
+                </div>
+            </div>
+            <div>
+          
+              <button *ngIf="currentPage>1" class="previous-button"
+              (click)="currentPage = currentPage - 1">Précédent</button>
+          <button *ngIf="currentPage<total" class="next-button"
+              (click)="currentPage = currentPage + 1">Suivant</button>
+      </div>
+        </section>
+ 
+    </body>
+
