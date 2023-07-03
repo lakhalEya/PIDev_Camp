@@ -11,8 +11,8 @@ import tn.camps.tuncamps.commons.security.JWTGenerator;
 import tn.camps.tuncamps.user.DTO.AuthResponseDTO;
 import tn.camps.tuncamps.user.DTO.LoginDTO;
 import tn.camps.tuncamps.user.DTO.RegisterDTO;
-import tn.camps.tuncamps.user.repository.UserEntity;
-import tn.camps.tuncamps.user.repository.UserRepository;
+import tn.camps.tuncamps.persistence.entity.user.User;
+import tn.camps.tuncamps.persistence.repository.user.UserRepository;
 import tn.camps.tuncamps.user.repository.UserRole;
 
 @Service
@@ -24,8 +24,8 @@ public class UserServiceImpl implements IUserService {
     private final JWTGenerator jwtGenerator;
 
     @Override
-    public UserEntity CreateUser(RegisterDTO registerDTO) {
-        UserEntity user = new UserEntity();
+    public User CreateUser(RegisterDTO registerDTO) {
+        User user = new User();
         if (userRepository.existsByEmail(registerDTO.getEmail()) || userRepository.existsByUsername(
                 registerDTO.getUserName())) {
             throw new RuntimeException("userName and Email must be unique");
@@ -42,13 +42,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserEntity getUserById(int userId) {
+    public User getUserById(int userId) {
         return userRepository.findById(userId).orElse(null);
     }
 
     @Override
-    public UserEntity updateUser(int userId, UserEntity updatedUserEntity) {
-        UserEntity userEntity = userRepository.findById(userId).orElse(null);
+    public User updateUser(int userId, User updatedUserEntity) {
+        User userEntity = userRepository.findById(userId).orElse(null);
         ;
 
         assert userEntity != null;
@@ -73,7 +73,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserEntity getUserByUserName(String userName) {
+    public User getUserByUserName(String userName) {
         return userRepository.findByUsername(userName);
     }
 }

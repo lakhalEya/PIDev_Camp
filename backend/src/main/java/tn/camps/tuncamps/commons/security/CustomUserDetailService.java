@@ -7,15 +7,14 @@ import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import tn.camps.tuncamps.user.repository.UserEntity;
-import tn.camps.tuncamps.user.repository.UserRepository;
+import tn.camps.tuncamps.persistence.entity.user.User;
+import tn.camps.tuncamps.persistence.repository.user.UserRepository;
 import tn.camps.tuncamps.user.repository.UserRole;
 
 @Service
@@ -24,8 +23,8 @@ public class CustomUserDetailService implements UserDetailsService {
     private UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userEntity = userRepository.findByUsername(username);
-        return new User(userEntity.getUsername(),userEntity.getPassword(),mapToAuthorities(
+        User userEntity = userRepository.findByUsername(username);
+        return new org.springframework.security.core.userdetails.User(userEntity.getUsername(),userEntity.getPassword(),mapToAuthorities(
                 Collections.singletonList(userEntity.getRole())));
     }
 

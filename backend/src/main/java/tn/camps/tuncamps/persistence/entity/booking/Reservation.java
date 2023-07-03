@@ -7,6 +7,7 @@ import lombok.*;
 import tn.camps.tuncamps.persistence.entity.commun.Tariff;
 import tn.camps.tuncamps.persistence.entity.parc.Parc;
 import tn.camps.tuncamps.persistence.entity.user.User;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 

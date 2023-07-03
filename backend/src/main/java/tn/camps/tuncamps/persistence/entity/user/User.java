@@ -1,27 +1,58 @@
 package tn.camps.tuncamps.persistence.entity.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
-import tn.camps.tuncamps.persistence.entity.booking.Reservation;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
-import java.util.List;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import tn.camps.tuncamps.camperVirtualSpace.CamperVirtualSpace;
+import tn.camps.tuncamps.user.repository.UserRole;
+import tn.camps.tuncamps.user.repository.UserState;
 
 @Getter
+@Builder
 @Setter
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@Entity
-@JsonIgnoreProperties("reservations")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "username", unique = true)
+    private String username;
+
+    @Column(name = "email", unique = true,nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "user")
-    private List<Reservation> reservations;
+    private String password;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id")
+    private CamperVirtualSpace profile;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    @Enumerated(EnumType.STRING)
+    private UserState state;
+
+    private String picture;
+
 
 }
+

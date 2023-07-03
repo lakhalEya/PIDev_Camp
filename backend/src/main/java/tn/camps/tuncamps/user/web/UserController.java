@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 import tn.camps.tuncamps.user.DTO.AuthResponseDTO;
 import tn.camps.tuncamps.user.DTO.LoginDTO;
 import tn.camps.tuncamps.user.DTO.RegisterDTO;
-import tn.camps.tuncamps.user.repository.UserEntity;
+import tn.camps.tuncamps.persistence.entity.user.User;
 import tn.camps.tuncamps.user.service.IUserService;
 
 @RestController
@@ -26,9 +26,9 @@ public class UserController {
     private final IUserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<UserEntity> RegisterNewUser(@RequestBody RegisterDTO registerDTO) throws Exception {
+    public ResponseEntity<User> RegisterNewUser(@RequestBody RegisterDTO registerDTO) throws Exception {
         try {
-            UserEntity user = userService.CreateUser(registerDTO);
+            User user = userService.CreateUser(registerDTO);
             return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -47,12 +47,12 @@ public class UserController {
     }
 
     @GetMapping("/get/{id}")
-    public UserEntity getUserById(@PathVariable("id") int userId) {
+    public User getUserById(@PathVariable("id") int userId) {
         return userService.getUserById(userId);
     }
 
     @PutMapping("/update/{id}")
-    public UserEntity updateUser(@PathVariable("id") int userId, @RequestBody UserEntity updatedUserEntity) {
+    public User updateUser(@PathVariable("id") int userId, @RequestBody User updatedUserEntity) {
         return userService.updateUser(userId, updatedUserEntity);
     }
 
