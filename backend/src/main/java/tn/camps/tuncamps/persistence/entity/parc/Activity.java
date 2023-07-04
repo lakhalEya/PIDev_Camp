@@ -7,6 +7,7 @@ import tn.camps.tuncamps.persistence.entity.commun.Tariff;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -42,8 +43,8 @@ public class Activity {
 
     private String organizer;
 
-    @OneToOne
-    private Tariff tariff;
+    @OneToMany
+    private Set<Tariff> tariff;
 
     @ManyToOne
     private Parc parc;
@@ -58,6 +59,7 @@ public class Activity {
     private String description;
 
     private int maxParticipants;
+    private int minParticipants;
 
     private boolean registrationRequired;
 

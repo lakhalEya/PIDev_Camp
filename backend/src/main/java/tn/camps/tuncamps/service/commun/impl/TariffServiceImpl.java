@@ -61,7 +61,7 @@ public class TariffServiceImpl implements TariffService {
         }
 
         // Save the tariff
-        return tariffRepository.save(tariff);
+        return tariffRepository.saveAndFlush(tariff);
     }
 
     @Override

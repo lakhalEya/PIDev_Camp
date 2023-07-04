@@ -1,1 +1,106 @@
-<p>parc works!</p>
+<c-row>
+    <c-col xs="12">
+        <c-card class="mb-3">
+            <c-card-header ngPreserveWhitespaces>
+                <strong>List of parcs</strong>
+            </c-card-header>
+            <c-card-body>
+                <c-nav variant="pills">
+                    <c-nav-item>
+                        <a [cTabContent]="tabContent3" [routerLink] [tabPaneIdx]="0" cNavLink>
+                            <svg cIcon class="me-2" name="cilHome"></svg> Active Parcs
+                        </a>
+                    </c-nav-item>
+                    <c-nav-item>
+                        <a [cTabContent]="tabContent3" [routerLink] [tabPaneIdx]="1" cNavLink>
+                            <svg cIcon class="me-2" name="cilUser"></svg> Inactive Parcs
+                        </a>
+                    </c-nav-item>
+                    <c-nav-item>
+                        <a [cTabContent]="tabContent3" [routerLink] [tabPaneIdx]="2" cNavLink>
+                            <svg cIcon class="me-2" name="cilCode"></svg> Contact
+                        </a>
+                    </c-nav-item>
+                </c-nav>
+                <c-tab-content #tabContent3="cTabContent" cRounded="bottom" [activeTabPaneIdx]="0">
+                    <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
+                        <c-card-body>
+                            <table [borderless]="true" cTable>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Max Capacity</th>
+                                        <th scope="col">Actions</th>
+                                        <th scope="col">Select</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let parc of parcs">
+                                        <th scope="row">{{ parc.idParc }}</th>
+                                        <td>{{ parc.name }}</td>
+                                        <td>{{ parc.description }}</td>
+                                        <td>{{ parc.category }}</td>
+                                        <td>{{ parc.maxCapacity }}</td>
+                                        <td>
+                                            <button cButton color="info">Update</button>
+                                            <button cButton color="danger">Delete</button>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" [(ngModel)]="parc.selected">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </c-card-body>
+                    </c-tab-pane>
+                    <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
+                        <c-card-body>
+                            <ul>
+                                <li *ngFor="let parc of parcs">
+                                    {{ parc.name }}
+                                </li>
+                            </ul>
+
+                        </c-card-body>
+                    </c-tab-pane>
+                    <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
+                        <c-card-body>
+                            <table [borderless]="true" cTable>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Class</th>
+                                        <th scope="col">Heading</th>
+                                        <th scope="col">Heading</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td colSpan="2">Larry the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </c-card-body>
+                    </c-tab-pane>
+                </c-tab-content>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>
