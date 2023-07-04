@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { DocsComponentsModule } from '@docs-components/docs-components.module';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 import {
@@ -37,6 +38,8 @@ import {
   UtilitiesModule,
   ButtonGroupModule,
   NavbarModule,
+
+
 
 } from '@coreui/angular';
 
@@ -85,6 +88,7 @@ import { IconModule } from '@coreui/icons-angular';
     ReactiveFormsModule,
     DocsComponentsModule,
     NavbarModule,
+    NgxPaginationModule
 
   ]
 })

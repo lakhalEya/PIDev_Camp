@@ -25,7 +25,7 @@
                 <c-tab-content #tabContent3="cTabContent" cRounded="bottom" [activeTabPaneIdx]="0">
                     <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
                         <c-card-body>
-                            <table [borderless]="true" cTable>
+                            <table cTable hover>
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -38,22 +38,42 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let parc of parcs">
+                                    <tr *ngFor="let parc of parcs | paginate
+                                    : {
+                                        itemsPerPage: tableSize,
+                                        currentPage: page,
+                                        totalItems: count
+                                      };
+                                let i = index">
                                         <th scope="row">{{ parc.idParc }}</th>
                                         <td>{{ parc.name }}</td>
                                         <td>{{ parc.description }}</td>
                                         <td>{{ parc.category }}</td>
                                         <td>{{ parc.maxCapacity }}</td>
                                         <td>
-                                            <button cButton color="info">Update</button>
-                                            <button cButton color="danger">Delete</button>
+                                            <button cButton color="info" cTooltip="Update parc" cTooltipPlacement="top">
+                                            <svg cIcon  class="cis-color-fill" name="cil-puzzle"></svg>
+
+                                            </button>
+                                            <button cButton color="danger" cTooltip="Delete parc" cTooltipPlacement="top">
+                                            <svg cIcon class="cis-color-fill" name="cil-trash"></svg>
+
+                                            </button>
+
                                         </td>
                                         <td>
-                                            <input type="checkbox" [(ngModel)]="parc.selected">
+                                            <c-form-check>
+                                                <input cFormCheckInput id="checkOne" type="checkbox" [(ngModel)]="parc.selected" />
+                                            </c-form-check>
                                         </td>
                                     </tr>
                                 </tbody>
+
                             </table>
+                            <div class="d-flex justify-content-center">
+                                <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                                </pagination-controls>
+                            </div>
                         </c-card-body>
                     </c-tab-pane>
                     <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
