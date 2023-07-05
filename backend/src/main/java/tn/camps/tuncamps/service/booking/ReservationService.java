@@ -24,6 +24,7 @@ public interface ReservationService {
 
     List<Reservation> findResParcname(String parcname);
 
+    List<Reservation> findResSale();
 
 
 }

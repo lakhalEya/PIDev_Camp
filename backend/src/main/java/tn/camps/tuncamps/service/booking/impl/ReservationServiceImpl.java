@@ -45,8 +45,6 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Reservation createReservation(Reservation reservation) {
         //ajouter les controles comme nbrpersonnes limites etc
-
-
         reservationRepository.save(reservation);
         ConfirmationToken confirmationToken = new ConfirmationToken(reservation);
         confirmationTokenRepository.save(confirmationToken);
@@ -77,6 +75,11 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<Reservation> findResParcname(String parcname) {
         return reservationRepository.findByParcName(parcname);
+    }
+
+    @Override
+    public List<Reservation> findResSale() {
+        return  reservationRepository.findBySaleFound();
     }
 
     @Override

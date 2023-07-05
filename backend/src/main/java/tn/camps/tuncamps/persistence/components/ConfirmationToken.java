@@ -29,7 +29,7 @@ public class ConfirmationToken {
     private Date createdDate;
 
     @OneToOne(targetEntity = Reservation.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "reservation_id")
+    @JoinColumn(nullable = true, name = "reservation")
     private Reservation reservation;
 
     public ConfirmationToken(Reservation reservation) {

@@ -1,10 +1,12 @@
 package tn.camps.tuncamps.persistence.entity.booking;
 
 import javax.persistence.*;
+import javax.swing.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import tn.camps.tuncamps.persistence.entity.commun.Tariff;
+import tn.camps.tuncamps.persistence.entity.parc.Activity;
 import tn.camps.tuncamps.persistence.entity.parc.Parc;
 import tn.camps.tuncamps.persistence.entity.user.User;
 import java.io.Serializable;
@@ -30,11 +32,14 @@ public class Reservation implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
-    @OneToOne
-    @JoinColumn(name = "tarif_id")
-    private Tariff tarif;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Enumerated(EnumType.STRING)
+    private ReservationCategory category;
+    //@OneToOne
+    //@JoinColumn(name = "tarif_id")
+    //private Tariff tarif;
+
+    @ManyToOne(optional = true,fetch = FetchType.LAZY)
     @JoinColumn(name = "sale_id")
     private Sale sale;
 
@@ -42,9 +47,13 @@ public class Reservation implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = true,fetch = FetchType.LAZY)
     @JoinColumn(name = "parc_id")
     private Parc parc;
+
+    @ManyToOne(optional = true,fetch = FetchType.LAZY)
+    @JoinColumn(name = "activity_id")
+    private Activity activity;
 
 
 

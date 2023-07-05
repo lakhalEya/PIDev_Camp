@@ -8,15 +8,18 @@ import org.springframework.web.bind.annotation.*;
 
 import tn.camps.tuncamps.persistence.components.EmailSender;
 import tn.camps.tuncamps.persistence.entity.booking.Reservation;
+import tn.camps.tuncamps.persistence.entity.booking.ReservationCategory;
 import tn.camps.tuncamps.persistence.entity.booking.ReservationStatus;
 import tn.camps.tuncamps.persistence.entity.booking.Sale;
 
 import tn.camps.tuncamps.persistence.entity.commun.Tariff;
+import tn.camps.tuncamps.persistence.entity.parc.Activity;
 import tn.camps.tuncamps.persistence.entity.parc.Parc;
 import tn.camps.tuncamps.persistence.entity.user.User;
 import tn.camps.tuncamps.persistence.repository.booking.ReservationRepository;
 import tn.camps.tuncamps.persistence.repository.booking.SaleRepository;
 import tn.camps.tuncamps.persistence.repository.commun.TariffRepository;
+import tn.camps.tuncamps.persistence.repository.parc.ActivityRepository;
 import tn.camps.tuncamps.persistence.repository.parc.ParcRepository;
 import tn.camps.tuncamps.persistence.repository.user.UserRepository;
 import tn.camps.tuncamps.service.booking.ReservationService;
@@ -41,6 +44,8 @@ public class ReservationController {
     @Autowired
     private ReservationRepository reservationRepository;
     @Autowired
+    private ActivityRepository activityRepository;
+    @Autowired
     private TariffRepository tarifRepository;
     private final EmailSender emailSender;
 
@@ -62,6 +67,11 @@ public class ReservationController {
     @GetMapping("/all")
     public ResponseEntity<List<Reservation>> getAllReservations() {
         List<Reservation> reservations = reservationService.findAll();
+        return ResponseEntity.ok(reservations);
+    }
+    @GetMapping("/allWithSale")
+    public ResponseEntity<List<Reservation>> getAllReservationsWithSale() {
+        List<Reservation> reservations = reservationService.findResSale();
         return ResponseEntity.ok(reservations);
     }
 
@@ -89,20 +99,49 @@ public class ReservationController {
         return ResponseEntity.ok(reservations);
     }*/
 
-    @PostMapping("/add")
-    public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
-
+    @PostMapping("/addForActiviy")
+    public ResponseEntity<String> createActivityReservation(@RequestBody Reservation reservation) {
         User user = userRepository.findById(reservation.getUser().getId()).orElse(null);
         Parc parc = parcRepository.findById(reservation.getParc().getIdParc()).orElse(null);
-        Tariff tarif = tarifRepository.findById(reservation.getTarif().getId()).orElse(null);
+        Activity activity = activityRepository.findById(reservation.getParc().getIdParc()).orElse(null);
         //à modifier Connected user
         reservation.setUser(user);
-        reservation.setParc(parc);
-        reservation.setTarif(tarif);
-        Reservation createdReservation = reservationService.createReservation(reservation);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdReservation);
+        if (parc!=null || activity==null){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("This reservation is for activity only");
+        }
+        else {
+            if (activity.isRegistrationRequired()){
+                reservation.setActivity(activity);
+                reservation.setCategory(ReservationCategory.ACTIVITY);
+                reservationService.createReservation(reservation);
+                return ResponseEntity.status(HttpStatus.CREATED).body("Activity Reservation");}
+            else {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("This Activity does not need reservation ");
+            }
+        }
 
     }
+
+    @PostMapping("/addForParc")
+    public ResponseEntity<String> createParcReservation(@RequestBody Reservation reservation) {
+        User user = userRepository.findById(reservation.getUser().getId()).orElse(null);
+        Parc parc = parcRepository.findById(reservation.getParc().getIdParc()).orElse(null);
+        Activity activity = activityRepository.findById(reservation.getParc().getIdParc()).orElse(null);
+        //Tariff tarif = tarifRepository.findById(reservation.getTarif().getId()).orElse(null);
+        //à modifier Connected user
+        reservation.setUser(user);
+        if (parc==null || activity!=null){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("This reservation is for Parc only");
+        }
+        else  {
+            reservation.setParc(parc);
+            reservation.setCategory(ReservationCategory.PARC);
+            reservationService.createReservation(reservation);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Parc Reservation");
+        }
+    }
+
+
     @RequestMapping(value="/confirm-reservation", method= {RequestMethod.GET, RequestMethod.POST})
     public ResponseEntity<Reservation> confirmUserAccount(@RequestParam("token")String confirmationToken) {
         Reservation confirmedReservation = reservationService.confirmReservation(confirmationToken);

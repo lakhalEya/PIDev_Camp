@@ -1,0 +1,56 @@
+<input type="text" name="search"  placeholder="search Reservation" >
+
+<!--<table class="table">
+  <thead>
+  <tr>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Status</th>
+    <th>Number Interessés ❤</th>
+    <th>action</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let reservation of reservations">
+  <tr>
+    <td>{{reservation.startDate}}</td>
+    <td>{{reservation.endDate}}</td>
+    <td>{{reservation.status}}</td>
+    <td>{{reservation.personnbr}}</td>
+    <button class="btn btn-success" >Interessted</button>
+    <td>
+      <button class="btn btn-danger"  >
+        delete
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>-->
+
+
+<c-row>
+    <c-col *ngFor="let reservation of reservations" [sm]="6">
+    <c-col *ngFor="let item of colors">
+      <c-card [cBorder]="{top: {color: 'success', width: 3}}" [textColor] color="item.textColor" class="mb-3">
+        <c-card-header>{{reservation.status}}</c-card-header>
+        <c-card-body>
+          <h5 cCardTitle> From : {{reservation.startDate}}</h5> <h5 cCardTitle>To : {{reservation.endDate}}</h5>
+          <p cCardText>
+            {{reservation.personnbr}}
+          </p>
+          <button [color]="item.color" cButton >Go somewhere</button>
+        </c-card-body>
+      </c-card>
+    </c-col>
+</c-col>
+  </c-row>
+
+
+  <c-row>
+    <c-col lg="5">
+      <input type="date" name="Datd"  placeholder="Date début" >
+    </c-col>
+  
+    <c-col lg="5">
+      <input type="date" name="Datd"  placeholder="Date fin" >
+    </c-col>
+  </c-row>

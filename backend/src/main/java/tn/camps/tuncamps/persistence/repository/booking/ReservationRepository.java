@@ -38,8 +38,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     @Query(nativeQuery = true,value ="SELECT * FROM reservation r RIGHT JOIN sale s on s.id=r.sale_id WHERE s.start_date <=?1 AND s.expiration_date >=?1")
     List<Reservation> findBySaleDate(LocalDate dateR);
 
-    //@Query("SELECT r FROM Reservation r WHERE r.sale.amount >= :prix order by r.sale.")
-    //List<Reservation> findBySaleAmount(@Param("amount") String prix);
+    @Query(nativeQuery = true,value ="SELECT * FROM Reservation  WHERE sale_id IS NOT NULL ")
+    List<Reservation> findBySaleFound();
 
 
 }

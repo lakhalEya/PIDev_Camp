@@ -15,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Import app component
 import { AppComponent } from './app.component';
-import { ListReservationComponent } from './components/booking/list-reservation/list-reservation.component';
+import { ListReservationsComponent } from './views/reservation/components/backoffice/list-reservations/list-reservations.component';
 
 
 
