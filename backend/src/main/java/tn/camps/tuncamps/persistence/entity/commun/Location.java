@@ -19,4 +19,8 @@ public class Location {
     private boolean disponibilite;
     private double latitude;
     private double longitude;
+
+    @ManyToOne
+    private City city;
 }
+
