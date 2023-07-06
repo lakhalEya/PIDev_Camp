@@ -16,6 +16,11 @@ public interface ParcRepository extends JpaRepository<Parc, Integer>, JpaSpecifi
     boolean existsByLocationLatitudeAndLocationLongitude(Double latitude, Double longitude);
     List<Parc> findByLocationCityCountry(String country);
 
+    Long countByStatus(Parc.ParcStatus status);
+
+    @Query(value = "SELECT category FROM parc GROUP BY category ORDER BY COUNT(*) DESC LIMIT 1", nativeQuery = true)
+    ParcCategory findMostUsedCategory();
+
     List<Parc> findByStatus(Parc.ParcStatus status);
 
     List<Parc> findByCategory(ParcCategory category);

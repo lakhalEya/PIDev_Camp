@@ -6,6 +6,8 @@ import tn.camps.tuncamps.persistence.entity.parc.ParcCategory;
 import java.util.List;
 
 public interface ParcService {
+    List<Parc> getParcsByIds(List<Integer> parcIds);
+
     Parc createParc(Parc parc);
 
     Parc updateParc(int id, Parc parc);

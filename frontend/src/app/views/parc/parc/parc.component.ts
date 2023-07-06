@@ -5,6 +5,10 @@ import {  ParcService } from './../services/parc.service'; // Import your ParcSe
 import { Parc } from './../models/parc.model';
 import { PaginationInstance } from 'ngx-pagination';
 
+import { getStyle } from '@coreui/utils';
+import { ChartjsComponent } from '@coreui/angular-chartjs';
+import { StaticsComponent } from './../statics/statics.component'; // Replace './statics.component' with the correct path to the StaticsComponent file
+import { StaticsService } from './../services/statics.service';
 
 @Component({
   selector: 'app-parc',
@@ -19,6 +23,15 @@ export class ParcComponent  implements OnInit {
   count: number = 0;
   tableSize: number = 7;
   tableSizes: any = [3, 6, 9, 12];
+  parcs: Parc[];
+  cities: City[];
+  isAllSelected = false;
+  selectedParc: Parc | null = null;
+  deleteModal: any;
+  showSuccessAlert : boolean = false;
+  showErrorAlert : boolean = false;
+  errorMessage: string;
+  message: string;
 
   public panes = [
     { name: 'Home 01', id: 'tab-01' },
@@ -26,8 +39,6 @@ export class ParcComponent  implements OnInit {
     { name: 'Contact 03', id: 'tab-03' }
   ];
 
-  parcs: Parc[];
-  cities: City[];
 
   ngOnInit() {
     this.getAllParcs();
@@ -35,11 +46,18 @@ export class ParcComponent  implements OnInit {
 
   }
 
+
+  toggleSelectAll() {
+    // Toggle the select status for all rows
+    this.isAllSelected = !this.isAllSelected;
+
+    // Set the 'selected' property for all Parc objects
+    this.parcs.forEach((parc) => (parc.selected = this.isAllSelected));
+  }
+
   getAllParcs() {
     this.parcService.getAllParcs().subscribe(
       (data:Parc[]) => this.parcs = data) };
-
-
 
   getAllCities() {
     this.cityService.getAllCity().subscribe(
@@ -56,6 +74,45 @@ export class ParcComponent  implements OnInit {
         this.getAllParcs();
       }
 
+      deleteParc() {
+        console.log(this.selectedParc);
+        console.log("test deleteParc");
+
+        if (this.selectedParc) {
+          const parcId = this.selectedParc.idParc;
+
+          this.parcService.deleteParc(parcId).subscribe(
+            response => {
+              console.log('Response code:', response.code);
+              console.log('Response message:', response.message);
+              if(response.code == 200)
+              {
+                this.parcs = this.parcs.filter((parc) => parc.idParc !== parcId);
+                this.selectedParc = null;
+                this.showSuccessAlert = true;
+                this.message= response.message;
+                setTimeout(() => {
+                  this.showSuccessAlert = false;
+                }, 3000);
+
+              }
+              else
+              {
+                this.showErrorAlert = true;
+                this.errorMessage= response.message;
+                setTimeout(() => {
+                  this.showErrorAlert = false;
+                }, 3000);
+              }
+              // Handle the response code and message accordingly
+            },
+            error => {
+              console.error('An error occurred:', error);
+              // Handle the error
+            }
+          );
+        }
+      }
   }
 
 

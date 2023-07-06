@@ -1,0 +1,730 @@
+[
+    {
+        "id": 1,
+        "price": 5.0,
+        "name": "tarif test maysa",
+        "description": "test test",
+        "duration": 3,
+        "discount": 0.0,
+        "currency": null,
+        "validityStartDate": null,
+        "validityEndDate": null,
+        "applicableDays": [],
+        "applicableStartTime": null,
+        "applicableEndTime": null,
+        "minimumParticipants": 0,
+        "maximumParticipants": 0,
+        "additionalServices": [],
+        "restrictions": null
+    },
+    {
+        "id": 2,
+        "price": 99.99,
+        "name": "Standard",
+        "description": "Standard tariff package",
+        "duration": 50,
+        "discount": 10.0,
+        "currency": "USD",
+        "validityStartDate": 1690848000000,
+        "validityEndDate": 1703980800000,
+        "applicableDays": [
+            "FRIDAY",
+            "MONDAY",
+            "WEDNESDAY"
+        ],
+        "applicableStartTime": [
+            9,
+            0
+        ],
+        "applicableEndTime": [
+            18,
+            0
+        ],
+        "minimumParticipants": 5,
+        "maximumParticipants": 20,
+        "additionalServices": [
+            "Refreshments",
+            "WiFi"
+        ],
+        "restrictions": "No pets allowed"
+    },
+    {
+        "id": 3,
+        "price": 10.99,
+        "name": "Standard",
+        "description": "Standard ticket",
+        "duration": 120,
+        "discount": 0.0,
+        "currency": "EUR",
+        "validityStartDate": 1689724800000,
+        "validityEndDate": 1692489600000,
+        "applicableDays": [
+            "FRIDAY",
+            "THURSDAY",
+            "MONDAY",
+            "WEDNESDAY",
+            "TUESDAY"
+        ],
+        "applicableStartTime": [
+            10,
+            0
+        ],
+        "applicableEndTime": [
+            14,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 100,
+        "additionalServices": [
+            "Refreshments",
+            "Parking"
+        ],
+        "restrictions": "No age restrictions"
+    },
+    {
+        "id": 4,
+        "price": 10.5,
+        "name": "Regular",
+        "description": "Regular tariff",
+        "duration": 60,
+        "discount": 0.0,
+        "currency": "USD",
+        "validityStartDate": 1690848000000,
+        "validityEndDate": 1696032000000,
+        "applicableDays": [
+            "FRIDAY",
+            "THURSDAY",
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY"
+        ],
+        "applicableStartTime": [
+            9,
+            0
+        ],
+        "applicableEndTime": [
+            17,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 100,
+        "additionalServices": [
+            "Transportation",
+            "Food"
+        ],
+        "restrictions": "None"
+    },
+    {
+        "id": 5,
+        "price": 49.99,
+        "name": "Standard Pass",
+        "description": "Access to hiking trails for a day",
+        "duration": 480,
+        "discount": 0.0,
+        "currency": "USD",
+        "validityStartDate": 1689379200000,
+        "validityEndDate": 1690761600000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            8,
+            0
+        ],
+        "applicableEndTime": [
+            16,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 20,
+        "additionalServices": [
+            "Lunch Pack",
+            "Guided Tour"
+        ],
+        "restrictions": "Participants must be at least 12 years old"
+    },
+    {
+        "id": 6,
+        "price": 99.99,
+        "name": "VIP Pass",
+        "description": "Exclusive VIP experience with premium seating and backstage access",
+        "duration": 2880,
+        "discount": 0.0,
+        "currency": "USD",
+        "validityStartDate": 1690848000000,
+        "validityEndDate": 1692662400000,
+        "applicableDays": [
+            "FRIDAY",
+            "SUNDAY",
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            16,
+            0
+        ],
+        "applicableEndTime": [
+            23,
+            59,
+            59
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 200,
+        "additionalServices": [
+            "VIP Lounge Access",
+            "Meet and Greet with Artists"
+        ],
+        "restrictions": "Participants must be at least 18 years old"
+    },
+    {
+        "id": 7,
+        "price": 59.99,
+        "name": "General Admission",
+        "description": "Access to all music performances",
+        "duration": 2880,
+        "discount": 0.0,
+        "currency": "USD",
+        "validityStartDate": 1690848000000,
+        "validityEndDate": 1692662400000,
+        "applicableDays": [
+            "FRIDAY",
+            "SUNDAY",
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            16,
+            0
+        ],
+        "applicableEndTime": [
+            23,
+            59,
+            59
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 5000,
+        "additionalServices": [
+            "VIP Lounge Access"
+        ],
+        "restrictions": ""
+    },
+    {
+        "id": 8,
+        "price": 49.99,
+        "name": "Half-Day Adventure",
+        "description": "A half-day guided tour with hiking and rock climbing",
+        "duration": 240,
+        "discount": 0.0,
+        "currency": "USD",
+        "validityStartDate": 1693526400000,
+        "validityEndDate": 1694304000000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            10,
+            0
+        ],
+        "applicableEndTime": [
+            14,
+            0
+        ],
+        "minimumParticipants": 3,
+        "maximumParticipants": 15,
+        "additionalServices": [
+            "Equipment Rental"
+        ],
+        "restrictions": "Participants must be at least 10 years old and in good physical condition"
+    },
+    {
+        "id": 9,
+        "price": 89.99,
+        "name": "Full-Day Adventure",
+        "description": "A full-day guided tour with hiking, rock climbing, and zip-lining",
+        "duration": 360,
+        "discount": 0.0,
+        "currency": "USD",
+        "validityStartDate": 1693526400000,
+        "validityEndDate": 1694304000000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            10,
+            0
+        ],
+        "applicableEndTime": [
+            16,
+            0
+        ],
+        "minimumParticipants": 5,
+        "maximumParticipants": 20,
+        "additionalServices": [
+            "Equipment Rental",
+            "Lunch"
+        ],
+        "restrictions": "Participants must be at least 12 years old and in good physical condition"
+    },
+    {
+        "id": 10,
+        "price": 129.99,
+        "name": "Advanced Workshop",
+        "description": "An advanced workshop for experienced artists to refine their painting skills",
+        "duration": 240,
+        "discount": 0.0,
+        "currency": "GBP",
+        "validityStartDate": 1696118400000,
+        "validityEndDate": 1697328000000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            14,
+            0
+        ],
+        "applicableEndTime": [
+            18,
+            0
+        ],
+        "minimumParticipants": 3,
+        "maximumParticipants": 10,
+        "additionalServices": [
+            "Refreshments",
+            "Art Supplies"
+        ],
+        "restrictions": "Participants must have prior painting experience"
+    },
+    {
+        "id": 11,
+        "price": 79.99,
+        "name": "Beginner Workshop",
+        "description": "A workshop for beginners to learn basic painting techniques",
+        "duration": 240,
+        "discount": 0.0,
+        "currency": "GBP",
+        "validityStartDate": 1696118400000,
+        "validityEndDate": 1697328000000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            14,
+            0
+        ],
+        "applicableEndTime": [
+            18,
+            0
+        ],
+        "minimumParticipants": 5,
+        "maximumParticipants": 15,
+        "additionalServices": [
+            "Refreshments",
+            "Art Supplies"
+        ],
+        "restrictions": "No prior painting experience required"
+    },
+    {
+        "id": 12,
+        "price": 99.99,
+        "name": "VIP Experience",
+        "description": "Exclusive VIP access with premium seating and backstage pass",
+        "duration": 300,
+        "discount": 0.0,
+        "currency": "USD",
+        "validityStartDate": 1690848000000,
+        "validityEndDate": 1692489600000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            18,
+            0
+        ],
+        "applicableEndTime": [
+            23,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 500,
+        "additionalServices": [
+            "VIP Lounge",
+            "Food and Drinks"
+        ],
+        "restrictions": "Participants must be 18 years or older"
+    },
+    {
+        "id": 13,
+        "price": 49.99,
+        "name": "General Admission",
+        "description": "Access to the music festival grounds",
+        "duration": 300,
+        "discount": 0.0,
+        "currency": "USD",
+        "validityStartDate": 1690848000000,
+        "validityEndDate": 1692489600000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            18,
+            0
+        ],
+        "applicableEndTime": [
+            23,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 10000,
+        "additionalServices": [
+            "Food Trucks",
+            "Merchandise Stall"
+        ],
+        "restrictions": "All ages are welcome"
+    },
+    {
+        "id": 14,
+        "price": 19.99,
+        "name": "Player Registration",
+        "description": "Participate in the soccer tournament as a player",
+        "duration": 180,
+        "discount": 0.0,
+        "currency": "GBP",
+        "validityStartDate": 1689379200000,
+        "validityEndDate": 1691193600000,
+        "applicableDays": [
+            "SUNDAY",
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            9,
+            0
+        ],
+        "applicableEndTime": [
+            18,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 100,
+        "additionalServices": [
+            "Tournament Jersey"
+        ],
+        "restrictions": "Participants must be at least 16 years old"
+    },
+    {
+        "id": 15,
+        "price": 9.99,
+        "name": "Spectator Pass",
+        "description": "Watch the thrilling soccer matches as a spectator",
+        "duration": 180,
+        "discount": 0.0,
+        "currency": "GBP",
+        "validityStartDate": 1689379200000,
+        "validityEndDate": 1691280000000,
+        "applicableDays": [
+            "SUNDAY",
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            9,
+            0
+        ],
+        "applicableEndTime": [
+            18,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 500,
+        "additionalServices": [
+            "Seating Area",
+            "Food and Drinks"
+        ],
+        "restrictions": "All ages are welcome"
+    },
+    {
+        "id": 16,
+        "price": 99.99,
+        "name": "Day Hike",
+        "description": "Join a single day hiking trip with experienced guides",
+        "duration": 180,
+        "discount": 0.0,
+        "currency": "USD",
+        "validityStartDate": 1690848000000,
+        "validityEndDate": 1694304000000,
+        "applicableDays": [
+            "THURSDAY",
+            "TUESDAY"
+        ],
+        "applicableStartTime": [
+            8,
+            0
+        ],
+        "applicableEndTime": [
+            16,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 10,
+        "additionalServices": [
+            "Guide"
+        ],
+        "restrictions": "Participants must be at least 12 years old and physically fit"
+    },
+    {
+        "id": 17,
+        "price": 199.99,
+        "name": "Full Expedition",
+        "description": "Join the complete hiking expedition with experienced guides",
+        "duration": 480,
+        "discount": 0.0,
+        "currency": "USD",
+        "validityStartDate": 1690848000000,
+        "validityEndDate": 1694304000000,
+        "applicableDays": [
+            "FRIDAY",
+            "MONDAY",
+            "WEDNESDAY"
+        ],
+        "applicableStartTime": [
+            8,
+            0
+        ],
+        "applicableEndTime": [
+            16,
+            0
+        ],
+        "minimumParticipants": 5,
+        "maximumParticipants": 20,
+        "additionalServices": [
+            "Camping Gear",
+            "Transportation",
+            "Meals"
+        ],
+        "restrictions": "Participants must be at least 18 years old and physically fit"
+    },
+    {
+        "id": 18,
+        "price": 99.99,
+        "name": "Advanced Workshop",
+        "description": "Take your watercolor skills to the next level with advanced techniques",
+        "duration": 300,
+        "discount": 0.0,
+        "currency": "EUR",
+        "validityStartDate": 1693526400000,
+        "validityEndDate": 1697328000000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            10,
+            0
+        ],
+        "applicableEndTime": [
+            15,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 10,
+        "additionalServices": [
+            "Personalized Feedback",
+            "Art Supplies"
+        ],
+        "restrictions": "Participants must have prior experience in watercolor painting"
+    },
+    {
+        "id": 19,
+        "price": 69.99,
+        "name": "Basic Workshop",
+        "description": "Learn the fundamentals of watercolor painting",
+        "duration": 300,
+        "discount": 0.0,
+        "currency": "EUR",
+        "validityStartDate": 1693526400000,
+        "validityEndDate": 1697328000000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            10,
+            0
+        ],
+        "applicableEndTime": [
+            15,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 15,
+        "additionalServices": [
+            "Art Supplies"
+        ],
+        "restrictions": "Participants must be at least 16 years old"
+    },
+    {
+        "id": 20,
+        "price": 99.99,
+        "name": "Advanced Workshop",
+        "description": "Take your watercolor skills to the next level with advanced techniques",
+        "duration": 300,
+        "discount": 0.0,
+        "currency": "EUR",
+        "validityStartDate": 1693526400000,
+        "validityEndDate": 1697328000000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            10,
+            0
+        ],
+        "applicableEndTime": [
+            15,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 10,
+        "additionalServices": [
+            "Personalized Feedback",
+            "Art Supplies"
+        ],
+        "restrictions": "Participants must have prior experience in watercolor painting"
+    },
+    {
+        "id": 21,
+        "price": 69.99,
+        "name": "Basic Workshop",
+        "description": "Learn the fundamentals of watercolor painting",
+        "duration": 300,
+        "discount": 0.0,
+        "currency": "EUR",
+        "validityStartDate": 1693526400000,
+        "validityEndDate": 1697328000000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            10,
+            0
+        ],
+        "applicableEndTime": [
+            15,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 20,
+        "additionalServices": [
+            "Art Supplies"
+        ],
+        "restrictions": "Participants must be at least 16 years old"
+    },
+    {
+        "id": 22,
+        "price": 69.99,
+        "name": "Basic Workshop",
+        "description": "Learn the fundamentals of watercolor painting",
+        "duration": 300,
+        "discount": 0.0,
+        "currency": "EUR",
+        "validityStartDate": 1693526400000,
+        "validityEndDate": 1697328000000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            10,
+            0
+        ],
+        "applicableEndTime": [
+            15,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 20,
+        "additionalServices": [
+            "Art Supplies"
+        ],
+        "restrictions": "Participants must be at least 16 years old"
+    },
+    {
+        "id": 23,
+        "price": 99.99,
+        "name": "Advanced Workshop",
+        "description": "Take your watercolor skills to the next level with advanced techniques",
+        "duration": 300,
+        "discount": 0.0,
+        "currency": "EUR",
+        "validityStartDate": 1693526400000,
+        "validityEndDate": 1697328000000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            10,
+            0
+        ],
+        "applicableEndTime": [
+            15,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 10,
+        "additionalServices": [
+            "Personalized Feedback",
+            "Art Supplies"
+        ],
+        "restrictions": "Participants must have prior experience in watercolor painting"
+    },
+    {
+        "id": 24,
+        "price": 69.99,
+        "name": "Basic Workshop",
+        "description": "Learn the fundamentals of watercolor painting",
+        "duration": 300,
+        "discount": 0.0,
+        "currency": "EUR",
+        "validityStartDate": 1693526400000,
+        "validityEndDate": 1697328000000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            10,
+            0
+        ],
+        "applicableEndTime": [
+            15,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 20,
+        "additionalServices": [
+            "Art Supplies"
+        ],
+        "restrictions": "Participants must be at least 16 years old"
+    },
+    {
+        "id": 25,
+        "price": 99.99,
+        "name": "Advanced Workshop",
+        "description": "Take your watercolor skills to the next level with advanced techniques",
+        "duration": 300,
+        "discount": 0.0,
+        "currency": "EUR",
+        "validityStartDate": 1693526400000,
+        "validityEndDate": 1697328000000,
+        "applicableDays": [
+            "SATURDAY"
+        ],
+        "applicableStartTime": [
+            10,
+            0
+        ],
+        "applicableEndTime": [
+            15,
+            0
+        ],
+        "minimumParticipants": 1,
+        "maximumParticipants": 10,
+        "additionalServices": [
+            "Personalized Feedback",
+            "Art Supplies"
+        ],
+        "restrictions": "Participants must have prior experience in watercolor painting"
+    }
+]

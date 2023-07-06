@@ -28,11 +28,16 @@ public class ParcServiceImpl implements ParcService {
     private final LocationRepository locationRepository;
     private final LocationService locationService;
 
+
     @Autowired
     public ParcServiceImpl(ParcRepository parcRepository, LocationRepository locationRepository, LocationService locationService) {
         this.parcRepository = parcRepository;
         this.locationRepository = locationRepository;
         this.locationService = locationService;
+    }
+    @Override
+    public List<Parc> getParcsByIds(List<Integer> parcIds) {
+        return parcRepository.findAllById(parcIds);
     }
 
     @Override
@@ -109,7 +114,7 @@ public class ParcServiceImpl implements ParcService {
 
     @Override
     public void deleteParc(int parcId) {
-        Optional<Location> parc = locationRepository.findById(parcId);
+        Optional<Parc> parc = parcRepository.findById(parcId);
         if (parc.isPresent()) {
             try {
                 parcRepository.deleteById(parcId);
