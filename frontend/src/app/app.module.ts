@@ -1,4 +1,6 @@
 import { NgModule , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,7 +37,6 @@ import {
   SidebarModule,
   TabsModule,
   UtilitiesModule,
-
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
@@ -52,6 +53,7 @@ const APP_CONTAINERS = [
   declarations: [AppComponent, ...APP_CONTAINERS, UserLayoutComponent, NavbarLayoutComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AvatarModule,
@@ -78,7 +80,8 @@ const APP_CONTAINERS = [
     CardModule,
     NgScrollbarModule,
     NgbModule,
-    NgbCollapseModule
+    NgbCollapseModule,
+
   ],
   providers: [
     {

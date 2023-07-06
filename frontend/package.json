@@ -39,6 +39,7 @@
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
     "chart.js": "^3.9.1",
+    "ngx-pagination": "^6.0.3",
     "ngx-scrollbar": "^12.0.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.3.0",

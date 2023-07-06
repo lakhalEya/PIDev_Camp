@@ -1,4 +1,5 @@
 package tn.camps.tuncamps.controller.parc;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,9 +33,14 @@ public class ActivityController {
     }
 
     @PostMapping
-    public ResponseEntity<Activity> createActivity(@RequestBody Activity activity) {
-        Activity createdActivity = activityService.createActivity(activity);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdActivity);
+    public ResponseEntity<?> createActivity(@RequestBody Activity activity) {
+        try {
+            Activity createdActivity = activityService.createActivity(activity);
+            return new ResponseEntity<>(createdActivity, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+        }
     }
 
     @PostMapping("/{id}")
