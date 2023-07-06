@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Router } from '@angular/router';
 import { Product } from 'src/model/Product';
-import Swal from 'sweetalert2';
+
 import { CartService } from '../services/Cart.service';
 import { CartItem } from 'src/model/CartItem';
 import { CartItemservice } from '../services/Cartitem.service';

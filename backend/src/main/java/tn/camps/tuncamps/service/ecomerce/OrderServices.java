@@ -44,6 +44,6 @@ public class OrderServices extends Abstarctservices<Order> {
 	}
 
 	public Order findByCart_IdCart(int id) {
-		return pr.findByCart_IdCart(id);
+		return pr.findByCartIdCart(id);
 	}
 }

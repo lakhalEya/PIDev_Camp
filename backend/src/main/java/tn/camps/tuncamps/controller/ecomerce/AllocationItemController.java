@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import tn.camps.tuncamps.persistence.entity.ecomerce.Allocation;
 import tn.camps.tuncamps.persistence.entity.ecomerce.Allocationitem;
-import tn.camps.tuncamps.persistence.entity.ecomerce.CartItem;
+
 import tn.camps.tuncamps.persistence.entity.ecomerce.Product;
 import tn.camps.tuncamps.service.ecomerce.AllocationServices;
 import tn.camps.tuncamps.service.ecomerce.AllocationitemServices;
@@ -23,7 +22,7 @@ import tn.camps.tuncamps.service.ecomerce.ProductServices;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api")
-public class AllocationitemController {
+public class AllocationItemController {
 	@Autowired
 	private AllocationServices cs;
 	@Autowired
@@ -37,7 +36,7 @@ public class AllocationitemController {
 	}
 
 	@GetMapping(path = "/locitem/{id}")
-	private Allocationitem getlocitem(@PathVariable int id) {
+	private Allocationitem getLocItem(@PathVariable int id) {
 	
 			return cis.findbyid(id).get();
 
