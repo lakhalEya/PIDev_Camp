@@ -1,7 +1,7 @@
 package tn.camps.tuncamps.persistence.entity.enumeration;
 
 public enum Visibility {
-    Publi,
+    All_Public,
     Private,
     Freinds_Only
 }

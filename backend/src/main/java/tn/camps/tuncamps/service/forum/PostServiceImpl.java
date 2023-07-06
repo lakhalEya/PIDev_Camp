@@ -29,15 +29,20 @@ public class PostServiceImpl implements IPostService{
     }
 
     @Override
-    public Post updatePost(Post post) {
-        if(postRepository.existsById(post.getIdPost())) {
-            Post p = postRepository.findById(post.getIdPost()).get();
-            p.setContent(post.getContent());
-            p.setDatePublication(post.getDatePublication());
-            postRepository.save(post);
+    public Post updatePost(int id, Post post) {
+        Post existingPost = postRepository.findById(id).orElse(null);
+        if (existingPost != null) {
+            existingPost.setTitle(post.getTitle());
+            existingPost.setCategory(post.getCategory());
+            existingPost.setContent(post.getContent());
+            existingPost.setDatePublication(post.getDatePublication());
+            existingPost.setVisibility(post.getVisibility());
+//            existingPost.setCommunitySpace(post.getCommunitySpace());
+            return postRepository.save(post);
         }
-        return post;
+        return null;
     }
+
 
     @Override
     public void deletePost(int id) {

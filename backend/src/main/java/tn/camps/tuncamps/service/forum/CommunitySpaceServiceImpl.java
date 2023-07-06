@@ -8,6 +8,8 @@ import tn.camps.tuncamps.persistence.entity.forum.Post;
 import tn.camps.tuncamps.persistence.repository.forum.CommunitySpaceRepository;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
   @Service
@@ -16,15 +18,35 @@ import java.util.List;
         @Autowired
     CommunitySpaceRepository communitySpaceRepository;
 
+//        @Override
+//    public CommunitySpace addCommunitySpaceWithPosts(CommunitySpace communitySpace) {
+//            // Create a new CommunitySpace entity
+//            CommunitySpace communitySpace1 = new CommunitySpace();
+//            communitySpace1.setTitle(communitySpace.getTitle());
+//            communitySpace1.setDescription(communitySpace.getDescription());
+//            communitySpace1.setCategory(communitySpace.getCategory());
+//
+//            // Create and associate Post entities
+//            List<Post> posts = new ArrayList<>();
+//            for (Post post : communitySpace.getPosts()) {
+//                Post post1 = new Post();
+//                post1.setTitle(post.getTitle());
+//                post1.setContent(post.getContent());
+//                // Set other post properties
+////                post1.setCommunitySpace(communitySpace); // Set the relationship with the community space
+//                posts.add(post);
+//            }
+//            communitySpace.setPosts(new HashSet<>(posts));
+//
+//            // Save the community space and associated posts
+//            communitySpaceRepository.save(communitySpace);
+//                return communitySpaceRepository.save(communitySpace);
+//        }
+
         @Override
-    public CommunitySpace createCommunitySpace(CommunitySpace communitySpace) {
-
-
-                return communitySpaceRepository.save(communitySpace);
-
+        public CommunitySpace createCommunitySpace(CommunitySpace communitySpace) {
+            return communitySpaceRepository.save(communitySpace);
         }
-
-
         @Override
         public CommunitySpace uploadCommunitySpace(MultipartFile file) throws IOException {
           CommunitySpace communitySpace = new CommunitySpace();

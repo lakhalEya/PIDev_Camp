@@ -23,13 +23,10 @@ public class CommunitySpace implements Serializable
     private CommunityCategory category;
     @OneToMany(mappedBy = "communitySpace", cascade = CascadeType.ALL)
     private Set<Post> posts;
-
-
     @Lob
     private byte[] fileData;
     private String fileName;
     private String fileType;
-
 //    @OneToMany(cascade = CascadeType.ALL)
 //    private Set<User> Users;
 }

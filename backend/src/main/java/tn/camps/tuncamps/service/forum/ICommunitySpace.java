@@ -9,6 +9,9 @@ import java.util.List;
 
 public interface ICommunitySpace {
     CommunitySpace createCommunitySpace(CommunitySpace communitySpace);
+
+//    CommunitySpace addCommunitySpaceWithPosts(CommunitySpace communitySpace);
+
     CommunitySpace uploadCommunitySpace(MultipartFile file) throws IOException;
     CommunitySpace retrieveCommunitySpace(int id);
     List<CommunitySpace> retrieveAllCommunitySpace();
