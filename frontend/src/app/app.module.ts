@@ -1,3 +1,6 @@
+
+import { HttpClientModule } from '@angular/common/http';
+
 import { NgModule , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -6,6 +9,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
+
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
 // Import routing module
@@ -13,6 +17,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Import app component
 import { AppComponent } from './app.component';
+import { ListReservationsComponent } from './views/reservation/components/backoffice/list-reservations/list-reservations.component';
+
+
 
 // Import containers
 import {  DefaultHeaderComponent, DefaultLayoutComponent } from './containers';
@@ -55,6 +62,7 @@ const APP_CONTAINERS = [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
     AvatarModule,
     BreadcrumbModule,
