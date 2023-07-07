@@ -1,5 +1,6 @@
 package tn.camps.tuncamps.persistence.entity.forum;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,8 +34,11 @@ public class Comment implements Serializable {
     private String content;
     @Temporal(TemporalType.DATE)
     private Date datePublication;
+    @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "post_id")
     private Post post;
-
-
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
 }

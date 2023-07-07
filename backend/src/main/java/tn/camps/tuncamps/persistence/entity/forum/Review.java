@@ -19,7 +19,7 @@ public class Review implements Serializable {
     private int idReview;
     private String title;
     private String Content;
-    private int rating;
+    private String rating;
     @Temporal(TemporalType.DATE)
     private Date reviewDate;
 //    @ManyToOne

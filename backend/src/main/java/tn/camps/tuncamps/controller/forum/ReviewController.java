@@ -8,7 +8,8 @@ import tn.camps.tuncamps.persistence.entity.forum.Review;
 import tn.camps.tuncamps.service.forum.IReviewService;
 
 import java.util.List;
-
+@RestController
+@RequestMapping("/review")
 public class ReviewController {
     @Autowired
     private IReviewService iReviewService;

@@ -2,6 +2,7 @@ package tn.camps.tuncamps.service.forum;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;;
+import tn.camps.tuncamps.persistence.entity.forum.CommunitySpace;
 import tn.camps.tuncamps.persistence.entity.forum.React;
 import tn.camps.tuncamps.persistence.repository.forum.ReactRepository;
 import java.util.List;
@@ -30,13 +31,13 @@ public class ReactServiceImpl implements IReactService{
 
     @Override
     public React updateReact(int id, React react) {
-        if(reactRepository.existsById(react.getIdReact())) {
-            React r = reactRepository.findById(react.getIdReact()).get();
-            r.setTitle(react.getTitle());
-            r.setDescription(react.getDescription());
-            reactRepository.save(react);
+        React existingReact = reactRepository.findById(id).orElse(null);
+        if (existingReact != null) {
+            existingReact.setTitle(react.getTitle());
+            existingReact.setDescription(react.getDescription());
+            return reactRepository.save(existingReact);
         }
-        return react;
+        return null;
     }
 
     @Override

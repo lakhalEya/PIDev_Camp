@@ -1,5 +1,6 @@
 package tn.camps.tuncamps.persistence.entity.forum;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import tn.camps.tuncamps.persistence.entity.enumeration.CommunityCategory;
@@ -7,6 +8,7 @@ import tn.camps.tuncamps.persistence.entity.enumeration.Visibility;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,11 +30,17 @@ public class Post implements Serializable {
     private Date datePublication;
     @Enumerated(EnumType.STRING)
     private Visibility visibility;
-    @OneToMany( cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany( mappedBy = "post", cascade = CascadeType.ALL)
     private Set<Comment> comments;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "community_space_id")
     private CommunitySpace communitySpace;
+
 //    @ManyToOne
+//    @JoinColumn(name = "user_id")
 //    private User user;
+
+
 }

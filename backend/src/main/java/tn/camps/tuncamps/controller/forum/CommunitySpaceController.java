@@ -1,6 +1,7 @@
 package tn.camps.tuncamps.controller.forum;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tn.camps.tuncamps.persistence.entity.enumeration.CommunityCategory;
 import tn.camps.tuncamps.persistence.entity.forum.CommunitySpace;
+import tn.camps.tuncamps.persistence.entity.forum.Post;
 import tn.camps.tuncamps.service.forum.ICommunitySpace;
 
 import java.io.IOException;
@@ -16,15 +18,39 @@ import java.util.List;
 @RestController
 @RequestMapping("/community-spaces")
 public class CommunitySpaceController {
-
+        private Mapper mapper;
         @Autowired
         private ICommunitySpace iCommunitySpace;
-
-        @PostMapping("/add")
-        @ResponseBody
-        public CommunitySpace createCommunitySpace(@RequestBody CommunitySpace communitySpace) {
-                        return iCommunitySpace.createCommunitySpace(communitySpace);
+        public CommunitySpaceController(ICommunitySpace iCommunitySpace) {
+                this.iCommunitySpace = iCommunitySpace;
         }
+        @PostMapping("/add")
+        public ResponseEntity<CommunitySpace> createForum(@RequestBody CommunitySpace communitySpace) {
+                CommunitySpace createdCommunitySpace = iCommunitySpace.createCommunitySpace(communitySpace);
+                return ResponseEntity.status(HttpStatus.CREATED).body(createdCommunitySpace);
+        }
+//        @PostMapping("/add")
+//        @ResponseBody
+//        public void createCommunitySpace(@RequestBody CommunitySpace communitySpace, Post post) {
+//                CommunitySpace c = new CommunitySpace();
+//                c.setTitle(communitySpace.getTitle());
+//                c.setDescription(communitySpace.getDescription());
+//                c.setCategory(communitySpace.getCategory());
+//                c.setFileData(communitySpace.getFileData());
+//                c.setFileName(communitySpace.getFileName());
+//                c.setFileType(communitySpace.getFileType());
+//                Post p = new Post();
+//                if(communitySpace.getCategory()== p.getCategory()){
+//                        p.setTitle(post.getTitle());
+//                        p.setContent(post.getContent());
+//                        p.setCategory(post.getCategory());
+//                        p.setVisibility(post.getVisibility());
+//                        p.setDatePublication(post.getDatePublication());
+//                }
+//                iCommunitySpace.createCommunitySpace(c, p);
+//
+////                        return iCommunitySpace.createCommunitySpace(communitySpace);
+//        }
 
         @PostMapping("/upload")
         @ResponseBody
@@ -40,7 +66,8 @@ public class CommunitySpaceController {
                         return null;
                 }
         }
-        @PostMapping("/merge")
+
+        @PostMapping("/addForum")
         @ResponseBody
         public ResponseEntity<CommunitySpace> uploadAndCreateCommunitySpace(
                 @RequestParam("file") MultipartFile file,
@@ -60,7 +87,6 @@ public class CommunitySpaceController {
                         communitySpace.setFileData(fileData);
                         communitySpace.setFileName(fileName);
                         communitySpace.setFileType(fileType);
-
                         CommunitySpace savedCommunitySpace = iCommunitySpace.createCommunitySpace(communitySpace);
                         return ResponseEntity.status(HttpStatus.CREATED).body(savedCommunitySpace);
                 } catch (IOException e) {
@@ -70,7 +96,7 @@ public class CommunitySpaceController {
         }
 
 
-          @PutMapping("/update")
+          @PutMapping("/update/{id}")
         public ResponseEntity<CommunitySpace> updateDocument(@PathVariable int id, @RequestBody CommunitySpace communitySpace) {
                 CommunitySpace newCommunitySpace = iCommunitySpace.updateCommunitySpace(id, communitySpace);
                 return new ResponseEntity<>( HttpStatus.OK);
@@ -80,6 +106,11 @@ public class CommunitySpaceController {
                 iCommunitySpace.deleteCommunitySpace(id);
                 return new ResponseEntity<>(HttpStatus.OK);
         }
+//        @GetMapping("/allWithPosts")
+//        public ResponseEntity<List<CommunitySpace>> getAllCommunitySpacesWithPosts() {
+//                List<CommunitySpace> communitySpaces = iCommunitySpace.getAllCommunitySpacesWithPosts();
+//                return ResponseEntity.ok(communitySpaces);
+//        }
 
         @GetMapping("/show")
         public List<CommunitySpace> listCommunitySpace()

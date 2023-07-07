@@ -27,18 +27,16 @@ public class CommentServiceImpl implements ICommentService
         List<Comment> listComment = (List<Comment>) commentRepository.findAll();
         return listComment;
     }
-
-    @Override
+        @Override
     public Comment updateComment(Long id, Comment comment) {
-        if(commentRepository.existsById(comment.getIdComment())) {
-            Comment c = commentRepository.findById(comment.getIdComment()).get();
-            c.setContent(comment.getContent());
-            c.setDatePublication(comment.getDatePublication());
-            commentRepository.save(comment);
+        Comment existingComment = commentRepository.findById(id).orElse(null);
+        if (existingComment != null) {
+            existingComment.setContent(comment.getContent());
+            existingComment.setDatePublication(comment.getDatePublication());
+            return commentRepository.save(existingComment);
         }
-        return comment;
+        return null;
     }
-
     @Override
     public void deleteComment(Long id) {
         commentRepository.deleteById(id);

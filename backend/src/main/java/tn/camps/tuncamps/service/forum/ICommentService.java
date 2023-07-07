@@ -9,4 +9,6 @@ public interface ICommentService {
     List<Comment> retrieveAllComment();
     Comment updateComment(Long id, Comment comment);
     void deleteComment(Long id);
+
+//    List<Comment> getCommentsByPostId(int postId);
 }

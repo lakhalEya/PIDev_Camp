@@ -14,5 +14,4 @@ public interface CommunitySpaceRepository  extends JpaRepository<CommunitySpace,
     @Query("SELECT c FROM CommunitySpace c WHERE c.title LIKE %:keyword% OR c.description LIKE %:keyword%")
     List<CommunitySpace> searchByKeyword(@Param("keyword") String keyword);
 
-
 }

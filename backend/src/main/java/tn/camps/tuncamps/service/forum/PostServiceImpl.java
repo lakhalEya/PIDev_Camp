@@ -2,6 +2,7 @@ package tn.camps.tuncamps.service.forum;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tn.camps.tuncamps.persistence.entity.forum.Post;
 import tn.camps.tuncamps.persistence.repository.forum.PostRepository;
 import java.util.List;
@@ -15,11 +16,23 @@ public class PostServiceImpl implements IPostService{
     public Post createPost(Post post) {
         return postRepository.save(post);
     }
+//    @Transactional
+//    @Override
+//    public Post createPost(Post post, int postId) {
+//        // Add any additional logic before saving the post
+//
+//        Post createdPost = postRepository.save(post);
+//        postRepository.setpostId(createdPost.getIdPost(), postId);
+//
+//        return createdPost;
+//    }
+//    public List<Post> getPostsBypostId(int postId) {
+//        return postRepository.findBypostId(postId);
+//    }
 
     @Override
     public Post retrievePost(int id) {
-        Post post = postRepository.findById(id).get();
-        return post;
+        return postRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -37,8 +50,7 @@ public class PostServiceImpl implements IPostService{
             existingPost.setContent(post.getContent());
             existingPost.setDatePublication(post.getDatePublication());
             existingPost.setVisibility(post.getVisibility());
-//            existingPost.setCommunitySpace(post.getCommunitySpace());
-            return postRepository.save(post);
+            return postRepository.save(existingPost);
         }
         return null;
     }

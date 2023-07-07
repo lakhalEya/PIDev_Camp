@@ -10,7 +10,7 @@ import tn.camps.tuncamps.service.forum.ICommentService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/comment")
+@RequestMapping("/comment")
 public class CommentController {
     @Autowired
     private ICommentService iCommentService;
@@ -28,7 +28,7 @@ public class CommentController {
     public Comment retrieveComment(@PathVariable("id") Long id){
         return  iCommentService.retrieveComment(id);
     }
-    @PutMapping("update")
+    @PutMapping("update/{id}")
     public ResponseEntity<Comment> updateComment(@PathVariable("id") Long id, @RequestBody Comment comment){
         Comment c = iCommentService.updateComment(id, comment);
         return  new ResponseEntity<>(HttpStatus.OK);
