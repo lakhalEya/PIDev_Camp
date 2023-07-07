@@ -65,3 +65,57 @@
   </c-col>
 </form>
 -->
+
+<h1>add a new Stage</h1>
+
+
+<form #f="ngForm"  >
+
+  <div class="form-group col-md-6">
+    <label>debut</label>
+    <input type="date" name="datedeb"  class="form-control"
+            required   [(ngModel)]="reservation.startDate" #t="ngModel" >
+  </div>
+  <div class="alert alert-danger col-md-6" *ngIf="t.invalid && t.touched">
+    <div *ngIf="t.hasError('required')">this field is required</div>
+
+  </div>
+  <div class="form-group col-md-6">
+    <label>fin</label>
+    <input type="date" name="datefin"  class="form-control"
+            required   [(ngModel)]="reservation.endDate" #t="ngModel" >
+  </div>
+  <div class="alert alert-danger col-md-6" *ngIf="t.invalid && t.touched">
+    <div *ngIf="t.hasError('required')">this field is required</div>
+
+  </div>
+  <div class="form-group col-md-6">
+    <label>nombre peronnes</label>
+    <input type="number" name="nbperson"  class="form-control"
+           required [(ngModel)]="reservation.personnbr" #d="ngModel">
+  </div>
+  <div class="alert alert-danger col-md-6" *ngIf="d.invalid && d.touched">
+    this field is required
+  </div>
+<div *ngIf="t.hasError('minlength')">field minlength is equal to 3</div>
+
+
+
+  <div>
+    <button  class="btn btn-success" (click)="save()"
+             [disabled]="f.invalid">
+      save
+    </button>
+    <button type="reset" class="btn btn-success" (click)="ngOnInit()">
+      reset
+    </button>
+  </div>
+
+</form>
+
+
+
+
+
+
+

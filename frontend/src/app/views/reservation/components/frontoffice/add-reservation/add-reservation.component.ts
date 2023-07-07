@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Reservation } from '../../../models/reservation';
+import { ReservationService } from '../../../services/reservation.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-reservation',
@@ -11,9 +14,18 @@ export class AddReservationComponent implements OnInit {
   tooltipValidated = false;
 
 
-  constructor() { }
+  reservation: Reservation;
 
-  ngOnInit(): void { }
+  constructor(private  reservationService:ReservationService,private router: Router) { }
+
+  ngOnInit(): void { 
+
+    this.reservation = new Reservation();
+
+
+  }
+
+  
 
   onSubmit1() {
     this.customStylesValidated = true;
@@ -44,5 +56,13 @@ export class AddReservationComponent implements OnInit {
     this.tooltipValidated = false;
     console.log('Reset... 3');
   }
+  save(){
+    this.reservationService.addForParc(this.reservation).subscribe(data => this.router.navigateByUrl('/reservation'));
+   
+  }
+
+
+
+  
 
 }

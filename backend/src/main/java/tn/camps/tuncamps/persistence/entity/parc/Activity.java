@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Entity
-@JsonIgnoreProperties("reservations")
 public class Activity {
     public enum ActivityCategory {
         SPORTS,
@@ -72,7 +71,5 @@ public class Activity {
     @Enumerated(EnumType.STRING)
     private ActivityStatus status;
 
-    @OneToMany(mappedBy = "activity")
-    private List<Reservation> reservations;
 
 }

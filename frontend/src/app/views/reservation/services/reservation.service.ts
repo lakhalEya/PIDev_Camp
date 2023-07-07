@@ -18,4 +18,8 @@ export class ReservationService {
       map(response=>response)
     );
   }
+
+  addForParc(reservation : Reservation ): Observable<Reservation> {
+    return this.https.post<Reservation>(this.API+'/addForParc/'+1,reservation);
+  }
 }

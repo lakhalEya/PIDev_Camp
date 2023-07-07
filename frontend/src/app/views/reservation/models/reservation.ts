@@ -4,6 +4,8 @@ export class Reservation {
     endDate: Date;
     personnbr: number;
     status: string;
+    //category: string;
+
 
     
 

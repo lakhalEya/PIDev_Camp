@@ -83,6 +83,15 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public int personNumberByParc(int parcId) {
+        return reservationRepository.findNumberPersonParc(parcId);
+    }
+    @Override
+    public int personNumberByActivity(int activityId) {
+        return reservationRepository.findNumberPersonActivity(activityId);
+    }
+
+    @Override
     public Reservation updateReservation(Reservation Reservation) {
         if (!reservationRepository.existsById(Reservation.getId())) {
             throw new RuntimeException("Reservation not found with id: " + Reservation.getId());

@@ -23,23 +23,21 @@ const routes: Routes = [
         component: ReservationComponent,
         data: {
           title: 'reservation',
-        },
-        children: [
-          {
-            path: 'list-reservations',
+        }
+      },
+      {
+        path: 'list-reservations',
             component: ListReservationsComponent,
             data: {
               title: 'listreservations',
-            },
-          },
-          {
-            path: 'add-reservations',
-            component: AddReservationComponent,
-            data: {
-              title: 'listreservations',
-            },
-          }
-        ],
+            }
+      },
+      {
+        path: 'add-reservations',
+        component: AddReservationComponent,
+        data: { 
+          title: 'addreservations',
+        }
       },
       {
         path: 'pricing-promotion',
