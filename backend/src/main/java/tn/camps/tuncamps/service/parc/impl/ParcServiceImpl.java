@@ -28,11 +28,16 @@ public class ParcServiceImpl implements ParcService {
     private final LocationRepository locationRepository;
     private final LocationService locationService;
 
+
     @Autowired
     public ParcServiceImpl(ParcRepository parcRepository, LocationRepository locationRepository, LocationService locationService) {
         this.parcRepository = parcRepository;
         this.locationRepository = locationRepository;
         this.locationService = locationService;
+    }
+    @Override
+    public List<Parc> getParcsByIds(List<Integer> parcIds) {
+        return parcRepository.findAllById(parcIds);
     }
 
     @Override
@@ -109,7 +114,7 @@ public class ParcServiceImpl implements ParcService {
 
     @Override
     public void deleteParc(int parcId) {
-        Optional<Location> parc = locationRepository.findById(parcId);
+        Optional<Parc> parc = parcRepository.findById(parcId);
         if (parc.isPresent()) {
             try {
                 parcRepository.deleteById(parcId);
@@ -156,6 +161,46 @@ public class ParcServiceImpl implements ParcService {
     @Override
     public List<Parc> getParcByAmenities(String amenities) {
         return parcRepository.findByAmenity(amenities);
+    }
+
+    @Override
+    public Double getMinRatingRange(List<Integer> parcIds) {
+        return parcRepository.getMinRatingRange(parcIds);
+    }
+
+    @Override
+    public Double getMaxRatingRange(List<Integer> parcIds) {
+        return parcRepository.getMaxRatingRange(parcIds);
+    }
+
+    @Override
+    public Double getMinCapacityRange(List<Integer> parcIds) {
+        return parcRepository.getMinCapacityRange(parcIds);
+    }
+
+    @Override
+    public Double getMaxCapacityRange(List<Integer> parcIds) {
+        return parcRepository.getMaxCapacityRange(parcIds);
+    }
+
+    @Override
+    public List<String> getAllAmenities(List<Integer> parcIds) {
+        return parcRepository.getAllAmenities(parcIds);
+    }
+
+    @Override
+    public List<String> getAllCities(List<Integer> parcIds) {
+        return parcRepository.getAllCities(parcIds);
+    }
+
+    @Override
+    public List<String> getAllCountries(List<Integer> parcIds) {
+        return parcRepository.getAllCountries(parcIds);
+    }
+
+    @Override
+    public List<String> getAllcategories(List<Integer> parcIds) {
+        return parcRepository.getAllcategories(parcIds);
     }
 
     @Override

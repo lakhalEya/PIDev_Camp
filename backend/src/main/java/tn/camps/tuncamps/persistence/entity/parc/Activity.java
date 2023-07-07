@@ -1,14 +1,13 @@
 package tn.camps.tuncamps.persistence.entity.parc;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import tn.camps.tuncamps.persistence.entity.booking.Reservation;
 import tn.camps.tuncamps.persistence.entity.commun.Location;
 import tn.camps.tuncamps.persistence.entity.commun.Tariff;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -44,8 +43,8 @@ public class Activity {
 
     private String organizer;
 
-    @OneToOne
-    private Tariff tariff;
+    @OneToMany
+    private Set<Tariff> tariff;
 
     @ManyToOne
     private Parc parc;
@@ -60,6 +59,7 @@ public class Activity {
     private String description;
 
     private int maxParticipants;
+    private int minParticipants;
 
     private boolean registrationRequired;
 
@@ -70,6 +70,5 @@ public class Activity {
 
     @Enumerated(EnumType.STRING)
     private ActivityStatus status;
-
 
 }

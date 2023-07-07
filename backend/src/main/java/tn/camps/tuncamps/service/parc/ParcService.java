@@ -6,6 +6,8 @@ import tn.camps.tuncamps.persistence.entity.parc.ParcCategory;
 import java.util.List;
 
 public interface ParcService {
+    List<Parc> getParcsByIds(List<Integer> parcIds);
+
     Parc createParc(Parc parc);
 
     Parc updateParc(int id, Parc parc);
@@ -30,4 +32,20 @@ public interface ParcService {
     List<Parc> getParcByCategory(ParcCategory category);
 
     List<Parc> getParcByAmenities(String amenities);
+
+    Double getMinRatingRange(List<Integer> parcIds);
+
+    Double getMaxRatingRange(List<Integer> parcIds);
+
+    Double getMinCapacityRange(List<Integer> parcIds);
+
+    Double getMaxCapacityRange(List<Integer> parcIds);
+
+    List<String> getAllAmenities(List<Integer> parcIds);
+
+    List<String> getAllCities(List<Integer> parcIds);
+
+    List<String> getAllCountries(List<Integer> parcIds);
+
+    List<String> getAllcategories(List<Integer> parcIds);
 }

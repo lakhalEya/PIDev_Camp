@@ -1,0 +1,226 @@
+[
+    {
+        "id": 23,
+        "name": "Garden B",
+        "description": "Small garden in the city",
+        "disponibilite": false,
+        "latitude": 37.7749,
+        "longitude": -122.4194,
+        "city": {
+            "id": 24,
+            "country": "Germany",
+            "city": "Berlin",
+            "postalCode": "10115"
+        }
+    },
+    {
+        "id": 22,
+        "name": "Park A",
+        "description": "Beautiful park with scenic views",
+        "disponibilite": true,
+        "latitude": 40.7128,
+        "longitude": -74.006,
+        "city": {
+            "id": 47,
+            "country": "Spain",
+            "city": "Seville",
+            "postalCode": "41001"
+        }
+    },
+    {
+        "id": 24,
+        "name": "Beach C",
+        "description": "Sandy beach with crystal clear water",
+        "disponibilite": true,
+        "latitude": 25.0343,
+        "longitude": -77.3963,
+        "city": {
+            "id": 29,
+            "country": "Australia",
+            "city": "Sydney",
+            "postalCode": "2000"
+        }
+    },
+    {
+        "id": 25,
+        "name": "Mountain D",
+        "description": "Towering mountain with breathtaking views | Zone B",
+        "disponibilite": true,
+        "latitude": 51.5074,
+        "longitude": 1.1278,
+        "city": {
+            "id": 40,
+            "country": "Canada",
+            "city": "Vancouver",
+            "postalCode": "V6B 1V2"
+        }
+    },
+    {
+        "id": 26,
+        "name": "Park E",
+        "description": "Spacious park with recreational facilities",
+        "disponibilite": true,
+        "latitude": 34.0522,
+        "longitude": -118.2437,
+        "city": {
+            "id": 50,
+            "country": "Tunisia",
+            "city": "Beja",
+            "postalCode": "9000"
+        }
+    },
+    {
+        "id": 27,
+        "name": "Garden F",
+        "description": "Peaceful garden with blooming flowers",
+        "disponibilite": true,
+        "latitude": 48.8566,
+        "longitude": 2.3522,
+        "city": {
+            "id": 53,
+            "country": "Tunisia",
+            "city": "Bizerte",
+            "postalCode": "7000"
+        }
+    },
+    {
+        "id": 28,
+        "name": "Beach G",
+        "description": "Popular beach for sunbathing and water sports",
+        "disponibilite": true,
+        "latitude": 40.4168,
+        "longitude": -3.7038,
+        "city": {
+            "id": 59,
+            "country": "Tunisia",
+            "city": "Kebili",
+            "postalCode": "4200"
+        }
+    },
+    {
+        "id": 29,
+        "name": "Mountain H",
+        "description": "Challenging mountain for experienced hikers",
+        "disponibilite": true,
+        "latitude": 45.4215,
+        "longitude": -75.6972,
+        "city": {
+            "id": 62,
+            "country": "Tunisia",
+            "city": "Kef",
+            "postalCode": "7100"
+        }
+    },
+    {
+        "id": 33,
+        "name": "Garden J",
+        "description": "Botanical garden with diverse plant species ",
+        "disponibilite": true,
+        "latitude": 35.6895,
+        "longitude": 139.6917,
+        "city": {
+            "id": 62,
+            "country": "Tunisia",
+            "city": "Kef",
+            "postalCode": "7100"
+        }
+    },
+    {
+        "id": 39,
+        "name": "Park I",
+        "description": "Green park with walking trails",
+        "disponibilite": true,
+        "latitude": 52.52,
+        "longitude": 13.405,
+        "city": {
+            "id": 62,
+            "country": "Tunisia",
+            "city": "Kef",
+            "postalCode": "7100"
+        }
+    },
+    {
+        "id": 40,
+        "name": "Park E",
+        "description": "Spacious park with recreational facilities | zone 2",
+        "disponibilite": true,
+        "latitude": 44.0522,
+        "longitude": -118.2437,
+        "city": {
+            "id": 50,
+            "country": "Tunisia",
+            "city": "Beja",
+            "postalCode": "9000"
+        }
+    },
+    {
+        "id": 41,
+        "name": "Park E",
+        "description": "Spacious park with recreational facilities | zone 3",
+        "disponibilite": true,
+        "latitude": 44.0522,
+        "longitude": -110.2437,
+        "city": {
+            "id": 50,
+            "country": "Tunisia",
+            "city": "Beja",
+            "postalCode": "9000"
+        }
+    },
+    {
+        "id": 42,
+        "name": "Park A",
+        "description": "Beautiful park with scenic views | zone C",
+        "disponibilite": true,
+        "latitude": 40.7128,
+        "longitude": -64.006,
+        "city": {
+            "id": 47,
+            "country": "Spain",
+            "city": "Seville",
+            "postalCode": "41001"
+        }
+    },
+    {
+        "id": 43,
+        "name": "Stadium",
+        "description": "Large football stadium",
+        "disponibilite": true,
+        "latitude": 52.520008,
+        "longitude": 13.404954,
+        "city": {
+            "id": 24,
+            "country": "Germany",
+            "city": "Berlin",
+            "postalCode": "10115"
+        }
+    },
+    {
+        "id": 44,
+        "name": "Art Studio",
+        "description": "Learn various painting techniques from expert artists",
+        "disponibilite": true,
+        "latitude": 51.5074,
+        "longitude": -0.1278,
+        "city": {
+            "id": 29,
+            "country": "Australia",
+            "city": "Sydney",
+            "postalCode": "2000"
+        }
+    },
+    {
+        "id": 45,
+        "name": "Mountain Base Camp",
+        "description": "Embark on an exciting hiking adventure in the majestic mountains",
+        "disponibilite": true,
+        "latitude": 39.7392,
+        "longitude": -104.9903,
+        "city": {
+            "id": 53,
+            "country": "Tunisia",
+            "city": "Bizerte",
+            "postalCode": "7000"
+        }
+    }
+]

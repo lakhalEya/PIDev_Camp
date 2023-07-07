@@ -6,6 +6,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tn.camps.tuncamps.persistence.entity.commun.City;
+import tn.camps.tuncamps.persistence.entity.commun.Location;
 import tn.camps.tuncamps.persistence.repository.commun.CityRepository;
 
 import java.io.IOException;
@@ -21,10 +22,16 @@ public class CityServiceImpl implements ApplicationRunner {
 
     private final CityRepository cityRepository;
 
+
+    public List<City> getAllCities() {
+        return cityRepository.findAll();
+    }
+
     @Autowired
     public CityServiceImpl (CityRepository cityRepository) {
         this.cityRepository = cityRepository;
     }
+
 
     public void loadCityDataFromFile() throws IOException {
         System.out.println("loadCityDataFromFile");

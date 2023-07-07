@@ -1,8 +1,6 @@
 package tn.camps.tuncamps.persistence.entity.parc;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import tn.camps.tuncamps.persistence.entity.booking.Reservation;
 import tn.camps.tuncamps.persistence.entity.commun.Location;
 
 import javax.persistence.*;
@@ -59,6 +57,5 @@ public class Parc {
 
     //TODO : Change it with User
     private String owner;
-
 
 }
