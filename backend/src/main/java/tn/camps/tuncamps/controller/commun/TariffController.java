@@ -28,7 +28,8 @@ public class TariffController {
             return new ResponseEntity<>("Tariff not found with id" + id, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping
+
+    @GetMapping("/all")
     public ResponseEntity<List<Tariff>> getAllTariffs() {
         List<Tariff> tariffs = tariffService.findAll();
         return new ResponseEntity<>(tariffs,HttpStatus.OK);

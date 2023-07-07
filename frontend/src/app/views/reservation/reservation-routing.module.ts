@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReservationComponent } from './reservation/reservation.component';
 import { PromotionComponent } from './promotion/promotion.component';
+import { ListReservationsComponent } from './components/backoffice/list-reservations/list-reservations.component';
 
-
+import { AddReservationComponent } from './components/frontoffice/add-reservation/add-reservation.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,22 @@ const routes: Routes = [
         data: {
           title: 'reservation',
         },
+        children: [
+          {
+            path: 'list-reservations',
+            component: ListReservationsComponent,
+            data: {
+              title: 'listreservations',
+            },
+          },
+          {
+            path: 'add-reservations',
+            component: AddReservationComponent,
+            data: {
+              title: 'listreservations',
+            },
+          }
+        ],
       },
       {
         path: 'pricing-promotion',

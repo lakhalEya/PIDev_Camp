@@ -1,0 +1,251 @@
+{
+  "name": "Garden B",
+  "description": "Small garden in the city",
+  "maxCapacity": 30,
+  "category": "FAMILY",
+  "creationDate": "2023-05-18T12:00:00Z",
+  "lastUpdateDate": "2023-05-18T12:00:00Z",
+  "status": "ENABLED",
+  "location": {
+        "id": 23,
+        "name": "Garden B",
+        "description": "Small garden in the city",
+        "disponibilite": false,
+        "latitude": 37.7749,
+        "longitude": -122.4194,
+        "city": {
+            "id": 24,
+            "country": "Germany",
+            "city": "Berlin",
+            "postalCode": "10115"
+        }
+    },
+  "imageURL": "https://example.com/garden-b-image.jpg",
+  "amenities": ["Picnic Area", "Children's Playground"],
+  "rating": 4.2,
+  "owner": "Jane Smith"
+}
+{
+  "name": "Park A",
+  "description": "Beautiful park with scenic views",
+  "maxCapacity": 15,
+  "category": "CAMPING",
+  "creationDate": "2023-05-18T12:00:00Z",
+  "lastUpdateDate": "2023-05-18T12:00:00Z",
+  "status": "ENABLED",
+  "location":     {
+        "id": 22,
+        "name": "Park A",
+        "description": "Beautiful park with scenic views",
+        "disponibilite": true,
+        "latitude": 40.7128,
+        "longitude": -74.006,
+        "city": {
+            "id": 47,
+            "country": "Spain",
+            "city": "Seville",
+            "postalCode": "41001"
+        }
+    },
+  "imageURL": "https://example.com/park-a-image.jpg",
+  "amenities": ["Walking Trails", "Sports Fields"],
+  "rating": 4.8,
+  "owner": "John Smith"
+}
+{
+  "name": "Beach C",
+  "description": "Sandy beach with crystal clear water",
+  "maxCapacity": 25,
+  "category": "WATER_SPORTS",
+  "creationDate": "2023-05-18T12:00:00Z",
+  "lastUpdateDate": "2023-05-18T12:00:00Z",
+  "status": "ENABLED",
+  "location": {
+    "longitude": -77.3963,
+    "latitude": 25.0343
+  },
+  "imageURL": "https://example.com/beach-c-image.jpg",
+  "amenities": ["Beach Volleyball", "Snack Bar"],
+  "rating": 4.5,
+  "owner": "Emily Johnson"
+}
+{
+  "name": "Mountain D",
+  "description": "Towering mountain with breathtaking views",
+  "maxCapacity": 12,
+  "category": "HIKING",
+  "creationDate": "2023-05-18T12:00:00Z",
+  "lastUpdateDate": "2023-05-18T12:00:00Z",
+  "status": "ENABLED",
+  "location": {
+    "longitude": -0.1278,
+    "latitude": 51.5074
+  },
+  "imageURL": "https://example.com/mountain-d-image.jpg",
+  "amenities": ["Hiking Trails", "Camping Area"],
+  "rating": 4.7,
+  "owner": "Michael Brown"
+}
+{
+  "name": "Park E",
+  "description": "Spacious park with recreational facilities",
+  "maxCapacity": 18,
+  "category": "ADVENTURE",
+  "creationDate": "2023-05-18T12:00:00Z",
+  "lastUpdateDate": "2023-05-18T12:00:00Z",
+  "status": "ENABLED",
+  "location":     {
+        "id": 25,
+        "name": "Mountain D",
+        "description": "Towering mountain with breathtaking views | Zone B",
+        "disponibilite": true,
+        "latitude": 51.5074,
+        "longitude": 1.1278,
+        "city": {
+            "id": 40,
+            "country": "Canada",
+            "city": "Vancouver",
+            "postalCode": "V6B 1V2"
+        }
+    },
+  "imageURL": "https://example.com/park-e-image.jpg",
+  "amenities": ["Tennis Courts", "BBQ Area"],
+  "rating": 4.4,
+  "owner": "Jessica Davis"
+}
+{
+  "name": "Garden F",
+  "description": "Peaceful garden with blooming flowers",
+  "maxCapacity": 10,
+  "category": "FAMILY",
+  "creationDate": "2023-05-18T12:00:00Z",
+  "lastUpdateDate": "2023-05-18T12:00:00Z",
+  "status": "ENABLED",
+  "location": {
+        "id": 26,
+        "name": "Park E",
+        "description": "Spacious park with recreational facilities",
+        "disponibilite": true,
+        "latitude": 34.0522,
+        "longitude": -118.2437,
+        "city": {
+            "id": 50,
+            "country": "Tunisia",
+            "city": "Beja",
+            "postalCode": "9000"
+        }
+    },
+  "imageURL": "https://example.com/garden-f-image.jpg",
+  "amenities": ["Botanical Trail", "Outdoor Sculptures"],
+  "rating": 4.1,
+  "owner": "Robert Johnson"
+}
+{
+  "name": "Beach G",
+  "description": "Popular beach for sunbathing and water sports",
+  "maxCapacity": 30,
+  "category": "WATER_SPORTS",
+  "creationDate": "2023-05-18T12:00:00Z",
+  "lastUpdateDate": "2023-05-18T12:00:00Z",
+  "status": "ENABLED",
+  "location":     {
+        "id": 27,
+        "name": "Garden F",
+        "description": "Peaceful garden with blooming flowers",
+        "disponibilite": true,
+        "latitude": 48.8566,
+        "longitude": 2.3522,
+        "city": {
+            "id": 53,
+            "country": "Tunisia",
+            "city": "Bizerte",
+            "postalCode": "7000"
+        }
+    },
+  "imageURL": "https://example.com/beach-g-image.jpg",
+  "amenities": ["Water Sports Rentals", "Beach Bar"],
+  "rating": 4.6,
+  "owner": "Sophia Anderson"
+}
+{
+  "name": "Mountain H",
+  "description": "Challenging mountain for experienced hikers",
+  "maxCapacity": 18,
+  "category": "HIKING",
+  "creationDate": "2023-05-18T12:00:00Z",
+  "lastUpdateDate": "2023-05-18T12:00:00Z",
+  "status": "ENABLED",
+  "location": {
+        "id": 28,
+        "name": "Beach G",
+        "description": "Popular beach for sunbathing and water sports",
+        "disponibilite": true,
+        "latitude": 40.4168,
+        "longitude": -3.7038,
+        "city": {
+            "id": 59,
+            "country": "Tunisia",
+            "city": "Kebili",
+            "postalCode": "4200"
+        }
+    },
+
+  "imageURL": "https://example.com/mountain-h-image.jpg",
+  "amenities": ["Climbing Routes", "Mountain Hut"],
+  "rating": 4.9,
+  "owner": "Daniel Wilson"
+}
+{
+  "name": "Park I",
+  "description": "Green park with walking trails",
+  "maxCapacity": 20,
+  "category": "FAMILY",
+  "creationDate": "2023-05-18T12:00:00Z",
+  "lastUpdateDate": "2023-05-18T12:00:00Z",
+  "status": "ENABLED",
+  "location": {
+        "id": 29,
+        "name": "Mountain H",
+        "description": "Challenging mountain for experienced hikers",
+        "disponibilite": true,
+        "latitude": 45.4215,
+        "longitude": -75.6972,
+        "city": {
+            "id": 62,
+            "country": "Tunisia",
+            "city": "Kef",
+            "postalCode": "7100"
+        }
+    },
+  "imageURL": "https://example.com/park-i-image.jpg",
+  "amenities": ["Dog Park", "Outdoor Fitness Equipment"],
+  "rating": 4.3,
+  "owner": "Sarah Thompson"
+}
+{
+  "name": "Garden J",
+  "description": "Botanical garden with diverse plant species",
+  "maxCapacity": 16,
+  "category": "FAMILY",
+  "creationDate": "2023-05-18T12:00:00Z",
+  "lastUpdateDate": "2023-05-18T12:00:00Z",
+  "status": "ENABLED",
+  "location":     {
+        "id": 33,
+        "name": "Garden J",
+        "description": "Botanical garden with diverse plant species ",
+        "disponibilite": true,
+        "latitude": 35.6895,
+        "longitude": 139.6917,
+        "city": {
+            "id": 62,
+            "country": "Tunisia",
+            "city": "Kef",
+            "postalCode": "7100"
+        }
+    },
+  "imageURL": "https://example.com/garden-j-image.jpg",
+  "amenities": ["Pond", "Tea House"],
+  "rating": 4.7,
+  "owner": "David Miller"
+}

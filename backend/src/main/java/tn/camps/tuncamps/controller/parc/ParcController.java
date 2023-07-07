@@ -1,5 +1,6 @@
 package tn.camps.tuncamps.controller.parc;
 
+import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import tn.camps.tuncamps.persistence.entity.parc.ParcCategory;
 import tn.camps.tuncamps.service.parc.ParcService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/parcs")
@@ -18,6 +20,89 @@ public class ParcController {
     @Autowired
     private ParcService parcService;
 
+    @GetMapping("/compare")
+    public ResponseEntity<List<Parc>> compareParcs(@RequestParam List<Integer> parcIds,
+                                                   @RequestParam(required = false) Double minRating,
+                                                   @RequestParam(required = false) List<String> amenities,
+                                                   @RequestParam(required = false) String city,
+                                                   @RequestParam(required = false) String country,
+                                                   @RequestParam(required = false) String category,
+                                                   @RequestParam(required = false) Integer minCapacity) {
+        // Fetch the parcs based on the given parcIds
+        List<Parc> parcs = parcService.getParcsByIds(parcIds);
+
+        // Filter the parcs based on the provided criteria
+        if (minRating != null) {
+            parcs = parcs.stream().filter(p -> p.getRating() >= minRating).collect(Collectors.toList());
+        }
+
+        if (amenities != null && !amenities.isEmpty()) {
+            parcs = parcs.stream().filter(p -> p.getAmenities().containsAll(amenities)).collect(Collectors.toList());
+        }
+
+        if (amenities != null && !amenities.isEmpty()) {
+            parcs = parcs.stream().filter(p -> p.getCategory().equals(category)).collect(Collectors.toList());
+        }
+
+
+        if (city != null) {
+            parcs = parcs.stream().filter(p -> p.getLocation().getCity().getCity().equals(city)).collect(Collectors.toList());
+        }
+
+        if (country != null) {
+            parcs = parcs.stream().filter(p -> p.getLocation().getCity().getCountry().equals(country)).collect(Collectors.toList());
+        }
+
+        if (minCapacity != null) {
+            parcs = parcs.stream().filter(p -> p.getMaxCapacity() >= minCapacity).collect(Collectors.toList());
+        }
+
+        return ResponseEntity.ok(parcs);
+    }
+
+    @GetMapping("/compare/minRatings")
+    public Double getMinRatingRange(@RequestParam List<Integer> parcIds) {
+        return parcService.getMinRatingRange(parcIds);
+    }
+
+    @GetMapping("/compare/maxRatings")
+    public Double getMaxRatingRange(@RequestParam List<Integer> parcIds) {
+        return parcService.getMaxRatingRange(parcIds);
+    }
+
+    @GetMapping("/compare/minCapacity")
+    public Double getMinCapacityRange(@RequestParam List<Integer> parcIds) {
+        return parcService.getMinCapacityRange(parcIds);
+    }
+
+    @GetMapping("/compare/maxCapacity")
+    public Double getMaxCapacityRange(@RequestParam List<Integer> parcIds) {
+        return parcService.getMaxCapacityRange(parcIds);
+    }
+
+    @GetMapping("/amenities")
+    public ResponseEntity<List<String>> getAllAmenities(@RequestParam List<Integer> parcIds) {
+        List<String> amenities = parcService.getAllAmenities(parcIds);
+        return ResponseEntity.ok(amenities);
+    }
+
+    @GetMapping("/cities")
+    public ResponseEntity<List<String>> getAllCities(@RequestParam List<Integer> parcIds) {
+        List<String> cities = parcService.getAllCities(parcIds);
+        return ResponseEntity.ok(cities);
+    }
+
+    @GetMapping("/countries")
+    public ResponseEntity<List<String>> getAllCountries(@RequestParam List<Integer> parcIds) {
+        List<String> countries = parcService.getAllCountries(parcIds);
+        return ResponseEntity.ok(countries);
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<List<String>> getAllcategories(@RequestParam List<Integer> parcIds) {
+        List<String> countries = parcService.getAllcategories(parcIds);
+        return ResponseEntity.ok(countries);
+    }
     @PostMapping
     public ResponseEntity<?> createParc(@RequestBody Parc parc) {
         try {
@@ -48,7 +133,7 @@ public class ParcController {
             parcService.deleteParc(parcId);
         return new ResponseEntity<>("Parc " + parcId + " Deleted successfully", HttpStatus.OK);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>("Parc " + parcId + " is not found ", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (RuntimeException e) {
             return new ResponseEntity<>("Failed to delete Parc: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -125,4 +210,7 @@ public class ParcController {
         List<Parc> locationList = parcService.getParcByAmenities(amenities);
         return new ResponseEntity<>(locationList, HttpStatus.OK);
     }
+
+
+
 }

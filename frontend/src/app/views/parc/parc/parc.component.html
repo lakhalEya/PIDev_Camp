@@ -1,1 +1,223 @@
-<p>parc works!</p>
+<c-row>
+
+    <c-alert *ngIf="showSuccessAlert" color="success" class="d-flex align-items-center">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+      <use xlink:href="#check-circle-fill" />
+    </svg>
+        <div>{{message}}</div>
+    </c-alert>
+    <c-alert *ngIf="showErrorAlert" color="danger" class="d-flex align-items-center">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+      <use xlink:href="#check-circle-fill" />
+    </svg>
+        <div>{{errorMessage}}</div>
+    </c-alert>
+    <app-statics></app-statics>
+    <c-col xs="12">
+        <c-card class="mb-3">
+            <c-card-header ngPreserveWhitespaces>
+                <strong>List of parcs</strong>
+            </c-card-header>
+            <c-card-body>
+                <c-nav variant="pills">
+                    <c-nav-item>
+                        <a [cTabContent]="tabContent3" [routerLink] [tabPaneIdx]="0" cNavLink>
+                            <svg cIcon class="me-2" name="cilHome"></svg> Active Parcs
+                        </a>
+                    </c-nav-item>
+                    <c-nav-item>
+                        <a [cTabContent]="tabContent3" [routerLink] [tabPaneIdx]="1" cNavLink>
+                            <svg cIcon class="me-2" name="cilUser"></svg> Inactive Parcs
+                        </a>
+                    </c-nav-item>
+                    <c-nav-item>
+                        <a [cTabContent]="tabContent3" [routerLink] [tabPaneIdx]="2" cNavLink>
+                            <svg cIcon class="me-2" name="cilCode"></svg> Contact
+                        </a>
+                    </c-nav-item>
+                </c-nav>
+                <c-tab-content #tabContent3="cTabContent" cRounded="bottom" [activeTabPaneIdx]="0">
+                    <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
+                        <div class="d-grid gap-2 d-md-flex  justify-content-md-end">
+                            <c-button-group aria-label="Button group with nested dropdown " role="group" size="lg">
+                                <button cButton *ngIf="!showComparceComp" [cModalToggle]="compareModal.id" cTooltip="Compare parcs" cTooltipPlacement="top" color="light" (click)="updateCompareData()"><svg
+                    [cIcon]="icons.cilBalanceScale" size="xl" title="List Icon"></svg>
+                </button>
+                                <button cButton *ngIf="showComparceComp" cTooltip="reset" cTooltipPlacement="top" color="light"><svg
+                    [cIcon]="icons.cilXCircle" size="xl" title="List Icon"></svg>
+                </button>
+                                <c-dropdown variant="btn-group">
+                                    <button cButton cDropdownToggle color="info">
+                    Actions
+                  </button>
+                                    <ul cDropdownMenu>
+                                        <li><a cDropdownItem routerLink>Action</a></li>
+                                        <li><a cDropdownItem routerLink>Another action</a></li>
+                                        <li><a cDropdownItem routerLink>Something else here</a></li>
+                                        <li cDropdownDivider></li>
+                                        <li><a cDropdownItem routerLink>Separated link</a></li>
+                                    </ul>
+                                </c-dropdown>
+                            </c-button-group>
+                        </div>
+                        <c-modal #compareModal alignment="center" id="compareModal">
+                            <c-modal-header>
+                                <h5 cModalTitle>Compare Parcs based on :</h5>
+                                <button [cModalToggle]="compareModal.id" cButtonClose></button>
+                            </c-modal-header>
+                            <c-modal-body>
+                                <c-input-group class="mb-3">
+                                    <label cLabel for="disabledRange">Min Rating : <strong>{{ratingValue}}</strong></label>
+                                    <input [(ngModel)]="ratingValue" cFormControl id="customRange2" [max]="maxRating" [min]="minRating" type="range" />
+                                </c-input-group>
+                                <c-input-group class="mb-3">
+                                    <label cLabel for="disabledRange">Min Capacity : <strong>{{capacityValue}}</strong></label>
+                                    <input [(ngModel)]="capacityValue" cFormControl id="customRange2" [max]="maxCapacity" [min]="minCapacity" type="range" />
+                                </c-input-group>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                    <c-form-check>
+                      <input cFormCheckInput id="checkOne" type="checkbox" />
+                    </c-form-check>
+                  </span>
+                                    <select aria-label="Small select example" cSelect sizing="sm" cFormControl>
+                    <option>Amenities</option>
+                    <option *ngFor="let amenity of amenitiesList" [value]="amenity">{{ amenity }}</option>
+                  </select>
+                                </c-input-group>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                    <c-form-check>
+                      <input cFormCheckInput id="checkOne" type="checkbox" />
+                    </c-form-check>
+                  </span>
+                                    <select aria-label="Small select example" cSelect sizing="sm" cFormControl>
+                    <option>Country</option>
+                    <option *ngFor="let country of countriesList" [value]="country">{{ country }}</option>
+
+                  </select>
+                                </c-input-group>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                    <c-form-check>
+                      <input cFormCheckInput id="checkOne" type="checkbox" />
+                    </c-form-check>
+                  </span>
+                                    <select aria-label="Small select example" cSelect sizing="sm" cFormControl>
+                    <option>City</option>
+                    <option *ngFor="let city of citiesList" [value]="city">{{ city }}</option>
+
+                  </select>
+                                </c-input-group>
+                                <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                    <c-form-check>
+                      <input cFormCheckInput id="checkOne" type="checkbox" />
+                    </c-form-check>
+                  </span>
+                                    <select aria-label="Small select example" cSelect sizing="sm" cFormControl>
+                    <option>Category</option>
+                    <option *ngFor="let category of categoriesList" [value]="category">{{ category }}</option>
+
+                  </select>
+                                </c-input-group>
+
+                            </c-modal-body>
+                            <c-modal-footer>
+                                <button [cModalToggle]="compareModal.id" cButton color="secondary">
+                  Cancel
+                </button>
+                                <button cButton color="primary" (click)="compareParcs()" [cModalToggle]="compareModal.id">Compare</button>
+                            </c-modal-footer>
+                        </c-modal>
+
+                        <c-card-body>
+
+                            <table cTable hover>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Max Capacity</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col">
+                                            <c-form-check>
+                                                <input cFormCheckInput type="checkbox" (change)="toggleSelectAll()" [checked]="isAllSelected" />
+                                            </c-form-check>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let parc of parcs | paginate
+                                    : {
+                                        itemsPerPage: tableSize,
+                                        currentPage: page,
+                                        totalItems: count
+                                      };
+                                let i = index">
+                                        <th scope="row">{{ parc.idParc }}</th>
+                                        <td>{{ parc.name }}</td>
+                                        <td>{{ parc.description }}</td>
+                                        <td>{{ parc.category }}</td>
+                                        <td>{{ parc.maxCapacity }}</td>
+                                        <td>
+                                            <button cButton color="info" cTooltip="Update parc" cTooltipPlacement="top">
+                        <svg cIcon class="cis-color-fill" name="cil-puzzle"></svg>
+
+                      </button>
+                                        </td>
+                                        <td>
+                                            <button cButton [cModalToggle]="deleteModal.id" color="danger" cTooltip="Delete parc" cTooltipPlacement="top" (click)="selectedParc = parc">
+                        <svg cIcon class="cis-color-fill" name="cil-trash"></svg>
+
+                      </button>
+
+                                        </td>
+                                        <td>
+                                            <c-form-check>
+                                                <input cFormCheckInput id="checkOne" type="checkbox" [(ngModel)]="parc.selected" (change)="selectedParc = parc" (change)="toggleParcSelection(parc)" />
+                                            </c-form-check>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <c-modal #deleteModal alignment="center" id="deleteModal">
+                                <c-modal-header>
+                                    <h5 cModalTitle>Delete Parc</h5>
+                                    <button [cModalToggle]="deleteModal.id" cButtonClose></button>
+                                </c-modal-header>
+                                <c-modal-body>
+                                    We are about to delete the parc {{ selectedParc?.name }}
+                                    <br> Do you confirm this operation?
+                                </c-modal-body>
+                                <c-modal-footer>
+                                    <button [cModalToggle]="deleteModal.id" cButton color="secondary">
+                    Close
+                  </button>
+                                    <button cButton color="primary" (click)="deleteParc()" [cModalToggle]="deleteModal.id">Delete</button>
+                                </c-modal-footer>
+                            </c-modal>
+                            <div class="d-flex justify-content-center">
+                                <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                                </pagination-controls>
+                            </div>
+                        </c-card-body>
+                    </c-tab-pane>
+                    <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
+                        <c-card-body>
+
+                        </c-card-body>
+                    </c-tab-pane>
+                    <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
+                        <c-card-body>
+                        </c-card-body>
+                    </c-tab-pane>
+
+                </c-tab-content>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>
