@@ -11,8 +11,8 @@ export class AllocationService {
   constructor(private http: HttpClient) { }
 
 
-  
-  private baseUrl = "http://127.0.0.1:8081/api";
+
+  private baseUrl = "http://localhost:8081/tunCamp/api";
 
 
 
@@ -24,7 +24,7 @@ export class AllocationService {
     return this.http.get<Allocation[]>(this.baseUrl + "/Allocations");
   }
 
- 
+
   deleteAllocation(id: number): Observable<Allocation> {
     return this.http.delete<Allocation>(`${this.baseUrl}/Allocation/${id}`);
   }

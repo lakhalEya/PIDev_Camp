@@ -11,8 +11,8 @@ export class AllocationitemService {
   constructor(private http: HttpClient) { }
 
 
-  
-  private baseUrl = "http://127.0.0.1:8081/api";
+
+  private baseUrl = "http://localhost:8081/tunCamp/api";
 
 
 
@@ -24,7 +24,7 @@ export class AllocationitemService {
     return this.http.get<Allocationitem[]>(this.baseUrl + "/locitems");
   }
 
-  
+
 
   deletelocitem(id: number): Observable<Allocationitem> {
     return this.http.delete<Allocationitem>(`${this.baseUrl}/locitem/${id}`);

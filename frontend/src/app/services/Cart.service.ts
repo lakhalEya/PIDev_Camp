@@ -11,8 +11,8 @@ export class CartService {
   constructor(private http: HttpClient) { }
 
 
-  
-  private baseUrl = "http://127.0.0.1:8081/api";
+
+  private baseUrl = "http://localhost:8081/tunCamp/api";
 
 
 
@@ -24,7 +24,7 @@ export class CartService {
     return this.http.get<Cart[]>(this.baseUrl + "/Carts");
   }
 
- 
+
   deleteCart(id: number): Observable<Cart> {
     return this.http.delete<Cart>(`${this.baseUrl}/Cart/${id}`);
   }

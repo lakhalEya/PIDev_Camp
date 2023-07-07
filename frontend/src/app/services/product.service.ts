@@ -11,8 +11,8 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
 
-  
-  private baseUrl = "http://127.0.0.1:8081/api";
+
+  private baseUrl = "http://localhost:8081/tunCamp/api";
 
 
 
