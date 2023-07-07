@@ -17,8 +17,8 @@ import { Allocationitem } from 'src/model/Allocationitem';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  idcart: number = 4
-  idallocation: number = 7
+  idcart: number = 3
+  idallocation: number = 61
   /********** replacer   par cartid of user   and allocation id of user ************/
 
   /**********************/

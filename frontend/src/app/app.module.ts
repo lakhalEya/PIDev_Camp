@@ -1,10 +1,9 @@
+import { HFilterPipe } from './pipes/HFilterPipe.pipe';
 import { NgModule , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
@@ -16,9 +15,8 @@ import { AppComponent } from './app.component';
 
 // Import containers
 import {  DefaultHeaderComponent, DefaultLayoutComponent } from './containers';
-import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
 
-import {
+import { 
   AvatarModule,
   BadgeModule,
   BreadcrumbModule,
@@ -41,19 +39,19 @@ import {
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { UserLayoutComponent } from './containers/user-layout/user-layout.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavbarLayoutComponent } from './containers/user-layout/navbar-layout/navbar-layout.component';
 
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
   DefaultLayoutComponent
 ];
-
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { HomeComponent } from './home/home.component';
+import { PanierComponent } from './panier/panier.component';
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, UserLayoutComponent, NavbarLayoutComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, UserLayoutComponent, HomeComponent, PanierComponent  ,HFilterPipe],
   imports: [
     BrowserModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AvatarModule,
@@ -78,9 +76,9 @@ const APP_CONTAINERS = [
     BadgeModule,
     ListGroupModule,
     CardModule,
-    NgScrollbarModule,
-    NgbModule,
-    NgbCollapseModule,
+    NgScrollbarModule,HttpClientModule,    
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), FormsModule
 
   ],
   providers: [
@@ -94,6 +92,10 @@ const APP_CONTAINERS = [
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
+  ],
+  exports: [
+    HomeComponent,
+    PanierComponent,
   ],
 })
 export class AppModule {
