@@ -1,5 +1,6 @@
 package tn.camps.tuncamps.controller.parc;
 
+import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,7 +60,49 @@ public class ParcController {
         return ResponseEntity.ok(parcs);
     }
 
+    @GetMapping("/compare/minRatings")
+    public Double getMinRatingRange(@RequestParam List<Integer> parcIds) {
+        return parcService.getMinRatingRange(parcIds);
+    }
 
+    @GetMapping("/compare/maxRatings")
+    public Double getMaxRatingRange(@RequestParam List<Integer> parcIds) {
+        return parcService.getMaxRatingRange(parcIds);
+    }
+
+    @GetMapping("/compare/minCapacity")
+    public Double getMinCapacityRange(@RequestParam List<Integer> parcIds) {
+        return parcService.getMinCapacityRange(parcIds);
+    }
+
+    @GetMapping("/compare/maxCapacity")
+    public Double getMaxCapacityRange(@RequestParam List<Integer> parcIds) {
+        return parcService.getMaxCapacityRange(parcIds);
+    }
+
+    @GetMapping("/amenities")
+    public ResponseEntity<List<String>> getAllAmenities(@RequestParam List<Integer> parcIds) {
+        List<String> amenities = parcService.getAllAmenities(parcIds);
+        return ResponseEntity.ok(amenities);
+    }
+
+    @GetMapping("/cities")
+    public ResponseEntity<List<String>> getAllCities(@RequestParam List<Integer> parcIds) {
+        List<String> cities = parcService.getAllCities(parcIds);
+        return ResponseEntity.ok(cities);
+    }
+
+    @GetMapping("/countries")
+    public ResponseEntity<List<String>> getAllCountries(@RequestParam List<Integer> parcIds) {
+        List<String> countries = parcService.getAllCountries(parcIds);
+        return ResponseEntity.ok(countries);
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<List<String>> getAllcategories(@RequestParam List<Integer> parcIds) {
+        List<String> countries = parcService.getAllcategories(parcIds);
+        return ResponseEntity.ok(countries);
+    }
     @PostMapping
     public ResponseEntity<?> createParc(@RequestBody Parc parc) {
         try {

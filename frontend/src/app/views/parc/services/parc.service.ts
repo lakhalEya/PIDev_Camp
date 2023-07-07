@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Parc } from './../models/parc.model'
 import { tap } from 'rxjs/operators';
@@ -41,4 +41,83 @@ export class ParcService {
     );
   }
 
+  compareParcs(
+    parcIds: number[],
+    minRating?: number,
+    amenities?: string[],
+    city?: string,
+    country?: string,
+    category?: string,
+    minCapacity?: number
+  ): Observable<Parc[]> {
+    const params = new HttpParams()
+      .set('parcIds', parcIds.join(','))
+      .set('minRating', minRating ? minRating.toString() : '')
+      .set('amenities', amenities ? amenities.join(',') : '')
+      .set('city', city || '')
+      .set('country', country || '')
+      .set('category', category || '')
+      .set('minCapacity', minCapacity ? minCapacity.toString() : '');
+      const url = `${this.apiUrl}/compare`;
+
+    return this.http.get<Parc[]>(url, { params });
+  }
+
+  getMinRatingRange(parcIds: number[]): Observable<number> {
+    const params = new HttpParams().set('parcIds', parcIds.join(','));
+    const url = `${this.apiUrl}/compare/minRatings`;
+
+    return this.http.get<number>(url, { params });
+  }
+
+  getMaxRatingRange(parcIds: number[]): Observable<number> {
+    const params = new HttpParams().set('parcIds', parcIds.join(','));
+    const url = `${this.apiUrl}/compare/maxRatings`;
+
+    return this.http.get<number>(url, { params });
+  }
+
+  getMinCapacityRange(parcIds: number[]): Observable<number> {
+    const params = new HttpParams().set('parcIds', parcIds.join(','));
+    const url = `${this.apiUrl}/compare/minCapacity`;
+
+    return this.http.get<number>(url, { params });
+  }
+
+  getMaxCapacityRange(parcIds: number[]): Observable<number> {
+    const params = new HttpParams().set('parcIds', parcIds.join(','));
+    const url = `${this.apiUrl}/compare/maxCapacity`;
+
+    return this.http.get<number>(url, { params });
+  }
+
+  getAllAmenities(parcIds: number[]): Observable<string[]> {
+    const params = new HttpParams().set('parcIds', parcIds.join(','));
+    const url = `${this.apiUrl}/amenities`;
+
+    return this.http.get<string[]>(url, { params });
+  }
+
+  getAllCities(parcIds: number[]): Observable<string[]> {
+    const params = new HttpParams().set('parcIds', parcIds.join(','));
+    const url = `${this.apiUrl}/cities`;
+
+    return this.http.get<string[]>(url, { params });
+  }
+
+  getAllCountries(parcIds: number[]): Observable<string[]> {
+    const params = new HttpParams().set('parcIds', parcIds.join(','));
+    const url = `${this.apiUrl}/countries`;
+
+    return this.http.get<string[]>(url, { params });
+  }
+
+  getAllCategories(parcIds: number[]): Observable<string[]> {
+    const params = new HttpParams().set('parcIds', parcIds.join(','));
+    const url = `${this.apiUrl}/categories`;
+
+    return this.http.get<string[]>(url, { params });
+  }
 }
+
+

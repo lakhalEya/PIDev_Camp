@@ -9,6 +9,8 @@ import { StaticsService } from './../services/statics.service';
 })
 export class StaticsComponent
 {
+  enabledParcPercentage: number;
+
   enabledParcCount: number;
   parcCount: number;
   mostUsedCategory: string;
@@ -19,6 +21,21 @@ export class StaticsComponent
     this.getEnabledParcCount();
     this.getParcCount();
     this.getMostUsedCategory();
+  }
+
+
+
+  getParcCount() {
+    this.staticsService.getParcCount().subscribe(
+      count => {
+        this.parcCount = count;
+        this.calculateEnabledParcPercentage();
+
+      },
+      error => {
+        console.error('Failed to get parc count:', error);
+      }
+    );
   }
 
   getEnabledParcCount() {
@@ -32,17 +49,6 @@ export class StaticsComponent
     );
   }
 
-  getParcCount() {
-    this.staticsService.getParcCount().subscribe(
-      count => {
-        this.parcCount = count;
-      },
-      error => {
-        console.error('Failed to get parc count:', error);
-      }
-    );
-  }
-
   getMostUsedCategory() {
     this.staticsService.getMostUsedCategory().subscribe(
       category => {
@@ -52,5 +58,11 @@ export class StaticsComponent
         console.error('Failed to get most used category:', error);
       }
     );
+  }
+
+  calculateEnabledParcPercentage() {
+    if (this.parcCount !== undefined && this.enabledParcCount !== undefined) {
+      this.enabledParcPercentage = (this.enabledParcCount / this.parcCount) * 100;
+    }
   }
 }

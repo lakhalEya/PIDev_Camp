@@ -164,6 +164,46 @@ public class ParcServiceImpl implements ParcService {
     }
 
     @Override
+    public Double getMinRatingRange(List<Integer> parcIds) {
+        return parcRepository.getMinRatingRange(parcIds);
+    }
+
+    @Override
+    public Double getMaxRatingRange(List<Integer> parcIds) {
+        return parcRepository.getMaxRatingRange(parcIds);
+    }
+
+    @Override
+    public Double getMinCapacityRange(List<Integer> parcIds) {
+        return parcRepository.getMinCapacityRange(parcIds);
+    }
+
+    @Override
+    public Double getMaxCapacityRange(List<Integer> parcIds) {
+        return parcRepository.getMaxCapacityRange(parcIds);
+    }
+
+    @Override
+    public List<String> getAllAmenities(List<Integer> parcIds) {
+        return parcRepository.getAllAmenities(parcIds);
+    }
+
+    @Override
+    public List<String> getAllCities(List<Integer> parcIds) {
+        return parcRepository.getAllCities(parcIds);
+    }
+
+    @Override
+    public List<String> getAllCountries(List<Integer> parcIds) {
+        return parcRepository.getAllCountries(parcIds);
+    }
+
+    @Override
+    public List<String> getAllcategories(List<Integer> parcIds) {
+        return parcRepository.getAllcategories(parcIds);
+    }
+
+    @Override
     public List<Parc> getParcByDisponibility(Parc.ParcStatus status) {
         return parcRepository.findByStatus(status);
     }
