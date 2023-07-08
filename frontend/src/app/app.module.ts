@@ -1,8 +1,13 @@
+
+import { HttpClientModule } from '@angular/common/http';
+
 import { NgModule , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
@@ -11,6 +16,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Import app component
 import { AppComponent } from './app.component';
+import { ListReservationsComponent } from './views/reservation/components/backoffice/list-reservations/list-reservations.component';
+
+
 
 // Import containers
 import {  DefaultHeaderComponent, DefaultLayoutComponent } from './containers';
@@ -35,7 +43,6 @@ import {
   SidebarModule,
   TabsModule,
   UtilitiesModule,
-
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
@@ -52,7 +59,9 @@ const APP_CONTAINERS = [
   declarations: [AppComponent, ...APP_CONTAINERS, UserLayoutComponent, NavbarLayoutComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
     AvatarModule,
     BreadcrumbModule,
@@ -78,7 +87,8 @@ const APP_CONTAINERS = [
     CardModule,
     NgScrollbarModule,
     NgbModule,
-    NgbCollapseModule
+    NgbCollapseModule,
+
   ],
   providers: [
     {

@@ -9,6 +9,6 @@ public interface ActivityService {
     List<Activity> getAllActivities();
     Optional<Activity> getActivityById(Integer id);
     Activity createActivity(Activity activity);
-    Activity updateActivity(Integer id, Activity activity);
+    Activity updateActivity(int id, Activity activity);
     void deleteActivity(Integer id);
 }

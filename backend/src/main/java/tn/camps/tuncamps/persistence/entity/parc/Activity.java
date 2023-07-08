@@ -6,6 +6,8 @@ import tn.camps.tuncamps.persistence.entity.commun.Tariff;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -13,8 +15,19 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 @Entity
-
 public class Activity {
+    public enum ActivityCategory {
+        SPORTS,
+        MUSIC,
+        ARTS,
+        OUTDOORS,
+        OTHER
+    }    public enum ActivityStatus {
+        UPCOMING,
+        ONGOING,
+        COMPLETED
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -30,7 +43,32 @@ public class Activity {
 
     private String organizer;
 
-    @OneToOne
-    private Tariff tariff;
+    @OneToMany
+    private Set<Tariff> tariff;
+
+    @ManyToOne
+    private Parc parc;
+
+    @Enumerated(EnumType.STRING)
+    private ActivityCategory category;
+
+    private Date creationDate;
+
+    private Date lastModificationDate;
+
+    private String description;
+
+    private int maxParticipants;
+    private int minParticipants;
+
+    private boolean registrationRequired;
+
+    @ElementCollection
+    private List<String> tags;
+
+    private String imageUrl;
+
+    @Enumerated(EnumType.STRING)
+    private ActivityStatus status;
 
 }

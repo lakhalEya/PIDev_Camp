@@ -7,9 +7,38 @@ import java.util.Optional;
 public interface LocationService {
     List<Location> getAllLocations();
 
+    /*
+     * Implement pagination in the getAllLocations method to retrieve locations in smaller chunks
+     * instead of fetching all locations at once. This can improve performance and reduce memory consumption,
+     *  especially when dealing with a large number of locations.
+     */
+
+    List<Location> getAllLocations(int pageNumber, int pageSize);
+
+
+    List<Location> getAllLocationsSorted(String sortBy);
+
+    List<Location> getAllLocationsFiltered(String filterBy, String filterValue);
+
+
     Optional<Location> getLocationById(int id);
 
-    Location saveLocation(Location location);
+    List<Location> getLocationByDisponibility(boolean status);
+
+    Location createLocation(Location location);
 
     void deleteLocation(int id);
+
+    void deleteLocationByCoordinates(double longitude, double latitude);
+
+
+    List<Location> getLocationByCountry(String country);
+
+    Optional<Location> getLocationByCoordinates(double longitude, double latitude);
+
+     Location updateLocation(int id ,Location location) ;
+
+    Location enableLocation(int id);
+    Location disableLocation(int id);
+
 }
