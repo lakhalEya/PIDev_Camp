@@ -21,7 +21,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     List<Reservation> findByStatus(@Param("status") ReservationStatus status);
 
     @Query("SELECT r FROM Reservation r WHERE r.user.id = :user_id")
-    List<Reservation> findByUser(@Param("user") User user);
+    List<Reservation> findByUser(@Param("user_id") User user);
 
     @Query("SELECT r FROM Reservation r WHERE r.parc.idParc = :parc_id")
     List<Reservation> findByParc(@Param("parc") Parc parc);

@@ -8,6 +8,8 @@ import {Page404Component} from './views/pages/page404/page404.component';
 import {Page500Component} from './views/pages/page500/page500.component';
 import {LoginComponent} from './views/pages/login/login.component';
 import {RegisterComponent} from './views/pages/register/register.component';
+import { AddReservationComponent } from './views/reservation/components/frontoffice/add-reservation/add-reservation.component';
+import { AddActReservationComponent } from './views/reservation/components/frontoffice/add-act-reservation/add-act-reservation.component';
 
 
 const routes: Routes = [
@@ -16,6 +18,8 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  { path: 'add-reservation', component: AddReservationComponent },
+  { path: 'add-act-reservation', component: AddActReservationComponent },
   {
     path: 'dashboard',
     component: DefaultLayoutComponent,

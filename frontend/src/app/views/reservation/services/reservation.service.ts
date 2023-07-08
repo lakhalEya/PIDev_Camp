@@ -27,8 +27,14 @@ export class ReservationService {
 
   addForParc(reservation : Reservation ): Observable<Reservation> {
     //recupérer l'id du parc 
-    reservation.user=1;
+    //reservation.user=1;
     return this.https.post<Reservation>(this.API+'/addForParc/'+1,reservation);
+  }
+
+  addForActivity(reservation : Reservation ): Observable<Reservation> {
+    //recupérer l'id de l'activity 
+    //reservation.user=1;
+    return this.https.post<Reservation>(this.API+'/addForActivity/'+1,reservation);
   }
 
   getNbReservation(): Observable<number> {

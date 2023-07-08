@@ -70,6 +70,14 @@ public class ReservationController {
         return ResponseEntity.ok(reservations);
     }
 
+    @GetMapping("/allByUser/{id_user}")
+    public ResponseEntity<List<Reservation>> getUserReservations(@PathVariable int id_user) {
+        User user = userRepository.findById(id_user).orElse(null);
+        //User user = userRepository.findById(1).orElse(null);
+        List<Reservation> reservations = reservationService.findResUser(user);
+        return ResponseEntity.ok(reservations);
+    }
+
     @GetMapping("/allWithSale")
     public ResponseEntity<List<Reservation>> getAllReservationsWithSale() {
         List<Reservation> reservations = reservationService.findResSale();
@@ -114,7 +122,8 @@ public class ReservationController {
 
     @PostMapping("/addForActivity/{id_act}")
     public ResponseEntity<String> createActivityReservation(@RequestBody Reservation reservation, @PathVariable int id_act) {
-        User user = userRepository.findById(reservation.getUser().getId()).orElse(null);
+        //User user = userRepository.findById(reservation.getUser().getId()).orElse(null);
+        User user = userRepository.findById(1).orElse(null);
         Activity activity = activityRepository.findById(id_act).orElse(null);
         //à modifier Connected user
         reservation.setUser(user);
@@ -125,36 +134,36 @@ public class ReservationController {
                 reservation.setActivity(activity);
                 reservation.setCategory(ReservationCategory.ACTIVITY);
                 reservationService.createReservation(reservation);
-                return ResponseEntity.status(HttpStatus.CREATED).body("Activity Reservation");
+                return ResponseEntity.status(HttpStatus.CREATED).body("{\"message\": \"Parc Required\"}");
             } else {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("This Activity does not need reservation ");
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{\"message\": \"Parc Reservation\"}");
             }
         }
             else {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("This Activity if full !! ");
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{\"message\": \"This parc is full!\"}");
             }
     }
 
 
 
     @PostMapping("/addForParc/{id_parc}")
-    public ResponseEntity<String> createParcReservation(@RequestBody Reservation reservation, @PathVariable int id_parc) {
-        User user = userRepository.findById(reservation.getUser().getId()).orElse(null);
-        //User user = userRepository.findById(1).orElse(null);
+    public ResponseEntity<Object> createParcReservation(@RequestBody Reservation reservation, @PathVariable int id_parc) {
+        //User user = userRepository.findById(reservation.getUser().getId()).orElse(null);
+        User user = userRepository.findById(1).orElse(null);
         Parc parc = parcRepository.findById(id_parc).orElse(null);
         //à modifier Connected user
         reservation.setUser(user);
         if (parc == null) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Parc Required");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{\"message\": \"Parc Required\"}");
         } else {
             if (parc.getMaxCapacity() >= reservationService.personNumberByParc(id_parc) + reservation.getPersonnbr()) {
                 reservation.setParc(parc);
                 reservation.setCategory(ReservationCategory.PARC);
                 reservationService.createReservation(reservation);
-                return ResponseEntity.status(HttpStatus.CREATED).body("Parc Reservation");
+                return ResponseEntity.status(HttpStatus.CREATED).body("{\"message\": \"Parc Reservation\"}");
             }
             else{
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("This parc if full !! ");
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{\"message\": \"This parc is full!\"}");
             }
         }
     }
