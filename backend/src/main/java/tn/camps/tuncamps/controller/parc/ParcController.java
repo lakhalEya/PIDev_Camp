@@ -23,7 +23,7 @@ public class ParcController {
     @GetMapping("/compare")
     public ResponseEntity<List<Parc>> compareParcs(@RequestParam List<Integer> parcIds,
                                                    @RequestParam(required = false) Double minRating,
-                                                   @RequestParam(required = false) List<String> amenities,
+                                                   @RequestParam(required = false) String amenities,
                                                    @RequestParam(required = false) String city,
                                                    @RequestParam(required = false) String country,
                                                    @RequestParam(required = false) String category,
@@ -37,7 +37,7 @@ public class ParcController {
         }
 
         if (amenities != null && !amenities.isEmpty()) {
-            parcs = parcs.stream().filter(p -> p.getAmenities().containsAll(amenities)).collect(Collectors.toList());
+            parcs = parcs.stream().filter(p -> p.getAmenities().contains(amenities)).collect(Collectors.toList());
         }
 
         if (amenities != null && !amenities.isEmpty()) {
@@ -151,6 +151,11 @@ public class ParcController {
         List<Parc> parcs = parcService.getAllParcs();
         return new ResponseEntity<>(parcs, HttpStatus.OK);
     }
+    @GetMapping("/parcamenities/{parcId}")
+    public ResponseEntity<List<String>> getAllParcAmenties(@PathVariable int parcId) {
+        List<String> amenties = parcService.getAllParcAmenties(parcId);
+        return new ResponseEntity<>(amenties, HttpStatus.OK);
+    }
 
     @PutMapping("/disable/{id}")
     public ResponseEntity<?> disableParc(@PathVariable int id) {
@@ -172,6 +177,12 @@ public class ParcController {
         }
     }
 
+    @GetMapping("/search/{keyword}/{status}")
+    public ResponseEntity<List<Parc>> searchParcByKeyword(@PathVariable String keyword,@PathVariable Parc.ParcStatus status) {
+        List<Parc> parcs = parcService.searchParcByKeywordAndStatus(keyword, status);
+        return ResponseEntity.ok(parcs);
+    }
+
     @GetMapping("/country/{country}")
     public ResponseEntity<?> getLocationsByCountry(@PathVariable String country) {
         List<Parc> parcList = parcService.getParcByCountry(country);
@@ -180,36 +191,43 @@ public class ParcController {
     }
 
     @GetMapping("/sortBy/{sortBy}")
-    public ResponseEntity<?> getAllLocationsFiltredBy(@PathVariable String sortBy) {
+    public ResponseEntity<?> getAllParcsFiltredBy(@PathVariable String sortBy) {
         List<Parc> locationList = parcService.getAllParcsSorted(sortBy);
         return new ResponseEntity<>(locationList, HttpStatus.OK);
 
     }
 
     @GetMapping("/filterBy/{filterBy}/{filterValue}")
-    public ResponseEntity<?> getAllLocationsFiltredBy(@PathVariable String filterBy, @PathVariable String filterValue) {
+    public ResponseEntity<?> getAllParcnsFiltredBy(@PathVariable String filterBy, @PathVariable String filterValue) {
         List<Parc> locationList = parcService.getAllParcsFiltered(filterBy, filterValue);
         return new ResponseEntity<>(locationList, HttpStatus.OK);
 
     }
 
     @GetMapping("/availabe/{status}")
-    public ResponseEntity<?> findLocationByDisponibility(@PathVariable Parc.ParcStatus status) {
+    public ResponseEntity<?> findParcByDisponibility(@PathVariable Parc.ParcStatus status) {
         List<Parc> locationList = parcService.getParcByDisponibility(status);
         return new ResponseEntity<>(locationList, HttpStatus.OK);
     }
 
     @GetMapping("/category/{category}")
-    public ResponseEntity<?> findLocationByCategory(@PathVariable ParcCategory category) {
+    public ResponseEntity<?> findParcByCategory(@PathVariable ParcCategory category) {
         List<Parc> locationList = parcService.getParcByCategory(category);
         return new ResponseEntity<>(locationList, HttpStatus.OK);
     }
 
     @GetMapping("/amenities/{amenities}")
-    public ResponseEntity<?> findLocationByAmenities(@PathVariable String amenities) {
+    public ResponseEntity<?> findParcByAmenities(@PathVariable String amenities) {
         List<Parc> locationList = parcService.getParcByAmenities(amenities);
         return new ResponseEntity<>(locationList, HttpStatus.OK);
     }
+
+    @GetMapping("/allamenities")
+    public ResponseEntity<?> findAllAmenities() {
+        List<String> amenities = parcService.getParcsAmenities();
+        return new ResponseEntity<>(amenities, HttpStatus.OK);
+    }
+
 
 
 

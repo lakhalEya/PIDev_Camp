@@ -1,223 +1,373 @@
 <c-row>
 
-    <c-alert *ngIf="showSuccessAlert" color="success" class="d-flex align-items-center">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
-      <use xlink:href="#check-circle-fill" />
+  <!-- Alert success -->
+  <c-alert *ngIf="showSuccessAlert" color="success" class="d-flex align-items-center">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+      <use xlink:href="#check-circle-fill"/>
     </svg>
-        <div>{{message}}</div>
-    </c-alert>
-    <c-alert *ngIf="showErrorAlert" color="danger" class="d-flex align-items-center">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
-      <use xlink:href="#check-circle-fill" />
+    <div>{{message}}</div>
+  </c-alert>
+  <!-- Alert Danger -->
+  <c-alert *ngIf="showErrorAlert" color="danger" class="d-flex align-items-center">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+      <use xlink:href="#check-circle-fill"/>
     </svg>
-        <div>{{errorMessage}}</div>
-    </c-alert>
-    <app-statics></app-statics>
-    <c-col xs="12">
-        <c-card class="mb-3">
-            <c-card-header ngPreserveWhitespaces>
-                <strong>List of parcs</strong>
-            </c-card-header>
-            <c-card-body>
-                <c-nav variant="pills">
-                    <c-nav-item>
-                        <a [cTabContent]="tabContent3" [routerLink] [tabPaneIdx]="0" cNavLink>
-                            <svg cIcon class="me-2" name="cilHome"></svg> Active Parcs
-                        </a>
-                    </c-nav-item>
-                    <c-nav-item>
-                        <a [cTabContent]="tabContent3" [routerLink] [tabPaneIdx]="1" cNavLink>
-                            <svg cIcon class="me-2" name="cilUser"></svg> Inactive Parcs
-                        </a>
-                    </c-nav-item>
-                    <c-nav-item>
-                        <a [cTabContent]="tabContent3" [routerLink] [tabPaneIdx]="2" cNavLink>
-                            <svg cIcon class="me-2" name="cilCode"></svg> Contact
-                        </a>
-                    </c-nav-item>
-                </c-nav>
-                <c-tab-content #tabContent3="cTabContent" cRounded="bottom" [activeTabPaneIdx]="0">
-                    <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
-                        <div class="d-grid gap-2 d-md-flex  justify-content-md-end">
-                            <c-button-group aria-label="Button group with nested dropdown " role="group" size="lg">
-                                <button cButton *ngIf="!showComparceComp" [cModalToggle]="compareModal.id" cTooltip="Compare parcs" cTooltipPlacement="top" color="light" (click)="updateCompareData()"><svg
+    <div>{{errorMessage}}</div>
+  </c-alert>
+  <!-- Modals  -->
+  <c-modal #compareModal alignment="center" id="compareModal">
+    <c-modal-header>
+      <h5 cModalTitle>Compare Parcs based on :</h5>
+      <button [cModalToggle]="compareModal.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+      <c-input-group class="mb-3">
+        <label cLabel for="disabledRange">Min Rating : <strong>{{ratingValue}}</strong></label>
+        <input [(ngModel)]="ratingValue" cFormControl id="ratingValue" [max]="maxRating" [min]="minRating"
+               type="range"/>
+      </c-input-group>
+      <c-input-group class="mb-3">
+        <label cLabel for="disabledRange">Min Capacity :
+          <strong>{{capacityValue}}</strong></label>
+        <input [(ngModel)]="capacityValue" cFormControl id="capacityValue" [max]="maxCapacity"
+               [min]="minCapacity" type="range"/>
+      </c-input-group>
+      <label cLabel for="amenitiesCheckbox">Amenities :</label>
+
+      <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                    <c-form-check>
+                      <input cFormCheckInput id="amenitiesCheckbox" type="checkbox" [(ngModel)]="selectedAmenitiesCheckbox" (change)="onAmenitiesCheckboxChange()"/>
+                    </c-form-check>
+                  </span>
+
+          <select cSelect sizing="sm" cFormControl [(ngModel)]="selectedAmenities" [disabled]="!selectedAmenitiesCheckbox">
+          <option selected disabled>Amenities</option>
+          <option *ngFor="let amenity of amenitiesList"
+                  [value]="amenity">{{ amenity }}</option>
+        </select>
+      </c-input-group>
+      <label cLabel for="countrycCheckbox">Country :</label>
+
+      <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+
+                    <c-form-check>
+                      <input cFormCheckInput id="countrycCheckbox" type="checkbox" [(ngModel)]="selectedCountryCheckbox" (change)="onCountryCheckboxChange()"/>
+                    </c-form-check>
+                  </span>
+
+        <select aria-label="Small select example" cSelect sizing="sm" cFormControl [(ngModel)]="selectedCountry" [disabled]="!selectedCountryCheckbox">
+          <option>Country</option>
+          <option *ngFor="let country of countriesList"
+                  [value]="country">{{ country }}</option>
+
+        </select>
+      </c-input-group>
+      <label cLabel for="cityCheckbox">City :</label>
+
+      <c-input-group class="mb-3">
+                                    <span cInputGroupText>
+                    <c-form-check>
+                      <input cFormCheckInput id="cityCheckbox" type="checkbox" [(ngModel)]="selectedCityCheckbox" (change)="onCityCheckboxChange()"/>
+                    </c-form-check>
+                  </span>
+        <select aria-label="Small select example" cSelect sizing="sm" cFormControl [(ngModel)]="selectedCity" [disabled]="!selectedCityCheckbox">
+          <option>City</option>
+          <option *ngFor="let city of citiesList" [value]="city">{{
+            city }}</option>
+
+        </select>
+      </c-input-group>
+      <label cLabel for="categoryCheckbox">Category :</label>
+
+      <c-input-group class="mb-3">
+                 <span cInputGroupText>
+                    <c-form-check>
+                      <input cFormCheckInput id="categoryCheckbox" type="checkbox" [(ngModel)]="selectedCategoryCheckbox" (change)="onCategoryCheckboxChange()"/>
+                    </c-form-check>
+                 </span>
+        <select aria-label="Small select example" cSelect sizing="sm" cFormControl [(ngModel)]="selectedCategory" [disabled]="!selectedCategoryCheckbox">
+          <option>Category</option>
+          <option *ngFor="let category of categoriesList"
+                  [value]="category">{{ category }}</option>
+
+        </select>
+      </c-input-group>
+
+    </c-modal-body>
+    <c-modal-footer>
+      <button [cModalToggle]="compareModal.id" cButton color="secondary">
+        Cancel
+      </button>
+      <button cButton color="primary" (click)="compareParcs()" [cModalToggle]="compareModal.id">Compare
+      </button>
+    </c-modal-footer>
+  </c-modal>
+  <c-modal #deleteModal alignment="center" id="deleteModal">
+    <c-modal-header>
+      <h5 cModalTitle>Delete Parc</h5>
+      <button [cModalToggle]="deleteModal.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+      We are about to delete the parc {{ selectedParc?.name }}
+      <br> Do you confirm this operation?
+    </c-modal-body>
+    <c-modal-footer>
+      <button [cModalToggle]="deleteModal.id" cButton color="secondary">
+        Close
+      </button>
+      <button cButton color="primary" (click)="deleteParc()" [cModalToggle]="deleteModal.id">Delete</button>
+    </c-modal-footer>
+  </c-modal>
+  <c-modal #AmentiesModal alignment="center" id="AmentiesModal">
+    <c-modal-header>
+      <h5 cModalTitle>Parc Amenties </h5>
+      <button [cModalToggle]="AmentiesModal.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+      <div cListGroup>
+        <a [routerLink] cBorder="0" cListGroupItem *ngFor="let amenity of amenitiesList">{{ amenity }}</a>
+      </div>
+
+    </c-modal-body>
+  </c-modal>
+
+  <c-modal #CreationParcModal alignment="center" id="CreationParcModal">
+    <c-modal-header>
+      <h5 cModalTitle>Parc Creation </h5>
+      <button [cModalToggle]="CreationParcModal.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+      <app-create-form></app-create-form>
+
+    </c-modal-body>
+
+  </c-modal>
+  <!-- statics -->
+
+  <app-statics></app-statics>
+
+  <!-- Main Bloc  -->
+
+  <c-col xs="12">
+    <c-card class="mb-3">
+      <!-- Header  -->
+
+      <c-card-header ngPreserveWhitespaces>
+        <strong>List of parcs</strong>
+      </c-card-header>
+      <!-- Body  -->
+
+      <c-card-body>
+        <!-- Tabs  -->
+
+        <c-nav variant="pills">
+          <c-nav-item>
+            <a [cTabContent]="tabContent3" [routerLink] [tabPaneIdx]="0" cNavLink>
+              <svg cIcon class="me-2" name="cilHome"></svg>
+              Active Parcs
+            </a>
+          </c-nav-item>
+          <c-nav-item>
+            <a [cTabContent]="tabContent3" [routerLink] [tabPaneIdx]="1" cNavLink>
+              <svg cIcon class="me-2" name="cilUser"></svg>
+              Inactive Parcs
+            </a>
+          </c-nav-item>
+        </c-nav>
+
+        <c-tab-content #tabContent3="cTabContent" cRounded="bottom" [activeTabPaneIdx]="0">
+          <!-- Active Tab  -->
+          <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
+            <!-- Menu  -->
+            <div class="d-grid gap-2 d-md-flex  justify-content-md-end">
+              <c-button-group aria-label="Button group with nested dropdown " role="group" size="lg">
+                <button cButton *ngIf="!showComparceComp" [cModalToggle]="compareModal.id" cTooltip="Compare parc"
+                        cTooltipPlacement="top" color="dark" (click)="updateCompareData()">
+                  <svg
                     [cIcon]="icons.cilBalanceScale" size="xl" title="List Icon"></svg>
                 </button>
-                                <button cButton *ngIf="showComparceComp" cTooltip="reset" cTooltipPlacement="top" color="light"><svg
+                <button cButton  [cModalToggle]="CreationParcModal.id" cTooltip="Add parcs"
+                        cTooltipPlacement="top" color="light" (click)="updateCompareData()">
+                  <svg [cIcon]="icons.cilPlus"
+                       size="xl" title="List Icon"></svg>
+                </button>
+                <button cButton *ngIf="showComparceComp" cTooltip="reset" cTooltipPlacement="top" color="light" (click)="resetCompare()">
+                  <svg
                     [cIcon]="icons.cilXCircle" size="xl" title="List Icon"></svg>
                 </button>
-                                <c-dropdown variant="btn-group">
-                                    <button cButton cDropdownToggle color="info">
+                <c-dropdown variant="btn-group">
+                  <button cButton cDropdownToggle color="info">
                     Actions
                   </button>
-                                    <ul cDropdownMenu>
-                                        <li><a cDropdownItem routerLink>Action</a></li>
-                                        <li><a cDropdownItem routerLink>Another action</a></li>
-                                        <li><a cDropdownItem routerLink>Something else here</a></li>
-                                        <li cDropdownDivider></li>
-                                        <li><a cDropdownItem routerLink>Separated link</a></li>
-                                    </ul>
-                                </c-dropdown>
-                            </c-button-group>
-                        </div>
-                        <c-modal #compareModal alignment="center" id="compareModal">
-                            <c-modal-header>
-                                <h5 cModalTitle>Compare Parcs based on :</h5>
-                                <button [cModalToggle]="compareModal.id" cButtonClose></button>
-                            </c-modal-header>
-                            <c-modal-body>
-                                <c-input-group class="mb-3">
-                                    <label cLabel for="disabledRange">Min Rating : <strong>{{ratingValue}}</strong></label>
-                                    <input [(ngModel)]="ratingValue" cFormControl id="customRange2" [max]="maxRating" [min]="minRating" type="range" />
-                                </c-input-group>
-                                <c-input-group class="mb-3">
-                                    <label cLabel for="disabledRange">Min Capacity Helloo : <strong>{{capacityValue}}</strong></label>
-                                    <input [(ngModel)]="capacityValue" cFormControl id="customRange2" [max]="maxCapacity" [min]="minCapacity" type="range" />
-                                </c-input-group>
-                                <c-input-group class="mb-3">
-                                    <span cInputGroupText>
+                  <ul cDropdownMenu>
+                    <li><a cDropdownItem (click)="disableParcs()">Disable Parcs</a></li>
+                    <li><a cDropdownItem >Filter Parcs</a></li>
+                    <li><a cDropdownItem >Sort Parcs</a></li>
+                    <li><a cDropdownItem >Search Parc</a></li>
+                  </ul>
+                </c-dropdown>
+              </c-button-group>
+            </div>
+
+            <c-card-body>
+
+              <table cTable hover>
+                <thead>
+                <!-- Table Header  -->
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Max Capacity</th>
+                  <th scope="col"></th>
+                  <!-- Select All checkBox  -->
+                  <th scope="col">
                     <c-form-check>
-                      <input cFormCheckInput id="checkOne" type="checkbox" />
+                      <input cFormCheckInput type="checkbox" (change)="toggleSelectAll()" [checked]="isAllSelected"/>
                     </c-form-check>
-                  </span>
-                                    <select aria-label="Small select example" cSelect sizing="sm" cFormControl>
-                    <option>Amenities</option>
-                    <option *ngFor="let amenity of amenitiesList" [value]="amenity">{{ amenity }}</option>
-                  </select>
-                                </c-input-group>
-                                <c-input-group class="mb-3">
-                                    <span cInputGroupText>
-                    <c-form-check>
-                      <input cFormCheckInput id="checkOne" type="checkbox" />
-                    </c-form-check>
-                  </span>
-                                    <select aria-label="Small select example" cSelect sizing="sm" cFormControl>
-                    <option>Country</option>
-                    <option *ngFor="let country of countriesList" [value]="country">{{ country }}</option>
-
-                  </select>
-                                </c-input-group>
-                                <c-input-group class="mb-3">
-                                    <span cInputGroupText>
-                    <c-form-check>
-                      <input cFormCheckInput id="checkOne" type="checkbox" />
-                    </c-form-check>
-                  </span>
-                                    <select aria-label="Small select example" cSelect sizing="sm" cFormControl>
-                    <option>City</option>
-                    <option *ngFor="let city of citiesList" [value]="city">{{ city }}</option>
-
-                  </select>
-                                </c-input-group>
-                                <c-input-group class="mb-3">
-                                    <span cInputGroupText>
-                    <c-form-check>
-                      <input cFormCheckInput id="checkOne" type="checkbox" />
-                    </c-form-check>
-                  </span>
-                                    <select aria-label="Small select example" cSelect sizing="sm" cFormControl>
-                    <option>Category</option>
-                    <option *ngFor="let category of categoriesList" [value]="category">{{ category }}</option>
-
-                  </select>
-                                </c-input-group>
-
-                            </c-modal-body>
-                            <c-modal-footer>
-                                <button [cModalToggle]="compareModal.id" cButton color="secondary">
-                  Cancel
-                </button>
-                                <button cButton color="primary" (click)="compareParcs()" [cModalToggle]="compareModal.id">Compare</button>
-                            </c-modal-footer>
-                        </c-modal>
-
-                        <c-card-body>
-
-                            <table cTable hover>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Max Capacity</th>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
-                                        <th scope="col">
-                                            <c-form-check>
-                                                <input cFormCheckInput type="checkbox" (change)="toggleSelectAll()" [checked]="isAllSelected" />
-                                            </c-form-check>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let parc of parcs | paginate
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let parc of enabledparcs | paginate
                                     : {
                                         itemsPerPage: tableSize,
                                         currentPage: page,
                                         totalItems: count
                                       };
                                 let i = index">
-                                        <th scope="row">{{ parc.idParc }}</th>
-                                        <td>{{ parc.name }}</td>
-                                        <td>{{ parc.description }}</td>
-                                        <td>{{ parc.category }}</td>
-                                        <td>{{ parc.maxCapacity }}</td>
-                                        <td>
-                                            <button cButton color="info" cTooltip="Update parc" cTooltipPlacement="top">
-                        <svg cIcon class="cis-color-fill" name="cil-puzzle"></svg>
-
+                  <th scope="row">{{ parc.idParc }}</th>
+                  <td>{{ parc.name }}</td>
+                  <td>{{ parc.description }}</td>
+                  <td>{{ parc.category }}</td>
+                  <td>{{ parc.maxCapacity }}</td>
+                  <td>
+                    <c-button-group aria-label="Button group with nested dropdown " role="group" size="lg">
+                      <!--Amenties-->
+                      <button cButton color="light" cTooltip="Amenties" [cModalToggle]="AmentiesModal.id"
+                              [(ngModel)]="parc.selected" (click)=" displayAmenties(parc)" cTooltipPlacement="top">
+                        <svg cIcon class="cis-color-fill" [cIcon]="icons.cilZoom"></svg>
                       </button>
-                                        </td>
-                                        <td>
-                                            <button cButton [cModalToggle]="deleteModal.id" color="danger" cTooltip="Delete parc" cTooltipPlacement="top" (click)="selectedParc = parc">
+
+                      <button cButton color="info" cTooltip="Update parc" cTooltipPlacement="top">
+                        <svg cIcon class="cis-color-fill" name="cil-puzzle"></svg>
+                      </button>
+                      <button cButton [cModalToggle]="deleteModal.id" color="danger" cTooltip="Delete parc"
+                              cTooltipPlacement="top" (click)="selectedParc = parc">
                         <svg cIcon class="cis-color-fill" name="cil-trash"></svg>
 
                       </button>
+                    </c-button-group>
 
-                                        </td>
-                                        <td>
-                                            <c-form-check>
-                                                <input cFormCheckInput id="checkOne" type="checkbox" [(ngModel)]="parc.selected" (change)="selectedParc = parc" (change)="toggleParcSelection(parc)" />
-                                            </c-form-check>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <c-modal #deleteModal alignment="center" id="deleteModal">
-                                <c-modal-header>
-                                    <h5 cModalTitle>Delete Parc</h5>
-                                    <button [cModalToggle]="deleteModal.id" cButtonClose></button>
-                                </c-modal-header>
-                                <c-modal-body>
-                                    We are about to delete the parc {{ selectedParc?.name }}
-                                    <br> Do you confirm this operation?
-                                </c-modal-body>
-                                <c-modal-footer>
-                                    <button [cModalToggle]="deleteModal.id" cButton color="secondary">
-                    Close
-                  </button>
-                                    <button cButton color="primary" (click)="deleteParc()" [cModalToggle]="deleteModal.id">Delete</button>
-                                </c-modal-footer>
-                            </c-modal>
-                            <div class="d-flex justify-content-center">
-                                <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
-                                </pagination-controls>
-                            </div>
-                        </c-card-body>
-                    </c-tab-pane>
-                    <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
-                        <c-card-body>
+                  </td>
+                  <td>
+                    <c-form-check>
+                      <input cFormCheckInput id="checkOne" type="checkbox" [(ngModel)]="parc.selected"
+                             (change)="selectedParc = parc" (change)="toggleParcSelection(parc)"/>
+                    </c-form-check>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
 
-                        </c-card-body>
-                    </c-tab-pane>
-                    <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
-                        <c-card-body>
-                        </c-card-body>
-                    </c-tab-pane>
-
-                </c-tab-content>
+              <div class="d-flex justify-content-center">
+                <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                </pagination-controls>
+              </div>
             </c-card-body>
-        </c-card>
-    </c-col>
+          </c-tab-pane>
+          <!-- Inactive Tab  -->
+          <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
+            <div class="d-grid gap-2 d-md-flex  justify-content-md-end">
+              <c-input-group role="group">
+                <input aria-describedby="button-addon2"
+                       aria-label="Search Parc"
+                       cFormControl
+                       placeholder="Search Parc"
+                       cBorder="0"
+                       [(ngModel)]="keyWord"
+                />
+                <button cButton color="secondary" id="button-addon2" type="button" variant="outline"
+                        (click)="searchParcByKeyword(keyWord)" cBorder="0">
+                  <svg cIcon class="cis-color-fill" [cIcon]="icons.cilZoom"></svg>
+                </button>
+              </c-input-group>
+            </div>
+            <c-card-body>
+              <table cTable hover>
+                <thead>
+                <!-- Table Header  -->
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Max Capacity</th>
+                  <th scope="col"></th>
+                  <!-- Select All checkBox  -->
+                  <th scope="col">
+                    <c-form-check>
+                      <input cFormCheckInput type="checkbox" (change)="toggleSelectAll()" [checked]="isAllSelected"/>
+                    </c-form-check>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let parc of disabledparcs | paginate
+                                    : {
+                                        itemsPerPage: tableSize,
+                                        currentPage: page,
+                                        totalItems: count
+                                      };
+                                let i = index">
+                  <th scope="row">{{ parc.idParc }}</th>
+                  <td>{{ parc.name }}</td>
+                  <td>{{ parc.location.name }} :  {{ parc.location.city.country }} - {{ parc.location.city.city }}</td>
+                  <td>{{ parc.category }}</td>
+                  <td>{{ parc.maxCapacity }}</td>
+                  <td>
+                    <c-button-group aria-label="Button group with nested dropdown " role="group" size="lg">
+                      <!--Amenties-->
+                      <button cButton color="light" cTooltip="Amenties" [cModalToggle]="AmentiesModal.id"
+                              [(ngModel)]="parc.selected" (click)=" displayAmenties(parc)" cTooltipPlacement="top">
+                        <svg cIcon class="cis-color-fill" [cIcon]="icons.cilZoom"></svg>
+                      </button>
+
+                      <button cButton color="success" cTooltip="Enable"
+                              [(ngModel)]="parc.selected" (click)="enableParc(parc.idParc)" cTooltipPlacement="top">
+                        <svg cIcon class="cis-color-fill" [cIcon]="icons.cilChevronDoubleLeft"></svg>
+                      </button>
+
+                      <button cButton [cModalToggle]="deleteModal.id" color="danger" cTooltip="Delete parc"
+                              cTooltipPlacement="top" (click)="selectedParc = parc">
+                        <svg cIcon class="cis-color-fill" name="cil-trash"></svg>
+
+                      </button>
+                    </c-button-group>
+
+                  </td>
+                  <td>
+                    <c-form-check>
+                      <input cFormCheckInput id="checkTwo" type="checkbox" [(ngModel)]="parc.selected"
+                             (change)="selectedParc = parc" (change)="toggleParcSelection(parc)"/>
+                    </c-form-check>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+              <div class="d-flex justify-content-center">
+                <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                </pagination-controls>
+              </div>
+            </c-card-body>
+          </c-tab-pane>
+
+        </c-tab-content>
+      </c-card-body>
+    </c-card>
+  </c-col>
 </c-row>

@@ -28,6 +28,15 @@ export class ParcService {
     );
   }
 
+  searchParcByKeyword(keyword: string): Observable<Parc[]> {
+    return this.http.get<Parc[]>(`${this.apiUrl}/search/${keyword}/DISABLED`);
+  }
+
+  getAllParcAmenties(parcId: number): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/parcamenities/${parcId}`);
+  }
+
+
   deleteParc(parcId: number): Observable<{ code: number, message: string }> {
     const url = `${this.apiUrl}/${parcId}`;
     return this.http.delete(url, { observe: 'response', responseType: 'text' }).pipe(
@@ -44,21 +53,33 @@ export class ParcService {
   compareParcs(
     parcIds: number[],
     minRating?: number,
-    amenities?: string[],
+    amenities?: string,
     city?: string,
     country?: string,
     category?: string,
     minCapacity?: number
   ): Observable<Parc[]> {
-    const params = new HttpParams()
-      .set('parcIds', parcIds.join(','))
-      .set('minRating', minRating ? minRating.toString() : '')
-      .set('amenities', amenities ? amenities.join(',') : '')
-      .set('city', city || '')
-      .set('country', country || '')
-      .set('category', category || '')
-      .set('minCapacity', minCapacity ? minCapacity.toString() : '');
-      const url = `${this.apiUrl}/compare`;
+    let params = new HttpParams().set('parcIds', parcIds.join(','));
+    if (minRating) {
+      params = params.set('minRating', minRating.toString());
+    }
+    if (amenities && amenities.trim() !== '') {
+      params = params.set('amenities', amenities);
+    }
+    if (city && city.trim() !== '') {
+      params = params.set('city', city);
+    }
+    if (country && country.trim() !== '') {
+      params = params.set('country', country);
+    }
+    if (category && category.trim() !== '') {
+      params = params.set('category', category);
+    }
+    if (minCapacity) {
+      params = params.set('minCapacity', minCapacity.toString());
+    }
+
+    const url = `${this.apiUrl}/compare`;
 
     return this.http.get<Parc[]>(url, { params });
   }
@@ -69,6 +90,11 @@ export class ParcService {
 
     return this.http.get<number>(url, { params });
   }
+
+  getParcsAmenities(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/allamenities`);
+  }
+
 
   getMaxRatingRange(parcIds: number[]): Observable<number> {
     const params = new HttpParams().set('parcIds', parcIds.join(','));
@@ -118,6 +144,35 @@ export class ParcService {
 
     return this.http.get<string[]>(url, { params });
   }
+
+  findParcByDisponibility(status: string): Observable<Parc[]> {
+    const url = `${this.apiUrl}/availabe/${status}`;
+    return this.http.get<Parc[]>(url);
+  }
+
+  findParcByCategory(category: string): Observable<Parc[]> {
+    const url = `${this.apiUrl}/category/${category}`;
+    return this.http.get<Parc[]>(url);
+  }
+
+  enableParc(id: number): Observable<Parc> {
+    console.log("id:",id)
+    const url = `${this.apiUrl}/enable/${id}`;
+    return this.http.put<Parc>(url, null);
+  }
+  disableParc(id: number): Observable<Parc> {
+    const url = `${this.apiUrl}/disable/${id}`;
+    return this.http.put<Parc>(url, null);
+  }
+  updateParc(parcId: number, parc: Parc): Observable<Parc> {
+    const url = `${this.apiUrl}/${parcId}`;
+    return this.http.post<Parc>(url, parc);
+  }
+  createParc(parc: Parc): Observable<Parc> {
+    return this.http.post<Parc>(`${this.apiUrl}`, parc);
+  }
+
+
 }
 
 

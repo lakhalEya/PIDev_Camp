@@ -204,6 +204,21 @@ public class ParcServiceImpl implements ParcService {
     }
 
     @Override
+    public List<String> getAllParcAmenties(int parcId) {
+        return parcRepository.findById(parcId).get().getAmenities();
+    }
+
+    @Override
+    public List<String> getParcsAmenities() {
+        return parcRepository.getAllAmenties();
+    }
+
+    @Override
+    public List<Parc> searchParcByKeywordAndStatus(String keyword, Parc.ParcStatus status) {
+        return parcRepository.searchByKeywordAndStatus(keyword,status);
+    }
+
+    @Override
     public List<Parc> getParcByDisponibility(Parc.ParcStatus status) {
         return parcRepository.findByStatus(status);
     }
@@ -223,7 +238,7 @@ public class ParcServiceImpl implements ParcService {
         Optional<Parc> existingParc = parcRepository.findById(id);
         if (!existingParc.isPresent())
             throw new IllegalArgumentException("the location with the id + " + id + " doesn't exists.");
-        existingParc.get().setStatus(Parc.ParcStatus.DISABLED);
+        existingParc.get().setStatus(Parc.ParcStatus.ENABLED);
         return parcRepository.save(existingParc.get());
 
     }
