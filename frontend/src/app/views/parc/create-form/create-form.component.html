@@ -1,0 +1,89 @@
+<p>create-form works!</p>
+<c-alert *ngIf="showErrorAlert" color="danger" class="d-flex align-items-center">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+    <use xlink:href="#check-circle-fill"/>
+  </svg>
+  <div>{{ errorMessage }}</div>
+</c-alert>
+<c-alert *ngIf="showSuccessAlert" color="success" class="d-flex align-items-center">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+    <use xlink:href="#check-circle-fill"/>
+  </svg>
+  <div>{{ message }}</div>
+</c-alert>
+
+<form [formGroup]="parcForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label cLabel class="form-label" for="name">Name</label>
+    <input cFormControl id="name" formControlName="name" placeholder="Parc Name" required/>
+    <c-form-feedback [valid]="parcForm.controls.name.valid">Please enter a name.</c-form-feedback>
+  </div>
+
+  <div class="mb-3">
+    <label cLabel class="form-label" for="description">Description</label>
+    <input cFormControl id="description" formControlName="description" placeholder="Parc Description"/>
+  </div>
+
+  <c-input-group class="mb-3">
+    <select cFormControl id="category" formControlName="category" cSelect sizing="lg">
+      <option value="" disabled selected>Select a Category</option>
+      <option>HIKING</option>
+      <option>CAMPING</option>
+      <option>WATER_SPORTS</option>
+      <option>ADVENTURE</option>
+      <option>WILDLIFE</option>
+      <option>FAMILY</option>
+    </select>
+  </c-input-group>
+
+  <div class="mb-3">
+    <label cLabel class="form-label" for="maxCapacity">Max Capacity</label>
+    <input cFormControl id="maxCapacity" formControlName="maxCapacity" type="number" placeholder="Max Capacity"/>
+  </div>
+
+  <c-input-group class="mb-3">
+    <select cFormControl id="locations" formControlName="location" cSelect sizing="lg">
+      <option value="" disabled selected>Select a Location</option>
+      <option *ngFor="let location of locationList" [value]="location.id"
+              cTooltip="{{ location.name }}: {{ location.latitude }}, {{ location.longitude }}"
+              cTooltipPlacement="top">
+        {{ location.name }} - {{ location.city.country }}, {{ location.city.city }}
+      </option>
+    </select>
+  </c-input-group>
+
+  <div class="mb-3">
+    <label cLabel class="form-label" for="imageURL">Image URL</label>
+    <input cFormControl id="imageURL" formControlName="imageURL" placeholder="Image URL"/>
+  </div>
+
+  <div class="mb-3">
+    <label cLabel class="form-label" for="rating">Rating</label>
+    <input cFormControl id="rating" formControlName="rating" type="number" step="0.1" placeholder="Rating"/>
+  </div>
+
+  <div class="mb-3">
+    <label cLabel class="form-label" for="owner">Owner</label>
+    <input cFormControl id="owner" formControlName="owner" placeholder="Owner"/>
+  </div>
+
+  <c-input-group class="mb-3">
+    <select cFormControl id="amenities" formControlName="amenities" cSelect sizing="lg" multiple>
+      <option *ngFor="let amenity of amenitiesList" [value]="amenity">{{ amenity }}</option>
+    </select>
+    <button cButton color="secondary" type="button" variant="outline" (click)="toggleCustomAmenities()">
+      <svg [cIcon]="icons.cilPlus" size="xl" title="List Icon"></svg>
+    </button>
+  </c-input-group>
+
+  <div class="mb-3" *ngIf="showCustomAmenities">
+    <textarea cFormControl id="customAmenities" formControlName="customAmenities"
+              placeholder="Add Custom Amenities" cBorder="0" rows="3"></textarea>
+  </div>
+
+  <div class="d-grid gap-2">
+    <button cButton color="secondary" type="reset">Reset</button>
+    <button cButton color="primary" type="submit">Add</button>
+  </div>
+
+</form>

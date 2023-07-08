@@ -19,6 +19,8 @@ public interface ParcService {
 
     List<Parc> getAllParcsFiltered(String filterBy, String filterValue);
 
+    List<Parc> searchParcByKeywordAndStatus(String keyword, Parc.ParcStatus status);
+
     List<Parc> getParcByDisponibility(Parc.ParcStatus status);
 
     List<Parc> getAllParcsSorted(String sortBy);
@@ -48,4 +50,8 @@ public interface ParcService {
     List<String> getAllCountries(List<Integer> parcIds);
 
     List<String> getAllcategories(List<Integer> parcIds);
+
+    List<String> getAllParcAmenties(int parcId);
+
+    List<String> getParcsAmenities();
 }

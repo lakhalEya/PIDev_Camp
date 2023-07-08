@@ -7,8 +7,7 @@ import { PaginationInstance } from 'ngx-pagination';
 
 import { getStyle } from '@coreui/utils';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
-import { StaticsComponent } from './../statics/statics.component'; // Replace './statics.component' with the correct path to the StaticsComponent file
-import { StaticsService } from './../services/statics.service';
+
 import { freeSet } from '@coreui/icons';
 
 
@@ -27,6 +26,9 @@ export class ParcComponent  implements OnInit {
   tableSize: number = 7;
   tableSizes: any = [3, 6, 9, 12];
   parcs: Parc[];
+  enabledparcs: Parc[];
+  disabledparcs: Parc[];
+
   checkedParcList: Parc[]= [];
   cities: City[];
   isAllSelected = false;
@@ -36,6 +38,7 @@ export class ParcComponent  implements OnInit {
   showSuccessAlert : boolean = false;
   showErrorAlert : boolean = false;
   showComparceComp: boolean = false;
+  keyWord: string;
   errorMessage: string;
   message: string;
   minRating : number = 0;
@@ -44,10 +47,18 @@ export class ParcComponent  implements OnInit {
   minCapacity : number = 0;
   maxCapacity : number = 100;
   capacityValue: number = 50;
-  amenitiesList: string[];
-  citiesList: string[];
-  countriesList: string[];
-  categoriesList: string[];
+  amenitiesList: string[]= [];
+  citiesList: string[]= [];
+  countriesList: string[]= [];
+  categoriesList: string[]= [];
+  selectedAmenitiesCheckbox: boolean = false;
+  selectedAmenities: string = '';
+  selectedCountry: string = '';
+  selectedCountryCheckbox: boolean = false;
+  selectedCityCheckbox: boolean = false;
+  selectedCity: string = '';
+  selectedCategoryCheckbox: boolean = false;
+  selectedCategory: string = '';
 
   public panes = [
     { name: 'Home 01', id: 'tab-01' },
@@ -56,8 +67,10 @@ export class ParcComponent  implements OnInit {
   ];
 
 
+
   ngOnInit() {
-    this.getAllParcs();
+    this.findEnabledParc();
+    this.findDisabledParc();
     this.getAllCities();
 
   }
@@ -75,13 +88,90 @@ export class ParcComponent  implements OnInit {
     this.fetchCategoriesList();
 
   }
+  disableParcs() {
+    if (this.checkedParcList) {
+      this.checkedParcList.forEach((parc) => {
+        this.parcService.disableParc(parc.idParc).subscribe(
+          () => {
+            this.checkedParcList = [];
+            this.showSuccessAlert = true;
+            this.message= "Parc disabled successfully";
+            setTimeout(() => {
+              this.showSuccessAlert = false;
+            }, 3000);
+
+          },
+          (error) => {
+            this.showErrorAlert = true;
+            this.errorMessage= error;
+            setTimeout(() => {
+              this.showErrorAlert = false;
+            }, 3000);
+            console.error(`Failed to disable parc with id ${parc.idParc}:`, error);
+          }
+        );
+      });
+    }
+  }
+
+
+
+
+  onAmenitiesCheckboxChange() {
+    if (!this.selectedAmenitiesCheckbox) {
+      this.selectedAmenities = '';
+
+    }
+    else
+    {
+      if (!this.checkedParcList)
+        this.checkedParcList = this.enabledparcs;
+      this.fetchAmenitiesList();
+    }
+  }
+
+  onCountryCheckboxChange() {
+    if (!this.selectedCountryCheckbox) {
+      this.selectedCountry = '';
+    }
+    else
+    {
+      if (!this.checkedParcList)
+        this.checkedParcList = this.enabledparcs;
+      this.fetchCountriesList();
+    }
+  }
+
+  onCityCheckboxChange() {
+    if (!this.selectedCityCheckbox) {
+      this.selectedCity = '';
+    }
+    else
+    {
+      if (!this.checkedParcList)
+        this.checkedParcList = this.enabledparcs;
+      this.fetchCitiesList();
+    }
+  }
+
+  onCategoryCheckboxChange() {
+    if (!this.selectedCategoryCheckbox) {
+      this.selectedCategory = '';
+    }
+    else
+    {
+      if (!this.checkedParcList)
+        this.checkedParcList = this.enabledparcs;
+      this.fetchCategoriesList()
+    }
+  }
 
   toggleSelectAll() {
     // Toggle the select status for all rows
     this.isAllSelected = !this.isAllSelected;
-
-    // Set the 'selected' property for all Parc objects
-    this.parcs.forEach((parc) => (parc.selected = this.isAllSelected));
+    if (this.enabledparcs) {
+      this.enabledparcs.forEach((parc) => (parc.selected = this.isAllSelected));
+    }
   }
 
   toggleParcSelection(parc: Parc) {
@@ -94,9 +184,175 @@ export class ParcComponent  implements OnInit {
       }
     }
   }
-  compareParcs(){
-    this.parcService.getAllParcs().subscribe(
-      (data:Parc[]) => this.parcs = data) };
+
+
+
+  searchParcByKeyword(keyword: string) {
+    this.parcService.searchParcByKeyword(keyword).subscribe(
+      parcs => {
+        this.parcs = parcs;
+      },
+      error => {
+        console.error('Failed to search parcs by keyword:', error);
+        this.showErrorAlert = true;
+        this.errorMessage = error.message;
+        setTimeout(() => {
+          this.showErrorAlert = false;
+        }, 3000);
+      }
+    );
+  }
+
+  findEnabledParc() {
+    this.parcService.findParcByDisponibility('ENABLED').subscribe(
+      parcs => {
+        this.enabledparcs = parcs;
+      },
+      error => {
+        this.showErrorAlert = true;
+        this.errorMessage = error.message;
+        setTimeout(() => {
+          this.showErrorAlert = false;
+        }, 3000);
+        console.error('Failed to find parcs by disponibility:', error);
+      }
+    );
+  }
+
+
+  findDisabledParc() {
+    this.parcService.findParcByDisponibility('DISABLED').subscribe(
+      parcs => {
+        this.disabledparcs = parcs;
+      },
+      error => {
+        this.showErrorAlert = true;
+        this.errorMessage = error.message;
+        setTimeout(() => {
+          this.showErrorAlert = false;
+        }, 3000);
+        console.error('Failed to find parcs by disponibility:', error);
+      }
+    );
+  }
+
+  findParcByCategory(category: string) {
+    this.parcService.findParcByCategory(category).subscribe(
+      parcs => {
+        this.parcs = parcs;
+      },
+      error => {
+        this.showErrorAlert = true;
+        this.errorMessage = error.message;
+        setTimeout(() => {
+          this.showErrorAlert = false;
+        }, 3000);
+        console.error('Failed to find parcs by category:', error);
+      }
+    );
+  }
+
+  enableParc(id: number) {
+
+    console.log("id = ",id)
+    this.parcService.enableParc(id).subscribe(
+      parc => {
+        this.selectedParc = null;
+        this.showSuccessAlert = true;
+        this.message= "Parc enabled successfully";
+        setTimeout(() => {
+          this.showSuccessAlert = false;
+        }, 3000);
+
+      },
+      error => {
+        this.showErrorAlert = true;
+        this.errorMessage = error.message;
+        setTimeout(() => {
+          this.showErrorAlert = false;
+        }, 3000);
+        console.error('Failed to enable parc:', error);
+      }
+    );
+  }
+
+
+
+  updateParc(parcId: number, parc: Parc) {
+    this.parcService.updateParc(parcId, parc).subscribe(
+      updatedParc => {
+        // Update the parc in the parcs array
+        const index = this.parcs.findIndex(p => p.idParc === updatedParc.idParc);
+        if (index !== -1) {
+          this.parcs[index] = updatedParc;
+        }
+      },
+      error => {
+        this.showErrorAlert = true;
+        this.errorMessage = error.message;
+        setTimeout(() => {
+          this.showErrorAlert = false;
+        }, 3000);
+        console.error('Failed to update parc:', error);
+      }
+    );
+  }
+
+  createParc(parc: Parc) {
+    this.parcService.createParc(parc).subscribe(
+      createdParc => {
+        // Add the created parc to the parcs array
+        this.parcs.push(createdParc);
+      },
+      error => {
+        this.showErrorAlert = true;
+        this.errorMessage = error.message;
+        setTimeout(() => {
+          this.showErrorAlert = false;
+        }, 3000);
+        console.error('Failed to create parc:', error);
+      }
+    );
+  }
+
+
+
+
+  displayAmenties(parc: Parc) {
+    this.getAllParcAmenties(parc);
+    console.log(this.amenitiesList);
+  }
+
+  compareParcs(): void {
+    const selectedParcIds = this.enabledparcs.filter(parc => parc.selected).map(parc => parc.idParc);
+    console.log("selectedParcIds",selectedParcIds)
+
+    this.parcService.compareParcs(selectedParcIds, this.ratingValue, this.selectedAmenities, this.selectedCity, this.selectedCountry, this.selectedCategory, this.capacityValue)
+      .subscribe(
+        parcs => {
+          console.log("parcs",parcs)
+
+          this.enabledparcs = parcs;
+          console.log("this.enabledparcs",this.enabledparcs)
+
+          this.showSuccessAlert = true;
+          this.message = 'Parcs compared successfully!';
+          setTimeout(() => {
+            this.showSuccessAlert = false;
+          }, 3000);
+          this.showComparceComp = true;
+        },
+        error => {
+          // Handle the error response and display the error message
+          this.showErrorAlert = true;
+          this.errorMessage = error.message;
+          setTimeout(() => {
+            this.showErrorAlert = false;
+          }, 3000);
+        }
+      );
+  }
+
 
   getAllParcs() {
     this.parcService.getAllParcs().subscribe(
@@ -150,6 +406,11 @@ export class ParcComponent  implements OnInit {
               // Handle the response code and message accordingly
             },
             error => {
+              this.showErrorAlert = true;
+              this.errorMessage= error;
+              setTimeout(() => {
+                this.showErrorAlert = false;
+              }, 3000);
               console.error('An error occurred:', error);
               // Handle the error
             }
@@ -259,7 +520,29 @@ export class ParcComponent  implements OnInit {
         );
       }
 
+  getAllParcAmenties(parc : Parc) {
+
+    console.log(parc);
+    console.log("test getAllParcAmenties");
+
+      this.parcService.getAllParcAmenties(parc.idParc).subscribe(
+        amenities => {
+          this.amenitiesList = amenities;
+          console.log('Parc Amenities:', amenities);
+        },
+        error => {
+          console.error('Failed to get parc amenities:', error);
+          // Handle the error
+        }
+      );
   }
+
+
+  resetCompare() {
+    this.findEnabledParc();
+    this.showComparceComp = false;
+  }
+}
 
 
 

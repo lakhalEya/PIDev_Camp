@@ -43,6 +43,7 @@ public interface ParcRepository extends JpaRepository<Parc, Integer>, JpaSpecifi
     @Query("SELECT DISTINCT amenity FROM Parc p JOIN p.amenities amenity WHERE p.idParc IN (:parcIds)")
     List<String> getAllAmenities(List<Integer> parcIds);
 
+
     @Query("SELECT DISTINCT p.location.city.city FROM Parc p WHERE p.idParc IN (:parcIds)")
     List<String> getAllCities(List<Integer> parcIds);
 
@@ -51,4 +52,12 @@ public interface ParcRepository extends JpaRepository<Parc, Integer>, JpaSpecifi
 
     @Query("SELECT DISTINCT p.category FROM Parc p WHERE p.idParc IN (:parcIds)")
     List<String> getAllcategories(List<Integer> parcIds);
+
+    @Query("SELECT DISTINCT amenity FROM Parc p JOIN p.amenities amenity")
+    List<String> getAllAmenties();
+
+    @Query("SELECT p FROM Parc p WHERE (p.name LIKE %:keyword% OR p.description LIKE %:keyword%) AND p.status = :status")
+    List<Parc> searchByKeywordAndStatus(@Param("keyword") String keyword, @Param("status") Parc.ParcStatus status);
+
+
 }

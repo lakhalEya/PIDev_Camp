@@ -14,6 +14,7 @@ import { DocsComponentsModule } from '@docs-components/docs-components.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -57,6 +58,7 @@ import {
 } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { ChartjsModule } from '@coreui/angular-chartjs';
+import { CreateFormComponent } from './create-form/create-form.component';
 
 
 
@@ -67,7 +69,8 @@ import { ChartjsModule } from '@coreui/angular-chartjs';
     EquipmentComponent,
     ActivityComponent,
     ParcComponent,
-    StaticsComponent
+    StaticsComponent,
+    CreateFormComponent
   ],
   imports: [
     HttpClientModule,
