@@ -26,7 +26,7 @@ public class securityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity https) throws Exception {
-        https.csrf().disable().
+        https.csrf().disable().cors().and().
                 exceptionHandling().authenticationEntryPoint(jwtAuthEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
                 authorizeRequests().antMatchers(HttpMethod.POST, "/user/login").permitAll().

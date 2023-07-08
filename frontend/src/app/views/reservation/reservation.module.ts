@@ -9,7 +9,7 @@ import { ReservationComponent } from './reservation/reservation.component';
 @NgModule({
   declarations: [
     PromotionComponent,
-    ReservationComponent,
+    ReservationComponent
   ],
   imports: [
     CommonModule,

@@ -38,7 +38,6 @@ const routes: Routes = [
           title: 'carts',
         },
       },
-
     ],
   },
 ];
