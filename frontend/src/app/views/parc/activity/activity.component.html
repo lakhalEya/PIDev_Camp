@@ -1,5 +1,82 @@
-<p>activity works!</p>
-<c-card-body>
+<c-col xs="12">
+  <c-card class="mb-3">
+    <!-- Header  -->
+
+    <c-card-header ngPreserveWhitespaces>
+      <strong>List of parcs</strong>
+    </c-card-header>
+    <!-- Body  -->
+
+    <c-card-body>
+      <!-- Tabs  -->
+
+      <c-nav variant="pills">
+        <c-nav-item>
+          <a [cTabContent]="tabContent3" [routerLink] [tabPaneIdx]="0" cNavLink>
+            <svg cIcon class="me-2" name="cilHome"></svg>
+            Active Parcs
+          </a>
+        </c-nav-item>
+      </c-nav>
+
+      <c-tab-content #tabContent3="cTabContent" cRounded="bottom" [activeTabPaneIdx]="0">
+        <!-- Active Tab  -->
+        <c-tab-pane aria-labelledby="docs-code-preview" class="p-3 preview" role="tabpanel">
+          <!-- Menu  -->
+
+          <c-card-body>
+
+            <table cTable hover>
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Category</th>
+                <th scope="col">Max Participants</th>
+                <th scope="col"></th>
+                <th scope="col">
+                  <c-form-check>
+                    <input cFormCheckInput type="checkbox" (change)="toggleSelectAll()" [checked]="isAllSelected" />
+                  </c-form-check>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let activity of activities | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: count }; let i = index">
+                <th scope="row">{{ activity.id }}</th>
+                <td>{{ activity.name }}</td>
+                <td>{{ activity.description }}</td>
+                <td>{{ activity.category }}</td>
+                <td>{{ activity.maxParticipants }}</td>
+                <td>
+                  <c-button-group aria-label="Button group with nested dropdown" role="group" size="lg">
+                    <button cButton color="info" cTooltip="Update activity" cTooltipPlacement="top">
+                      <svg cIcon class="cis-color-fill" name="cil-puzzle"></svg>
+                    </button>
+                    <button cButton color="danger" cTooltip="Delete activity" cTooltipPlacement="top">
+                      <svg cIcon class="cis-color-fill" name="cil-trash"></svg>
+                    </button>
+                  </c-button-group>
+                </td>
+                <td>
+                  <c-form-check>
+                    <input cFormCheckInput id="checkOne" type="checkbox"   />
+                  </c-form-check>
+                </td>
+              </tr>
+              </tbody>
+            </table>
 
 
-</c-card-body>
+            <div class="d-flex justify-content-center">
+              <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+              </pagination-controls>
+            </div>
+          </c-card-body>
+        </c-tab-pane>
+
+      </c-tab-content>
+    </c-card-body>
+  </c-card>
+</c-col>
