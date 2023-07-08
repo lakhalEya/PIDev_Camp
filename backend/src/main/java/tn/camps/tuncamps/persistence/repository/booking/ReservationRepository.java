@@ -42,4 +42,29 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     List<Reservation> findBySaleFound();
 
 
+    @Query("SELECT sum(r.personnbr) FROM Reservation r where r.parc.idParc=:parc")
+    int findNumberPersonParc(@Param("parc") int parc_id);
+
+    @Query("SELECT sum(r.personnbr) FROM Reservation r where r.activity.id=:activity")
+    int findNumberPersonActivity(@Param("activity") int activity_id);
+
+
+    @Query("SELECT count(r) FROM Reservation r ")
+    int findNbReservation();
+
+    @Query("SELECT count(r) FROM Reservation r where r.activity.id=:activity")
+    int findNbReservationByActivity(@Param("activity") int activity_id);
+
+    @Query("SELECT count(r) FROM Reservation r where r.parc.idParc=:parc")
+    int findNbReservationByParc(@Param("parc") int parc_id);
+
+
+    @Query("SELECT count(r) FROM Reservation r where  r.category='ACTIVITY' ")
+    int findNbReservationActivity();
+
+    @Query("SELECT count(r) FROM Reservation r where r.category='PARC'")
+    int findNbReservationParc();
+
+
+
 }

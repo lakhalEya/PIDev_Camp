@@ -1,0 +1,38 @@
+<button cButton color="primary" variant="outline" [routerLink]="['/add-reservation']" >Add Reservation</button>
+<c-row>
+    <c-col *ngFor="let reservation of reservations" [sm]="6">
+    <c-col *ngFor="let item of colors">
+      <c-card [cBorder]="{top: {color: 'success', width: 3}}" [textColor] color="item.textColor" class="mb-3">
+        <c-card-header>{{reservation.status}}</c-card-header>
+        <c-card-body>
+          <h5 cCardTitle> From : {{reservation.startDate}}</h5> <h5 cCardTitle>To : {{reservation.endDate}}</h5>
+          <p cCardText>
+             Person Number in this reservation : {{reservation.personnbr}}
+          </p>
+
+          <button cButton [cModalToggle]="cancelModal.id" color="danger" cTooltip="Cancel Reservation" cTooltipPlacement="top" (click)="selectedReservation = reservation">
+            <svg cIcon class="cis-color-fill" name="cil-trash"></svg>
+          </button>
+
+          <c-modal #cancelModal alignment="center" id="cancelModal">
+            <c-modal-header>
+                <h5 cModalTitle>Cancel Reservation</h5>
+                <button [cModalToggle]="cancelModal.id" cButtonClose></button>
+            </c-modal-header>
+            <c-modal-body>
+                <br> Do you confirm this operation?
+            </c-modal-body>
+            <c-modal-footer>
+                <button [cModalToggle]="cancelModal.id" cButton color="secondary">
+Close
+</button>
+                <button cButton color="primary" (click)="cancelReservation()" [cModalToggle]="cancelModal.id">Cancel</button>
+            </c-modal-footer>
+        </c-modal>
+        </c-card-body>
+      </c-card>
+    </c-col>
+</c-col>
+  </c-row>
+
+
