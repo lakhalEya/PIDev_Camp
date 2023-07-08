@@ -65,6 +65,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ChartjsModule } from '@coreui/angular-chartjs';
 import { HttpClientModule } from '@angular/common/http';
+import { AddActReservationComponent } from './components/frontoffice/add-act-reservation/add-act-reservation.component';
 
 
 
@@ -77,7 +78,8 @@ import { HttpClientModule } from '@angular/common/http';
     AddSaleComponent,
     ListUserReservationComponent,
     AddReservationComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    AddActReservationComponent
     
    /* AccordionsComponent,
     BreadcrumbsComponent,
