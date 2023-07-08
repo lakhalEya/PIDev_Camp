@@ -10,7 +10,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { HttpClientModule } from '@angular/common/http';
 
 // Import routing module
 import { AppRoutingModule } from './app-routing.module';

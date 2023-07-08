@@ -16,7 +16,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/community-spaces")
-@CrossOrigin(origins ="http://localhost:4200")
 public class CommunitySpaceController {
         private final MyObjectMapper mapper;
 
@@ -120,6 +119,21 @@ public class CommunitySpaceController {
 //                return ResponseEntity.ok(communitySpaces);
 //        }
 
+        @GetMapping("/show/{id}")
+        public ResponseEntity<CommunitySpaceDTO> retreiveCommunitySpaceById(@PathVariable("id") int id){
+                try{
+                        CommunitySpace communitySpace = iCommunitySpace.retrieveCommunitySpace(id);
+                        if(null!=communitySpace){
+                                return  ResponseEntity.status(HttpStatus.OK).body(mapper.toCommunitySpaceDto(communitySpace));
+                        }else{
+                                return  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                        }
+
+                } catch (Exception e) {
+                        e.printStackTrace();
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                }
+        }
         @GetMapping("/show")
         public ResponseEntity<List<CommunitySpaceDTO>> listCommunitySpace()
         {
@@ -140,21 +154,7 @@ public class CommunitySpaceController {
 
                 return ResponseEntity.status(HttpStatus.OK).body(communitySpaceDTOS);
         }
-        @GetMapping("/show/{id}")
-        public ResponseEntity<CommunitySpaceDTO> retreiveCommunitySpaceById(@PathVariable("id") int id){
-                try{
-                        CommunitySpace communitySpace = iCommunitySpace.retrieveCommunitySpace(id);
-                        if(null!=communitySpace){
-                                return  ResponseEntity.status(HttpStatus.OK).body(mapper.toCommunitySpaceDto(communitySpace));
-                        }else{
-                                return  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-                        }
 
-                } catch (Exception e) {
-                        e.printStackTrace();
-                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-                }
-        }
 
         @GetMapping("/search")
         public List<CommunitySpace> searchCommunitySpaces(@RequestParam("keyword") String keyword) {
