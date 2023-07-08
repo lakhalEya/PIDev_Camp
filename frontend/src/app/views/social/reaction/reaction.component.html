@@ -1,1 +1,28 @@
-<p>reaction works!</p>
+<form cForm [formGroup]="form">
+  <div class="mb-3">
+    <label cLabel for="content">Content</label>
+    <textarea cFormControl id="content" formControlName="content" rows="3"></textarea>
+  </div>
+
+  
+  <div class="mb-3">
+    <label cLabel for="datePublication">Publish Date</label>
+    <input cFormControl
+           id="datePublication"
+           formControlName="datePublication"
+           placeholder="datePublication"
+           type="date"
+    />
+  </div>
+  
+  <div class="mb-3">
+    <label cLabel for="postId">Post</label>
+    <input cFormControl
+           id="postId"
+           formControlName="postId"
+           placeholder="postId"
+           type="text"
+    />
+  </div>
+  <button cButton color="primary" type="submit" (click)="addComment()">Save changes</button>
+</form>
