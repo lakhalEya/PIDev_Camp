@@ -1,1 +1,42 @@
-<p>list-sales works!</p>
+<c-row>
+    <c-col *ngFor="let sale of sales" [sm]="6">
+    <c-col *ngFor="let item of colors">
+      <c-card [cBorder]="{top: {color: 'success', width: 3}}" [textColor] color="item.textColor" class="mb-3">
+        <c-card-header>{{sale.title}}</c-card-header>
+        <c-card-body>
+            <c-col>
+          <h5 cCardTitle> From : {{sale.startDate}}</h5> 
+          <h5 cCardTitle>To : {{sale.expirationDate}}</h5>
+        </c-col>
+          <p cCardText>
+            Description: {{sale.description}}
+          </p>
+          <p cCardText>
+            Amount of Sale :
+            {{sale.amount}}
+         </p>
+          
+          <button cButton [cModalToggle]="deleteModal.id" color="danger" cTooltip="Delete Sale" cTooltipPlacement="top" (click)="selectedSale = sale">
+            <svg cIcon class="cis-color-fill" name="cil-trash"></svg>
+          </button>
+
+          <c-modal #deleteModal alignment="center" id="deleteModal">
+            <c-modal-header>
+                <h5 cModalTitle>Delete Sale</h5>
+                <button [cModalToggle]="deleteModal.id" cButtonClose></button>
+            </c-modal-header>
+            <c-modal-body>
+                <br> Do you confirm this operation?
+            </c-modal-body>
+            <c-modal-footer>
+                <button [cModalToggle]="deleteModal.id" cButton color="secondary">
+Close
+</button>
+                <button cButton color="primary" (click)="deleteSale()" [cModalToggle]="deleteModal.id">Delete</button>
+            </c-modal-footer>
+        </c-modal>
+        </c-card-body>
+      </c-card>
+    </c-col>
+</c-col>
+</c-row>

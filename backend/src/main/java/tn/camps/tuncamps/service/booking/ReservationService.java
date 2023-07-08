@@ -27,4 +27,14 @@ public interface ReservationService {
     List<Reservation> findResSale();
 
 
+    int personNumberByParc(int parcId);
+    int personNumberByActivity(int activityId);
+    int nbReservation();
+    int nbReservationByParc(int parcId);
+    int nbReservationByActivity(int activityId);
+
+    int nbReservationParc();
+    int nbReservationActivity();
+
+
 }

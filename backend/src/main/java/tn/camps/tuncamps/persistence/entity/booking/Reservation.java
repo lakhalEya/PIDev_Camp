@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.swing.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import tn.camps.tuncamps.persistence.entity.commun.Tariff;
 import tn.camps.tuncamps.persistence.entity.parc.Activity;
@@ -26,8 +27,6 @@ public class Reservation implements Serializable {
     private LocalDate startDate;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
-    //nombre de personne dans une seule reservation effectuée par un utilisateur
-    //le prix va etre personnbr*tarif.price
     private int personnbr;
 
     @Enumerated(EnumType.STRING)
@@ -35,23 +34,22 @@ public class Reservation implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private ReservationCategory category;
-    //@OneToOne
-    //@JoinColumn(name = "tarif_id")
-    //private Tariff tarif;
 
-    @ManyToOne(optional = true,fetch = FetchType.LAZY)
+
+    @ManyToOne(optional = true)
     @JoinColumn(name = "sale_id")
     private Sale sale;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(optional = true,fetch = FetchType.LAZY)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "parc_id")
     private Parc parc;
 
-    @ManyToOne(optional = true,fetch = FetchType.LAZY)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "activity_id")
     private Activity activity;
 

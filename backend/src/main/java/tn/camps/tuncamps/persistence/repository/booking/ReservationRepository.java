@@ -21,7 +21,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     List<Reservation> findByStatus(@Param("status") ReservationStatus status);
 
     @Query("SELECT r FROM Reservation r WHERE r.user.id = :user_id")
-    List<Reservation> findByUser(@Param("user") User user);
+    List<Reservation> findByUser(@Param("user_id") User user);
 
     @Query("SELECT r FROM Reservation r WHERE r.parc.idParc = :parc_id")
     List<Reservation> findByParc(@Param("parc") Parc parc);
@@ -40,6 +40,31 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 
     @Query(nativeQuery = true,value ="SELECT * FROM Reservation  WHERE sale_id IS NOT NULL ")
     List<Reservation> findBySaleFound();
+
+
+    @Query("SELECT sum(r.personnbr) FROM Reservation r where r.parc.idParc=:parc")
+    int findNumberPersonParc(@Param("parc") int parc_id);
+
+    @Query("SELECT sum(r.personnbr) FROM Reservation r where r.activity.id=:activity")
+    int findNumberPersonActivity(@Param("activity") int activity_id);
+
+
+    @Query("SELECT count(r) FROM Reservation r ")
+    int findNbReservation();
+
+    @Query("SELECT count(r) FROM Reservation r where r.activity.id=:activity")
+    int findNbReservationByActivity(@Param("activity") int activity_id);
+
+    @Query("SELECT count(r) FROM Reservation r where r.parc.idParc=:parc")
+    int findNbReservationByParc(@Param("parc") int parc_id);
+
+
+    @Query("SELECT count(r) FROM Reservation r where  r.category='ACTIVITY' ")
+    int findNbReservationActivity();
+
+    @Query("SELECT count(r) FROM Reservation r where r.category='PARC'")
+    int findNbReservationParc();
+
 
 
 }
