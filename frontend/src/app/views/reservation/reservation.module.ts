@@ -30,7 +30,10 @@ import {
   TabsModule,
   TooltipModule,
   UtilitiesModule,
-  ButtonGroupModule
+  ButtonGroupModule,
+  ModalModule,
+  AlertModule,
+  WidgetModule
 } from '@coreui/angular';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -57,8 +60,11 @@ import { ListSalesComponent } from './components/backoffice/list-sales/list-sale
 import { AddSaleComponent } from './components/backoffice/add-sale/add-sale.component';
 import { ListUserReservationComponent } from './components/frontoffice/list-user-reservation/list-user-reservation.component';
 import { AddReservationComponent } from './components/frontoffice/add-reservation/add-reservation.component';
-
-
+import { StatisticsComponent } from './components/backoffice/statistics/statistics.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ChartjsModule } from '@coreui/angular-chartjs';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -70,7 +76,8 @@ import { AddReservationComponent } from './components/frontoffice/add-reservatio
     ListSalesComponent,
     AddSaleComponent,
     ListUserReservationComponent,
-    AddReservationComponent
+    AddReservationComponent,
+    StatisticsComponent
     
    /* AccordionsComponent,
     BreadcrumbsComponent,
@@ -122,7 +129,42 @@ import { AddReservationComponent } from './components/frontoffice/add-reservatio
     DropdownModule,
     SharedModule,
     NgbDatepickerModule,
-    FormsModule 
+    FormsModule ,
+    HttpClientModule,
+    FormsModule,
+    AccordionModule,
+    BadgeModule,
+    BreadcrumbModule,
+    ButtonModule,
+    CardModule,
+    CarouselModule,
+    CollapseModule,
+    DropdownModule,
+    FormModule,
+    GridModule,
+    ListGroupModule,
+    NavModule,
+    PaginationModule,
+    PlaceholderModule,
+    PopoverModule,
+    ProgressModule,
+    SharedModule,
+    SpinnerModule,
+    TableModule,
+    TabsModule,
+    TooltipModule,
+    UtilitiesModule,
+    CommonModule,
+    ButtonGroupModule,
+    IconModule,
+    ReactiveFormsModule,
+    DocsComponentsModule,
+    NgxPaginationModule,
+    ModalModule,
+    NgxDatatableModule,
+    AlertModule,
+    WidgetModule,
+    ChartjsModule
     
   ]
 })

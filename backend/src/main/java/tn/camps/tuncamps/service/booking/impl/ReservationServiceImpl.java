@@ -53,7 +53,7 @@ public class ReservationServiceImpl implements ReservationService {
         message.setSubject("Reservation Confirmation");
         message.setText("Thank you for your reservation!\n\n " +
                 "To confirm please click here in less then 5 minutes: \n\n " +
-                "http://localhost:8082/tunCamp/reservations/confirm-reservation?token="+confirmationToken.getConfirmationToken());// "/*+ reservationDetails*/);
+                "http://localhost:8081/tunCamp/reservations/confirm-reservation?token="+confirmationToken.getConfirmationToken());// "/*+ reservationDetails*/);
         emailSender.sendEmail(message);
         return reservation;
     }
@@ -89,6 +89,31 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public int personNumberByActivity(int activityId) {
         return reservationRepository.findNumberPersonActivity(activityId);
+    }
+
+    @Override
+    public int nbReservation() {
+        return reservationRepository.findNbReservation();
+    }
+
+    @Override
+    public int nbReservationByParc(int parcId) {
+        return reservationRepository.findNbReservationByParc(parcId);
+    }
+
+    @Override
+    public int nbReservationByActivity(int activityId) {
+        return reservationRepository.findNbReservationByActivity(activityId);
+    }
+
+    @Override
+    public int nbReservationParc() {
+        return reservationRepository.findNbReservationParc();
+    }
+
+    @Override
+    public int nbReservationActivity() {
+        return reservationRepository.findNbReservationActivity();
     }
 
     @Override

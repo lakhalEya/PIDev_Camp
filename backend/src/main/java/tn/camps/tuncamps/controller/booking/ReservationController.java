@@ -24,11 +24,12 @@ import tn.camps.tuncamps.persistence.repository.user.UserRepository;
 import tn.camps.tuncamps.service.booking.ReservationService;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 
 
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/reservations")
 public class ReservationController {
@@ -93,6 +94,22 @@ public class ReservationController {
         return ResponseEntity.ok(reservations);
     }
 
+    @GetMapping("/nbReservation")
+    public ResponseEntity<Integer> getNbReservations() {
+        int nbReservation= reservationService.nbReservation();
+        return ResponseEntity.status(HttpStatus.CREATED).body(nbReservation);
+    }
+    @GetMapping("/nbReservationParc")
+    public ResponseEntity<Integer> getNbReservationsParc() {
+        int nbReservation= reservationService.nbReservationParc();
+        return ResponseEntity.status(HttpStatus.CREATED).body(nbReservation);
+    }
+    @GetMapping("/nbReservationActivity")
+    public ResponseEntity<Integer> getNbReservationsActivity() {
+        int nbReservation= reservationService.nbReservationActivity();
+        return ResponseEntity.status(HttpStatus.CREATED).body(nbReservation);
+    }
+
 
 
     @PostMapping("/addForActivity/{id_act}")
@@ -123,6 +140,7 @@ public class ReservationController {
     @PostMapping("/addForParc/{id_parc}")
     public ResponseEntity<String> createParcReservation(@RequestBody Reservation reservation, @PathVariable int id_parc) {
         User user = userRepository.findById(reservation.getUser().getId()).orElse(null);
+        //User user = userRepository.findById(1).orElse(null);
         Parc parc = parcRepository.findById(id_parc).orElse(null);
         //à modifier Connected user
         reservation.setUser(user);
@@ -174,6 +192,29 @@ public class ReservationController {
         }
     }
 
+
+
+    @PutMapping("/cancel/{id}")
+    public ResponseEntity<Reservation> CancelReservation(@PathVariable int id) {
+        Reservation reservation = reservationService.findById(id);
+        LocalDate sysdate=LocalDate.now();
+        long numberOfDays = ChronoUnit.DAYS.between(sysdate, reservation.getStartDate());
+
+        try {
+            if(reservation.getStatus()==ReservationStatus.CONFIRMED && numberOfDays>2){
+                reservation.setStatus(ReservationStatus.CANCELED);
+                reservationService.updateReservation(reservation);
+                return ResponseEntity.ok(reservation);
+            }
+            else{
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
+
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 
 
     @DeleteMapping("/delete/{id}")

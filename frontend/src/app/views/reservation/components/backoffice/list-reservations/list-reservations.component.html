@@ -1,4 +1,4 @@
-<input type="text" name="search"  placeholder="search Reservation" >
+
 
 <!--<table class="table">
   <thead>
@@ -27,6 +27,8 @@
 </table>-->
 
 
+<app-statistics></app-statistics>
+
 <c-row>
     <c-col *ngFor="let reservation of reservations" [sm]="6">
     <c-col *ngFor="let item of colors">
@@ -35,9 +37,47 @@
         <c-card-body>
           <h5 cCardTitle> From : {{reservation.startDate}}</h5> <h5 cCardTitle>To : {{reservation.endDate}}</h5>
           <p cCardText>
-            {{reservation.personnbr}}
+             Person Number in this reservation : {{reservation.personnbr}}
           </p>
-          <button [color]="item.color" cButton >Go somewhere</button>
+          
+          <button cButton [cModalToggle]="deleteModal.id" color="danger" cTooltip="Delete Reservation" cTooltipPlacement="top" (click)="selectedReservation = reservation">
+            <svg cIcon class="cis-color-fill" name="cil-trash"></svg>
+          </button>
+          <P>            </P>
+          <c-dropdown
+  *ngFor="let item of colors"
+  placement="bottom-start"
+  variant="btn-group">
+  <button [color]="item.textColor" cButton>
+    Add Sale
+  </button>
+  <button [color]="item.textColor" cButton cDropdownToggle split>
+    <span class="visually-hidden">Toggle Dropdown</span>
+  </button>
+  <ul cDropdownMenu *ngIf="selectedReservation && sales && sales.length > 0">
+    <li *ngFor="let sale of sales">
+      <button cDropdownItem (click)="assignSaleToReservation(sale)">
+        {{ sale.title }}
+      </button>
+    </li>
+  </ul>
+</c-dropdown>
+
+          <c-modal #deleteModal alignment="center" id="deleteModal">
+            <c-modal-header>
+                <h5 cModalTitle>Delete Reservation</h5>
+                <button [cModalToggle]="deleteModal.id" cButtonClose></button>
+            </c-modal-header>
+            <c-modal-body>
+                <br> Do you confirm this operation?
+            </c-modal-body>
+            <c-modal-footer>
+                <button [cModalToggle]="deleteModal.id" cButton color="secondary">
+Close
+</button>
+                <button cButton color="primary" (click)="deleteReservation()" [cModalToggle]="deleteModal.id">Delete</button>
+            </c-modal-footer>
+        </c-modal>
         </c-card-body>
       </c-card>
     </c-col>
@@ -45,12 +85,3 @@
   </c-row>
 
 
-  <c-row>
-    <c-col lg="5">
-      <input type="date" name="Datd"  placeholder="Date début" >
-    </c-col>
-  
-    <c-col lg="5">
-      <input type="date" name="Datd"  placeholder="Date fin" >
-    </c-col>
-  </c-row>

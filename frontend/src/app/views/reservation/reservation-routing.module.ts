@@ -32,13 +32,15 @@ const routes: Routes = [
               title: 'listreservations',
             }
       },
+
       {
-        path: 'add-reservations',
+        path: 'add-reservation',
         component: AddReservationComponent,
-        data: { 
-          title: 'addreservations',
-        }
+        data: {
+          title: 'addreservation',
+        },
       },
+
       {
         path: 'pricing-promotion',
         component: PromotionComponent,
@@ -46,6 +48,7 @@ const routes: Routes = [
           title: 'Pricing and Promotion',
         },
       },
+     
     ],
   },
 ];
