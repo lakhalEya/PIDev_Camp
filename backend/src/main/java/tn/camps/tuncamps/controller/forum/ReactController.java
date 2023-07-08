@@ -10,6 +10,7 @@ import tn.camps.tuncamps.service.forum.IReactService;
 import java.util.List;
 @RestController
 @RequestMapping("/react")
+@CrossOrigin(origins ="http://localhost:4200")
 public class ReactController {
     @Autowired
     private IReactService iReactService;

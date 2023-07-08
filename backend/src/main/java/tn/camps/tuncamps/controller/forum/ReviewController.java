@@ -10,6 +10,7 @@ import tn.camps.tuncamps.service.forum.IReviewService;
 import java.util.List;
 @RestController
 @RequestMapping("/review")
+@CrossOrigin(origins ="http://localhost:4200")
 public class ReviewController {
     @Autowired
     private IReviewService iReviewService;

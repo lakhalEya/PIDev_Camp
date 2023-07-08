@@ -30,10 +30,10 @@ public class Post implements Serializable {
     private Date datePublication;
     @Enumerated(EnumType.STRING)
     private Visibility visibility;
-    @JsonIgnore
+
     @OneToMany( mappedBy = "post", cascade = CascadeType.ALL)
     private Set<Comment> comments;
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "community_space_id")
     private CommunitySpace communitySpace;

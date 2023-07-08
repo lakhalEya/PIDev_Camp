@@ -1,28 +1,29 @@
 package tn.camps.tuncamps.controller.forum;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.catalina.mapper.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import tn.camps.tuncamps.dto.CommunitySpaceDTO;
+import tn.camps.tuncamps.mapper.MyObjectMapper;
 import tn.camps.tuncamps.persistence.entity.enumeration.CommunityCategory;
 import tn.camps.tuncamps.persistence.entity.forum.CommunitySpace;
-import tn.camps.tuncamps.persistence.entity.forum.Post;
 import tn.camps.tuncamps.service.forum.ICommunitySpace;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/community-spaces")
+@CrossOrigin(origins ="http://localhost:4200")
 public class CommunitySpaceController {
-        private Mapper mapper;
-        @Autowired
+        private final MyObjectMapper mapper;
+
         private ICommunitySpace iCommunitySpace;
-        public CommunitySpaceController(ICommunitySpace iCommunitySpace) {
+        public CommunitySpaceController(ICommunitySpace iCommunitySpace, MyObjectMapper mapper) {
                 this.iCommunitySpace = iCommunitySpace;
+                this.mapper = mapper;
         }
         @PostMapping("/add")
         public ResponseEntity<CommunitySpace> createForum(@RequestBody CommunitySpace communitySpace) {
@@ -97,9 +98,16 @@ public class CommunitySpaceController {
 
 
           @PutMapping("/update/{id}")
-        public ResponseEntity<CommunitySpace> updateDocument(@PathVariable int id, @RequestBody CommunitySpace communitySpace) {
-                CommunitySpace newCommunitySpace = iCommunitySpace.updateCommunitySpace(id, communitySpace);
-                return new ResponseEntity<>( HttpStatus.OK);
+        public ResponseEntity<CommunitySpace> updateDocument(@PathVariable int id, @RequestBody CommunitySpaceDTO communitySpaceDTO) {
+                  try {
+                        CommunitySpace communitySpace =   mapper.toCommunitySpace(communitySpaceDTO);
+                        CommunitySpace newCommunitySpace = iCommunitySpace.updateCommunitySpace(id,communitySpace);
+                        return new ResponseEntity<>( HttpStatus.OK);
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                  }
+
         }
         @DeleteMapping("/delete/{id}")
         public ResponseEntity<?> deleteCommunitySpace(@PathVariable("id") int id) {
@@ -113,13 +121,39 @@ public class CommunitySpaceController {
 //        }
 
         @GetMapping("/show")
-        public List<CommunitySpace> listCommunitySpace()
+        public ResponseEntity<List<CommunitySpaceDTO>> listCommunitySpace()
         {
-                return iCommunitySpace.retrieveAllCommunitySpace();
+                List<CommunitySpaceDTO>  communitySpaceDTOS = new ArrayList<>();
+                List<CommunitySpace> communitySpaces = iCommunitySpace.retrieveAllCommunitySpace();
+                if(null!=communitySpaces && !communitySpaces.isEmpty()){
+                        for (CommunitySpace communitySpace:communitySpaces
+                        ) {
+                            try{
+                                communitySpaceDTOS.add(mapper.toCommunitySpaceDto(communitySpace));
+                                } catch (Exception e) {
+                                        e.printStackTrace();
+                                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                                }
+                        }
+                        return ResponseEntity.status(HttpStatus.OK).body(communitySpaceDTOS);
+                }
+
+                return ResponseEntity.status(HttpStatus.OK).body(communitySpaceDTOS);
         }
         @GetMapping("/show/{id}")
-        public CommunitySpace retreiveCommunitySpaceById(@PathVariable("id") int id){
-                return  iCommunitySpace.retrieveCommunitySpace(id);
+        public ResponseEntity<CommunitySpaceDTO> retreiveCommunitySpaceById(@PathVariable("id") int id){
+                try{
+                        CommunitySpace communitySpace = iCommunitySpace.retrieveCommunitySpace(id);
+                        if(null!=communitySpace){
+                                return  ResponseEntity.status(HttpStatus.OK).body(mapper.toCommunitySpaceDto(communitySpace));
+                        }else{
+                                return  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                        }
+
+                } catch (Exception e) {
+                        e.printStackTrace();
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                }
         }
 
         @GetMapping("/search")
