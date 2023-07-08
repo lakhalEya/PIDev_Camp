@@ -26,7 +26,11 @@ export class AddReservationComponent implements OnInit {
   }
 
   save(){
-    this.reservationService.addForParc(this.reservation).subscribe(data => this.router.navigateByUrl('/reservation'));
+    this.reservationService.addForParc(this.reservation).subscribe(data => this.router.navigateByUrl('/pricing-promotion'));
+   
+  }
+  save1(){
+    this.reservationService.addForActivity(this.reservation).subscribe(data => this.router.navigateByUrl('/pricing-promotion'));
    
   }
 
