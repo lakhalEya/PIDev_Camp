@@ -1,1 +1,96 @@
-<p>forum works!</p>
+
+
+<button (click)="toggleLiveDemo()" cButton color="success" shape="rounded-pill">Add</button>
+<br>
+<div class="table-responsive">
+  <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Category</th>
+
+      <th scope="col">File name</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let communityspace of communitySpaces">
+        <th scope="row">{{communityspace.idForum}}</th>
+        <td>{{communityspace.title}}</td>
+        <td>{{communityspace.description}}</td>
+        <td>{{communityspace.category}}</td>
+
+        <td>{{communityspace.fileName}}</td>
+        <td><div class="card-body">
+          <div class="float-right btn-group btn-group-sm">
+            <button type="button" cButton color="warning" shape="rounded-pill">Edit</button>
+            <button type="button" (click)="deleteCommunitySpace(communityspace.idForum)" cButton color="danger" shape="rounded-pill">Delete</button>
+            <a class="btn btn-primary rounded-pill" routerLink="../posts/{{communityspace.idForum}}">Add post</a>
+
+
+          </div>
+        </div></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+
+
+
+  <c-modal id="liveDemoModal" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
+    <c-modal-header>
+      <h5 cModalTitle>Add Community space</h5>
+      <button (click)="toggleLiveDemo()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+      <form cForm [formGroup]="form">
+        <div class="mb-3">
+          <label cLabel for="title">Title</label>
+          <input cFormControl
+                 id="title"
+                 formControlName="title"
+                 placeholder="title"
+                 type="text"
+          />
+        </div>
+        <div class="mb-3">
+          <label cLabel for="description">Description</label>
+          <textarea cFormControl id="description" formControlName="description" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label cLabel for="category">Category</label>
+    <select formControlName="category" id="category" aria-label="category" cSelect class="mb-3" sizing="lg">
+
+      <option value="General">General</option>
+      <option value="Tips_AND_Tricks">Tips_AND_Tricks</option>
+      <option value="Gear_AND_Equipment">Gear_AND_Equipment</option>
+      <option value="Destinations">Destinations</option>
+      <option value="Cooking_AND_Recipes">Cooking_AND_Recipes</option>
+    </select>
+        </div>
+        <div class="mb-3">
+          <label cLabel for="fileName">FileName</label>
+          <input cFormControl
+                 id="fileName"
+                 formControlName="fileName"
+                 placeholder="fileName"
+                 type="text"
+          />
+        </div>
+
+      </form>
+    </c-modal-body>
+    <c-modal-footer>
+      <button (click)="toggleLiveDemo()" cButton color="secondary">
+        Close
+      </button>
+      <button cButton color="primary" type="submit" (click)="addCommunitySpace()">Save changes</button>
+    </c-modal-footer>
+  </c-modal>
+
+
+

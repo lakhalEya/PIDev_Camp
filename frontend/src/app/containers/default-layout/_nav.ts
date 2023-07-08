@@ -50,14 +50,15 @@ export const navItems: INavData[] = [
     url: '/dashboard/social/forums', //
     iconComponent: { name: 'cil-chat-bubble' },
   },
+
   {
-    name: 'Post',
-    url: '/dashboard/social/posts', //
+    name: 'List Post',
+    url: '/dashboard/social/listPosts', //
     iconComponent: { name: 'cil-chat-bubble' },
   },
   {
-    name: 'Reaction',
-    url: '/dashboard/social/reactions', //
+    name: 'List Reaction',
+    url: '/dashboard/social/listReactions', //
     iconComponent: { name: 'cil-chat-bubble' },
   },
   {

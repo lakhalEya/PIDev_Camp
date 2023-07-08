@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { HttpClientModule } from '@angular/common/http';
 
 // Import routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -54,6 +55,7 @@ const APP_CONTAINERS = [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     AvatarModule,
     BreadcrumbModule,
     FooterModule,

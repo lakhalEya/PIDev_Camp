@@ -10,6 +10,7 @@ import { ChecksRadiosComponent } from './checks-radios/checks-radios.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ValidationComponent } from './validation/validation.component';
 
+
 const routes: Routes = [
   {
     path: '',
@@ -77,7 +78,8 @@ const routes: Routes = [
         data: {
           title: 'Validation'
         }
-      }
+      },
+
     ]
   }
 ];

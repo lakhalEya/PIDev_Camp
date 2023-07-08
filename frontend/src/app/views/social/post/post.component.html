@@ -1,1 +1,56 @@
-<p>post works!</p>
+<form cForm [formGroup]="form">
+  <div class="mb-3">
+    <label cLabel for="title">Title</label>
+    <input cFormControl
+           id="title"
+           formControlName="title"
+           placeholder="title"
+           type="text"
+    />
+  </div>
+  <div class="mb-3">
+    <label cLabel for="content">Content</label>
+    <textarea cFormControl id="content" formControlName="content" rows="3"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label cLabel for="category">Category</label>
+    <select formControlName="category" id="category" aria-label="category" cSelect class="mb-3" sizing="lg">
+
+      <option value="General">General</option>
+      <option value="Tips_AND_Tricks">Tips_AND_Tricks</option>
+      <option value="Gear_AND_Equipment">Gear_AND_Equipment</option>
+      <option value="Destinations">Destinations</option>
+      <option value="Cooking_AND_Recipes">Cooking_AND_Recipes</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label cLabel for="datePublication">Publish Date</label>
+    <input cFormControl
+           id="datePublication"
+           formControlName="datePublication"
+           placeholder="datePublication"
+           type="date"
+    />
+  </div>
+  <div class="mb-3">
+    <label cLabel for="visibility">Visibility</label>
+    <select formControlName="visibility" id="visibility" aria-label="Visibility" cSelect class="mb-3" sizing="lg">
+
+      <option value="Private">Private</option>
+      <option value="Only_Friends">Friends_Only</option>
+      <option value="All_Public">All_Public</option>
+    </select>
+
+  </div>
+  <div class="mb-3">
+    <label cLabel for="communitySpaceId">Forum</label>
+    <input cFormControl
+           id="communitySpaceId"
+           formControlName="communitySpaceId"
+           placeholder="communitySpaceId"
+           type="text"
+    />
+  </div>
+  <button cButton color="primary" type="submit" (click)="addPost()">Save changes</button>
+</form>

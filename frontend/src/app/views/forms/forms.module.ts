@@ -26,6 +26,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { ValidationComponent } from './validation/validation.component';
 
 
+
 @NgModule({
   declarations: [
     RangesComponent,
@@ -36,6 +37,7 @@ import { ValidationComponent } from './validation/validation.component';
     InputGroupsComponent,
     LayoutComponent,
     ValidationComponent
+
   ],
   imports: [
     CommonModule,
